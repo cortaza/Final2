@@ -12,7 +12,7 @@
     <!-- //-----//Codigo Centro//-----// -->
     <div class="col-md-4">
         <label for="validationCustom01" class="form-label">Codigo Centro</label>
-        <input type="text" class="form-control" id="validationCustom01" name="codigo_centro" placeholder="Codigo" required="">
+        <input type="text" class="form-control" id="validationCustom01" name="codigo_centro" placeholder="Codigo_centro" required="">
     </div>
 
     <!-- //-----//Numero Ambientes//-----// -->
@@ -22,11 +22,11 @@
       </div>
 
       <!-- //-----//Usuario//-----// -->
-      <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Administraciónx  </font></font></label>
+      <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuario</font></font></label>
       <select class="form-select" id="validationCustom04" required="" name="id_usuario">
         <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach ($administracion as $admin)
-            <option>{{$admin->id_usuario}}</option>    
+          @foreach ($administracion as $usuario)
+            <option>{{$usuario->id_usuario}}</option>    
           @endforeach         
       </select>
       <!-- //-----//BOTON DE ENVIAR//-----// -->

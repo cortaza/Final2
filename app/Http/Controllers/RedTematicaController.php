@@ -31,10 +31,14 @@ class RedTematicaController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'codigo_red' => 'required',
+            'nombre' => 'required',
+        ]);
         $redtematica=new RedTematica;
         $redtematica->codigo_red=$request->codigo_red;
         $redtematica->nombre=$request->nombre;
-        $redtematica->save();
+        $redtematica->save();   
         return redirect()->route('redindex');
     }
 

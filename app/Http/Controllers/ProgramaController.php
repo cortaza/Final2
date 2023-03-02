@@ -6,6 +6,7 @@ use App\Models\AreaTematica;
 use App\Models\CentroFormacion;
 use App\Models\Programa;
 use Illuminate\Http\Request;
+use DB;
 
 class ProgramaController extends Controller
 {
@@ -58,24 +59,20 @@ class ProgramaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Programa $programa)
+    public function edit($programa)
     {
-        //
+        $prog=Programa::where('codigo_prog','=',$programa)->get();
+        $area=AreaTematica::all();
+        $centro=CentroFormacion::all();
+        return view('programa/edit',['programa'=>$prog, 'areatematica'=>$area, 'centroformacion'=>$centro ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Programa $programa)
+    public function update(Request $request)
     {
-        $programa=Programa::find($request->codigo_prog);
-        $programa->codigo_prog=$request->codigo_prog;
-        $programa->nombre=$request->nombre;
-        $programa->estado=$request->estado;
-        $programa->nivel_formacion=$request->nivel_formacion;
-        $programa->duracion=$request->duracion;
-        $programa->version=$request->version;
-        $programa->save();
+        Programa::where('codigo_prog',$request->codigo)->update(['codigo_prog'=>$request->codigo_prog,'nombre'=>$request->nombre,'estado'=>$request->estado,'nivel_formacion'=>$request->nivel_formacion,'duracion'=>$request->duracion,'version'=>$request->version,'codigo_centro'=>$request->codigo_centro,'codigo_area'=>$request->codigo_area]);
         return redirect()->route('programaindex');
     }
 

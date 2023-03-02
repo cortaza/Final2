@@ -21,7 +21,7 @@
                                 </thead>
 
                                 <tbody>
-                                    @forelse($programas as $prog)                                        
+                                    @forelse($programa as $prog)                                        
                                     <tr>
                                         <th>{{$prog->codigo_prog}}</th>
                                         <th>{{$prog->nombre}}</th>                                     
@@ -32,12 +32,12 @@
                                         <th>{{$prog->codigo_area}}</th>
                                         <th>{{$prog->codigo_centro}}</th>
                                         <th>
-                                            <a href="{{route('programaedit', $area->codigo_area )}}" class="btn btn-info">Editar</a>                                              
+                                            <a href="{{route('programaedit', $prog->codigo_prog )}}" class="btn btn-info">Editar</a>                                              
                                             <!--DELETE REGISTERS-->
                                         </th>
                                         <th>
                                             <!--DELETE REGISTERS-->
-                                            <form action="{{route('programadestroy', $area->codigo_area )}}" method="POST">
+                                            <form action="{{route('programadestroy', $prog->codigo_prog )}}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>                                                

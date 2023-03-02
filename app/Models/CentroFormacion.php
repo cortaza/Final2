@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CentroFormacion extends Model
 {
     use HasFactory;
-    protected $primarykey='codigo_centro';
+    protected $primarykey='Codigo_centro';
     public $timestamps=true;
     protected $fillable = [
-        'codigo_centro',
-        'nr_ambientes',
-        'id_usuario'
+        'Codigo_centro',
+        'Nr_ambientes',
+        'ID_usuario'
     ];
 }

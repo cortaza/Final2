@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
          //ADMINISTRACION     
         Administracion::insert([
             [
-            'id_usuario'=>'',
+            'id_usuario'=>'1',
             'rol'=>'coordinador',
             'nombre'=>'Cristian',
             'apellido'=>'fernando',
@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
 
         Administracion::insert([
             [
-            'id_usuario'=>'1',
+            'id_usuario'=>'2',
             'rol'=>'coordinador',
             'nombre'=>'Cristiana',
             'apellido'=>'fernanda',

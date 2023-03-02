@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Administracion;
 use App\Models\CentroFormacion;
 use Illuminate\Http\Request;
+use DB;
 
 class CentroFormacionController extends Controller
 {
@@ -53,29 +54,31 @@ class CentroFormacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CentroFormacion $centroformacion)
+    public function edit($centroformacion)
     {
-        //
+        $centro=CentroFormacion::where('codigo_centro','=',$centroformacion)->get();
+        $id=Administracion::all();
+        return view('centroformacion/edit',['centroformacion'=>$centro, 'administracion'=>$id ]);
     }
+
+
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CentroFormacion $centroformacion)
+    public function update(Request $request)
     {
-        $centroformacion=CentroFormacion::find($request->codigo_centro);
-        $centroformacion->codigo_centro=$request->codigo_centro;
-        $centroformacion->nr_ambientes=$request->nr_ambientes;
-        $centroformacion->save();
+        CentroFormacion::where('codigo_centro', $request ->codigo)->update(['codigo_centro'=>$request->codigo_centro,'nr_ambientes'=>$request->nr_ambientes,'id_usuario'=>$request->id_usuario]);
         return redirect()->route('centroindex');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CentroFormacion $centroformacion)
+    public function destroy($centroformacion)
     {
-        DB::delete('DELETE FROM centroformacions WHERE codigo_centro = ?' [$centroformacion]);
+        DB::delete('DELETE FROM centro_formacions WHERE codigo_centro = ?', [$centroformacion]);
         return redirect()->route('centroindex');
     }
 }

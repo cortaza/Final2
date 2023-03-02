@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resultado;
+use App\Models\Competencia;
 use Illuminate\Http\Request;
+use DB;
 
 class ResultadoController extends Controller
 {
@@ -12,7 +14,7 @@ class ResultadoController extends Controller
      */
     public function index()
     {
-        $resultados=Resultado::all();        
+        $resultados=Resultado::all();
         return view('resultados/index', ['resultados'=>$resultados]);
     }
 
@@ -22,7 +24,8 @@ class ResultadoController extends Controller
     public function create()
     {
         $resultados=Resultado::all();
-        return view('resultados/create', ['resultados'=>$resultados]);
+        $competencia=Competencia::select('codigo_comp')->get();
+        return view('resultados/create', ['resultados'=>$resultados, 'competencia'=>$competencia]);
     }
 
     /**
@@ -32,7 +35,7 @@ class ResultadoController extends Controller
     {
         $resultados=new Resultado;
         $resultados->id_resultado=$request->id_resultado;
-        $resultados->resultado=$request->resultados;
+        $resultados->resultado=$request->resultado;
         $resultados->estado=$request->estado;
         $resultados->codigo_comp=$request->codigo_comp;
         $resultados->save();
@@ -50,15 +53,17 @@ class ResultadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Resultado $resultado)
+    public function edit($resultado)
     {
-        //
+        $resul=Resultado::where('id_resultado','=',$resultado)->get();
+        $competencia=Competencia::all();
+        return view('areatematica/editar',['areatematica'=>$resul, 'codigo_comp'=>$competencia ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Resultado $resultado)
+    public function update(Request $request)
     {
         //
     }
@@ -66,8 +71,9 @@ class ResultadoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Resultado $resultado)
+    public function destroy($resultado)
     {
-        //
+        DB::delete('DELETE FROM resultados WHERE id_resultado = ?', [$resultado]);
+        return redirect()->route('resultadoindex');
     }
 }

@@ -52,9 +52,9 @@ class AreaTematicaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($areaTematica)
+    public function edit($areatematica)
     {
-        $area=AreaTematica::where('codigo_area','=',$areaTematica)->get();
+        $area=AreaTematica::where('codigo_area','=',$areatematica)->get();
         $red=RedTematica::all();
         return view('areatematica/editar',['areatematica'=>$area, 'redtematica'=>$red ]);
     }
@@ -71,9 +71,9 @@ class AreaTematicaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($areaTematica)
+    public function destroy($areatematica)
     {
-        DB::delete('DELETE FROM area_tematicas WHERE codigo_area = ?', [$areaTematica]);          
+        DB::delete('DELETE FROM area_tematicas WHERE codigo_area = ?', [$areatematica]);          
             return redirect()->route('areaindex');  
     }
 }

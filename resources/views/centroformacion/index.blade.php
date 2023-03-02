@@ -22,12 +22,12 @@
                                         <th>{{$centro->nr_ambientes}}</th>                                     
                                         <th>{{$centro->id_usuario}}</th>                                   
                                         <th>
-                                            <a href="{{route('centroedit', $centro->codigo_centro )}}" class="btn btn-info">Editar</a>                                              
+                                            <a href="{{route('centroedit',$centro->codigo_centro)}}" class="btn btn-info">Editar</a>                                              
                                             <!--DELETE REGISTERS-->
                                         </th>
                                         <th>
                                             <!--DELETE REGISTERS-->
-                                            <form action="{{route('centrodestroy', $centro->codigo_centro )}}" method="POST">
+                                            <form action="{{route('centrodestroy', $centro->codigo_centro)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>                                                

@@ -1,5 +1,5 @@
 @extends('layouts.structure')
-@section('titulo','Crear Red Tematica')
+@section('titulo','Crear Administrador')
 @section('contenido')
     <!-- Seleccionador de formulario -->
     <div>@include('partials.selectform')</div>

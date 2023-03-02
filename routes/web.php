@@ -18,7 +18,7 @@ use App\Http\Controllers\SubsedeController;
 use App\Http\Controllers\TipoFormacionController;
 
 // /*-----------------LOGIN-----------------*/
- Route::get('/', function () {return view('login');});
+ Route::get('/', function () {return view('welcome');});
 
 // /*-----------------PAGINA PRINCIPAL-----------------*/
 
@@ -49,7 +49,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/area/creararea','store')->name('areastore');        
     //Editar
     Route::get('/area/edit/{areatematica}','edit')->name('areaedit');
-    Route::put('/area/update/{areatematica}','update')->name('areaupdate');
+    Route::put('/area/update','update')->name('areaupdate');
 });
 
 // /*INSTRUCTOR*/
@@ -63,7 +63,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/instructor/crearinstructor','store')->name('instructorstore');        
     //Editar
     Route::get('/instructor/edit/{instructor}','edit')->name('instructoredit');
-    Route::put('/instructor/update/{instructor}','update')->name('instructorupdate');
+    Route::put('/instructor/update/','update')->name('instructorupdate');
 });
 
 // /*ADMINISTRACION*/
@@ -77,7 +77,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/administracion/crearadministracion','store')->name('administracionstore');        
     //Editar
     Route::get('/administracion/edit/{administracion}','edit')->name('administracionedit');
-    Route::put('/administracion/update/{administracion}','update')->name('administracionupdate');
+    Route::put('/administracion/update/','update')->name('administracionupdate');
 });
 
 // /*CENTRO*/
@@ -91,7 +91,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/centroformacion/crearcentro','store')->name('centrostore');        
     //Editar
     Route::get('/centroformacion/edit/{centroformacion}','edit')->name('centroedit');
-    Route::put('/centroformacion/update/{centroformacion}','update')->name('centroupdate');
+    Route::put('/centroformacion/update/','update')->name('centroupdate');
 });
 
 // /*SUBSEDE*/
@@ -105,7 +105,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/subsede/crearsubsede','store')->name('subsedestore');        
     //Editar
     Route::get('/subsede/edit/{subsede}','edit')->name('subsedeedit');
-    Route::put('/subsede/update/{subsede}','update')->name('subsedeupdate');
+    Route::put('/subsede/update/','update')->name('subsedeupdate');
 });
 
 // /*PROGRAMA*/
@@ -119,7 +119,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/programa/crearprograma','store')->name('programastore');        
     //Editar
     Route::get('/programa/edit/{programa}','edit')->name('programaedit');
-    Route::put('/programa/update/{programa}','update')->name('programaupdate');
+    Route::put('/programa/update/','update')->name('programaupdate');
 });
 
 // /*DESCARGA*/
@@ -161,7 +161,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/ficha/crearficha','store')->name('fichastore');        
     //Editar
     Route::get('/ficha/edit/{ficha}','edit')->name('fichaedit');
-    Route::put('/ficha/update/{ficha}','update')->name('fichaupdate');
+    Route::put('/ficha/update/','update')->name('fichaupdate');
 });
 
     //AMBIENTES
@@ -175,7 +175,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/ambiente/crearambiente','store')->name('ambientestore');        
     //Editar
     Route::get('/ambiente/edit/{ambiente}','edit')->name('ambienteedit');
-    Route::put('/ambiente/update/{ambiente}','update')->name('ambienteupdate');
+    Route::put('/ambiente/update/','update')->name('ambienteupdate');
 });
 
     //COMPETENCIA
@@ -189,7 +189,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/competencia/crearcompetencia','store')->name('competenciastore');        
     //Editar
     Route::get('/competencia/edit/{competencia}','edit')->name('competenciaedit');
-    Route::put('/competencia/update/{competencia}','update')->name('competenciaupdate');
+    Route::put('/competencia/update','update')->name('competenciaupdate');  
 });
 
     //RESULTADO
@@ -203,7 +203,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/resultado/crearresultado','store')->name('resultadostore');        
     //Editar
     Route::get('/resultado/edit/{resultado}','edit')->name('resultadoedit');
-    Route::put('/resultado/update/{resultado}','update')->name('resultadoupdate');
+    Route::put('/resultado/update/','update')->name('resultadoupdate');
 });
 
     //SEMAFORO
@@ -217,7 +217,7 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/semaforo/crearsemaforo','store')->name('semaforostore');        
     //Editar
     Route::get('/semaforo/edit/{semaforo}','edit')->name('semaforoedit');
-    Route::put('/semaforo/update/{semaforo}','update')->name('semaforoupdate');
+    Route::put('/semaforo/update/','update')->name('semaforoupdate');
 });
 
     //HORARIO
@@ -231,5 +231,5 @@ use App\Http\Controllers\TipoFormacionController;
     Route::post('/horario/crearhorario','store')->name('horariostore');        
     //Editar
     Route::get('/horario/edit/{horario}','edit')->name('horarioedit');
-    Route::put('/horario/update/{horario}','update')->name('horarioupdate');
+    Route::put('/horario/update/','update')->name('horarioupdate');
 });

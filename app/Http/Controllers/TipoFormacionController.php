@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoFormacion;
 use Illuminate\Http\Request;
+use DB;
+
+use function PHPUnit\Framework\returnSelf;
 
 class TipoFormacionController extends Controller
 {
@@ -48,24 +51,27 @@ class TipoFormacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TipoFormacion $tipoFormacion)
+    public function edit($tipo)
     {
-        //
+        $tipo=TipoFormacion::where('codigo_for','=',$tipo)->get();
+        return view('tipoformacion/edit',['tipoformacion'=>$tipo]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoFormacion $tipoFormacion)
+    public function update(Request $request)
     {
-        //
+        TipoFormacion::where('codigo_for', $request->codigo)->update(['codigo_for'=>$request->codigo_for,'nombre'=>$request->nombre]);
+        return redirect()->route('formacionindex');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TipoFormacion $tipoFormacion)
+    public function destroy($tipoFormacion)
     {
-        //
+        DB::delete('DELETE FROM tipo_formacions WHERE codigo_for = ?', [$tipoFormacion]);
+        return redirect()->route('formacionindex');
     }
 }

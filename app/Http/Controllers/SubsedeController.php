@@ -6,6 +6,7 @@ use App\Models\CentroFormacion;
 use App\Models\Subsede;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use DB;
 
 class SubsedeController extends Controller
 {
@@ -44,7 +45,7 @@ class SubsedeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Subsede $subsede)
+    public function show($subsede)
     {
         //
     }
@@ -52,27 +53,26 @@ class SubsedeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subsede $subsede)
+    public function edit($subsede)
     {
-        //
+        $sub=Subsede::where('codigo_sede','=',$subsede)->get();
+        $centro=CentroFormacion::all();
+        return view('subsede/edit',['subsede'=>$sub, 'centroformacion'=>$centro ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subsede $subsede)
+    public function update(Request $request)
     {
-        $subsede=Subsede::find($request->codigo_sede);
-        $subsede->codigo_sede=$request->codigo_sede;
-        $subsede->nombre=$request->nombre;
-        $subsede->save();
+        Subsede::where('codigo_sede',$request->codigo)->update(['codigo_sede'=>$request->codigo_sede,'nombre'=>$request->nombre,'codigo_centro'=>$request->codigo_centro]);
         return redirect()->route('subsedeindex');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subsede $subsede)
+    public function destroy($subsede)
     {
         DB::delete('DELETE FROM subsedes WHERE codigo_sede = ?', [$subsede]);
         return redirect()->route('subsedeindex');

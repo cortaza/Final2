@@ -1,31 +1,41 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal tipo formacion')
+@section('titulo','Formulario principal Fichas')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
-    <h1>Formulario principal TipoFormacion</h1>
+    <h1>Formulario principal Fichas</h1>
     <div>
     <table class="table" >
                                 <thead class="table-success table-striped" >
                                     <tr>
-                                        <th>Codigo</th>
-                                        <th>Nombre</th>                                   
+                                        <th>Numero de Fichas</th>
+                                        <th>Jornada</th>  
+                                        <th>Modalidad</th>
+                                        <th>Numero de Aprendices</th>
+                                        <th>Codigo de la Formacion</th>
+                                        <th>Codigo del Programa</th>
+                                        <th>Numero de Documento</th>
                                         <th colspan="2"><center>Acción</center></th>                                    
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @forelse($tipoformacion as $tipo)                                         
+                                    @forelse($ficha as $ficha)                                        
                                     <tr>
-                                        <th>{{$tipo->codigo_for}}</th>
-                                        <th>{{$tipo->nombre}}</th>                                     
+                                        <th>{{$ficha->nr_ficha}}</th>
+                                        <th>{{$ficha->jornada}}</th>                                     
+                                        <th>{{$ficha->modalidad}}</th>
+                                        <th>{{$ficha->nr_aprendices}}</th>
+                                        <th>{{$ficha->codigo_for}}</th>
+                                        <th>{{$ficha->codigo_prog}}</th>
+                                        <th>{{$ficha->dni}}</th>
                                         <th>
-                                            <a href="{{route('formacionedit', $tipo->codigo_for )}}" class="btn btn-info">Editar</a>                                              
+                                            <a href="{{route('fichaedit', $ficha->nr_ficha )}}" class="btn btn-info">Editar</a>                                              
                                             <!--DELETE REGISTERS-->
                                         </th>
                                         <th>
                                             <!--DELETE REGISTERS-->
-                                            <form action="{{route('formaciondestroy', $tipo->codigo_for )}}" method="POST">
+                                            <form action="{{route('fichadestroy', $ficha->nr_ficha )}}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>                                                
@@ -34,7 +44,7 @@
                                     </tr>
                                     @empty
                                         <tr>
-                                            <th><h3>No hay Tipos de Formacion</h3></th>
+                                            <th><h3>No hay Fichas</h3></th>
                                         </tr>
                                     @endforelse                                    
                                     
@@ -43,7 +53,7 @@
 
     </table>
     <div>
-        <a href="{{route('formacioncreate')}}" class="btn btn-info" style="background-color:green; border-color:green;">Crear</a> 
+        <a href="{{route('fichacreate')}}" class="btn btn-info" style="background-color:green; border-color:green;">Crear</a> 
     </div>
     
 

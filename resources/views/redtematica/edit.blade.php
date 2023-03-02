@@ -8,7 +8,7 @@
     <!-- Formulario -->
     <form action="{{route('redupdate')}}" method="POST" class="row g-3 needs-validation" novalidate="">       
         <!-- //-----//Codigo//-----// -->
-        @csrf
+        @csrf   
         @method('PUT')
         @foreach($redtematica as $r)
         <div class="col-md-4">
@@ -32,4 +32,5 @@
             <button class="btn btn-primary" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar formulario</font></font></button>
         </div>
     </form>    
+    
 @endsection

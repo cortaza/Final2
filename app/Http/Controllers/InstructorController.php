@@ -60,25 +60,20 @@ class InstructorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Instructor $instructor)
+    public function edit($instructor)
     {
-        return view('instructor/edit', compact('instructor'));
+        $inst=Instructor::where('dni','=',$instructor)->get();
+      //$area=AreaTematica::where('codigo_area','=',$areatematica)->get();
+        return view('instructor/edit',['instructor'=>$inst]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Instructor $instructor)
+    public function update(Request $request)
     {
-        $instructor=Instructor::find($request->dni);
-        $instructor->dni=$request->dni;
-        $instructor->nombre=$request->nombre;
-        $instructor->apellido=$request->apellido;
-        $instructor->telefono=$request->telefono;
-        $instructor->correo=$request->correo;
-        $instructor->estado=$request->estado;
-        $instructor->tipo_contrato=$request->tipo_contrato;
-        $instructor->save();
+
+        Instructor::where('dni',$request->codigo)->update(['dni'=>$request->dni,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'telefono'=>$request->telefono,'correo'=>$request->correo,'estado'=>$request->estado,'tipo_contrato'=>$request->tipo_contrato,'codigo_red'=>$request->codigo_red,'codigo_area'=>$request->codigo_area]);
         return redirect()->route('instructorindex');
     }
 

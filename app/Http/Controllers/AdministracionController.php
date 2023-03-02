@@ -52,23 +52,18 @@ class AdministracionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Administracion $administracion)
+    public function edit($administracion)
     {
-        
+        $administracion=Administracion::where('id_usuario','=',$administracion)->get();
+        return view('administracion/edit',['administracion'=>$administracion]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Administracion $administracion)
+    public function update(Request $request)
     {
-        $administracion=Administracion::find($request->id_usuario);
-        $administracion->id_usuario=$request->id_usuario;
-        $administracion->rol=$request->rol;
-        $administracion->nombre=$request->nombre;
-        $administracion->apellido=$request->apellido;
-        $administracion->contraseña=$request->contraseña;
-        $administracion->save();
+        Administracion::where('id_usuario',$request ->codigo)->update(['id_usuario'=>$request->id_usuario,'rol'=>$request->rol,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'contraseña'=>$request->contraseña]);
         return redirect()->route('administracionindex');
     }
 
