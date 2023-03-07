@@ -57,7 +57,7 @@ class ResultadoController extends Controller
     {
         $resul=Resultado::where('id_resultado','=',$resultado)->get();
         $competencia=Competencia::all();
-        return view('areatematica/editar',['areatematica'=>$resul, 'codigo_comp'=>$competencia ]);
+        return view('resultados/editar',['resultado'=>$resul, 'codigo_comp'=>$competencia ]);
     }
 
     /**
@@ -65,7 +65,8 @@ class ResultadoController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        Resultado::where('id_resultado', $request->codigo)->update(['id_resultado'=>$request->id_resultado,'resultado'=>$request->resultado, 'estado'=>$request->estado, 'codigo_comp'=>$request->codigo_comp ]);
+        return redirect()->route('resultadoindex');
     }
 
     /**

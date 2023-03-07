@@ -4,76 +4,68 @@ namespace App\Http\Controllers;
 
 use App\Models\AreaTematica;
 use App\Models\RedTematica;
+use App\Models\Redbasura;
+use App\Models\Areabasura;
 use Illuminate\Http\Request;
-use DB;
 
 class AreaTematicaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $areatematica=AreaTematica::all();        
-        return view('areatematica/index', ['areatematica'=>$areatematica ]);
+        $red=RedTematica::all();
+        $area=AreaTematica::all();
+        $areatrash=Areabasura::all();
+        return view('areatematica/index', compact('area', 'areatrash', 'red'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $redtematica=RedTematica::select('codigo_red')->get(); 
-        $areatematica=AreaTematica::all();
-        return view('areatematica/create', ['areatematica'=>$areatematica, 'redtematica'=>$redtematica]);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $areatematica=new AreaTematica;
+    public function create(Request $request)
+    {   
+        $areatematica = new AreaTematica;
         $areatematica->codigo_area=$request->codigo_area;
         $areatematica->nombre=$request->nombre;
         $areatematica->codigo_red=$request->codigo_red;
         $areatematica->save();
         return redirect()->route('areaindex');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AreaTematica $areaTematica)
+    public function archive($area)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($areatematica)
-    {
-        $area=AreaTematica::where('codigo_area','=',$areatematica)->get();
-        $red=RedTematica::all();
-        return view('areatematica/editar',['areatematica'=>$area, 'redtematica'=>$red ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        AreaTematica::where('codigo_area', $request->codigo)->update(['codigo_area'=>$request->codigo_area,'nombre'=>$request->nombre, 'codigo_red'=>$request->codigo_red]);
+        $areatematica=AreaTematica::where('codigo_area', $area)->first();
+        $areabasura=new Areabasura;
+        $areabasura->codigo_area=$areatematica->codigo_area;
+        $areabasura->nombre=$areatematica->nombre;
+        $areabasura->codigo_red=$areatematica->codigo_red;
+        $areabasura->save();
+        $areatematica=AreaTematica::where('codigo_area', $area)->delete();
         return redirect()->route('areaindex');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($areatematica)
+    public function restore($area)
     {
-        DB::delete('DELETE FROM area_tematicas WHERE codigo_area = ?', [$areatematica]);          
-            return redirect()->route('areaindex');  
+        $areabasura=Areabasura::where('codigo_area', $area)->first();
+        $areatematica=new AreaTematica;
+        $areatematica->codigo_area=$areabasura->codigo_area;
+        $areatematica->nombre=$areabasura->nombre;
+        $areatematica->codigo_red=$areabasura->codigo_red;
+        $areatematica->save();
+        $areabasura=Areabasura::where('codigo_area', $area)->delete();
+        return redirect()->route('areaindex');
+    }
+
+
+    public function destroy($area)
+    {
+        Areabasura::where('codigo_area', $area)->delete();
+        return redirect()->route('areaindex');
+    }
+
+    public function edit(Request $request)
+    {   
+        // $redtematica=AreaTematica::where('codigo_red', $red)->get();
+        // return $redtematica;   
+        AreaTematica::where('codigo_area', $request->codigo)->update(['codigo_area'=>$request->codigo_area,'nombre'=>$request->nombre,'codigo_red'=>$request->codigo_red,]);   
+        return redirect()->route('areaindex');
     }
 }

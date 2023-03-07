@@ -4,38 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Instructor;
 use App\Models\AreaTematica;
+use App\Models\Instructorbasura;
 use App\Models\RedTematica;
 use Illuminate\Http\Request;
-use DB;
 
 class InstructorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $instructor=Instructor::all();
-        return view('instructor/index', ['instructor'=>$instructor ]);
+        $red=RedTematica::all();
+        $area=AreaTematica::all();
+        $instruc=Instructor::all();
+        $instructrash=Instructorbasura::all();
+        return view('instructor/index', compact('instruc', 'instructrash','area','red'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        $redtematica=RedTematica::select('codigo_red')->get(); 
-        $areatematica=AreaTematica::select('codigo_area')->get();
-        $instructor=Instructor::all();
-        return view('instructor/create', ['areatematica'=>$areatematica, 'redtematica'=>$redtematica, 'instructor'=>$instructor]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $instructor=new Instructor;
+        $instructor = new Instructor;
         $instructor->dni=$request->dni;
         $instructor->nombre=$request->nombre;
         $instructor->apellido=$request->apellido;
@@ -49,40 +36,51 @@ class InstructorController extends Controller
         return redirect()->route('instructorindex');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Instructor $instructor)
+    public function archive($instruc)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($instructor)
-    {
-        $inst=Instructor::where('dni','=',$instructor)->get();
-      //$area=AreaTematica::where('codigo_area','=',$areatematica)->get();
-        return view('instructor/edit',['instructor'=>$inst]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-
-        Instructor::where('dni',$request->codigo)->update(['dni'=>$request->dni,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'telefono'=>$request->telefono,'correo'=>$request->correo,'estado'=>$request->estado,'tipo_contrato'=>$request->tipo_contrato,'codigo_red'=>$request->codigo_red,'codigo_area'=>$request->codigo_area]);
+        $instructor = Instructor::where('dni', $instruc)->first();
+        $instructrash = new Instructorbasura;
+        $instructrash->dni=$instructor->dni;
+        $instructrash->nombre=$instructor->nombre;
+        $instructrash->apellido=$instructor->apellido;
+        $instructrash->telefono=$instructor->telefono;
+        $instructrash->correo=$instructor->correo;
+        $instructrash->estado=$instructor->estado;
+        $instructrash->tipo_contrato=$instructor->tipo_contrato;
+        $instructrash->codigo_area=$instructor->codigo_area;
+        $instructrash->codigo_red=$instructor->codigo_red;
+        $instructrash->save();
+        $instructor = Instructor::where('dni', $instruc)->delete();
         return redirect()->route('instructorindex');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($instructor)
+    public function restore($instruc)
     {
-        DB::delete('DELETE FROM instructors WHERE dni = ?', [$instructor]);
+        $instructrash = Instructorbasura::where('dni', $instruc)->first();
+        $instructor = new Instructor;
+        $instructor->dni=$instructrash->dni;
+        $instructor->nombre=$instructrash->nombre;
+        $instructor->apellido=$instructrash->apellido;
+        $instructor->telefono=$instructrash->telefono;
+        $instructor->correo=$instructrash->correo;
+        $instructor->estado=$instructrash->estado;
+        $instructor->tipo_contrato=$instructrash->tipo_contrato;
+        $instructor->codigo_red=$instructrash->codigo_red;
+        $instructor->codigo_area=$instructrash->codigo_area;
+        $instructor->save();
+        $instructrash = Instructorbasura::where('dni', $instruc)->delete();
+        return redirect()->route('instructorindex');
+    }
+
+    public function destroy($instruc)
+    {
+        Instructorbasura::where('dni', $instruc)->delete();
+        return redirect()->route('instructorindex');
+    }
+
+    public function edit(Request $request)
+    { 
+        Instructor::where('dni', $request->dni)->update(['dni'=>$request->dni,'nombre'=>$request->nombre,'apellido'=>$request->apellido, 'telefono'=>$request->telefono, 'correo'=>$request->correo,'estado'=>$request->estado,'tipo_contrato'=>$request->tipo_contrato, 'codigo_red'=>$request->codigo_red, 'codigo_area'=>$request->codigo_area,]);
         return redirect()->route('instructorindex');
     }
 }

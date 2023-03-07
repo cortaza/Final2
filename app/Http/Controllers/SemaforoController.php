@@ -10,12 +10,20 @@ use DB;
 class SemaforoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.6
      */
     public function index()
     {
-        $semaforo=Semaforo::all();        
-        return view('semaforo/index', ['semaforo'=>$semaforo ]);
+        $semaforo=Semaforo::all(); 
+        $nombreprogrm = Semaforo::select('semaforos.id_semaforo', 'programas.nombre')
+        ->join('programas', 'semaforos.codigo_prog', '=', 'programas.codigo_prog')
+        ->orderBy('semaforos.id_semaforo', 'ASC')
+        ->get();
+        $nombrecomp = Semaforo::select('semaforos.id_semaforo', 'competencias.codigo_comp',  'competencias.nombre')
+        ->join('competencias', 'semaforos.codigo_comp', '=', 'competencias.codigo_comp')
+        ->orderBy('semaforos.id_semaforo', 'ASC')
+        ->get();
+        return view('semaforo/index', ['semaforo'=>$semaforo, 'nombreprog'=>$nombreprogrm, 'nombrecomp'=>$nombrecomp]);
     }
 
     /**

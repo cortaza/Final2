@@ -21,7 +21,32 @@ class HorarioController extends Controller
     public function index()
     {
         $horario=Horario::all();
-        return view('horario/index', ['horario'=>$horario]);
+        //NOMBRE PROGRAMA       
+        $nombreprogrm = Horario::select('horarios.codigo_h', 'programas.nombre')
+        ->join('programas', 'horarios.codigo_prog', '=', 'programas.codigo_prog')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //NOMBRE CENTRO FORMACIÓN
+        $nombrecentro = Horario::select('horarios.codigo_h', 'centro_formacions.nombre_centro')
+        ->join('centro_formacions', 'horarios.codigo_centro', '=', 'centro_formacions.codigo_centro')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //NOMBRE AMBIENTE
+        $nombreambiente=Horario::select('horarios.codigo_h', 'ambiente_formacions.nombre')
+        ->join('ambiente_formacions', 'horarios.codigo_ambiente', '=', 'ambiente_formacions.codigo_ambiente')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //NOMBRE DEL INSTRUCTOR
+        $nombreinstructor=Horario::select('horarios.codigo_h', 'instructors.nombre')
+        ->join('instructors', 'horarios.dni', '=', 'instructors.dni')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //TRIMESTRE
+        $trimestre=Horario::select('horarios.codigo_h', 'semaforos.trimestre')
+        ->join('semaforos', 'horarios.id_semaforo', '=', 'semaforos.id_semaforo')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        return view('horario/index', ['horario'=>$horario,'nombreprogrm'=>$nombreprogrm,'nombrecentro'=>$nombrecentro,'nombreambiente'=>$nombreambiente,'nombreinstructor'=>$nombreinstructor, 'trimestre'=>$trimestre ]);
     }
 
     /**

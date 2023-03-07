@@ -2,83 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Administracion;
 use App\Models\CentroFormacion;
+use App\Models\Administracion;
+use App\Models\AdministracionBasura;
+use App\Models\centroformacionbasura;
 use Illuminate\Http\Request;
-use DB;
 
 class CentroFormacionController extends Controller
 {
-    /**
-     * 
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $centroformacion=CentroFormacion::all();
-        return view('centroformacion/index', ['centroformacion'=>$centroformacion]);
+        $centro=CentroFormacion::all();
+        $centrotrash=centroformacionbasura::all();
+        return view('centroformacion/index', compact('centro', 'centrotrash'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $administracion=Administracion::select('id_usuario')->get();
-        $centroformacion=CentroFormacion::all();
-        return view('centroformacion/create', ['centroformacion'=>$centroformacion,
-                                                'administracion'=>$administracion]);
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $centroformacion= new CentroFormacion;
+    public function create(Request $request)
+    {   
+        $centroformacion = new CentroFormacion;
         $centroformacion->codigo_centro=$request->codigo_centro;
+        $centroformacion->nombre_centro=$request->nombre_centro;
         $centroformacion->nr_ambientes=$request->nr_ambientes;
         $centroformacion->id_usuario=$request->id_usuario;
         $centroformacion->save();
         return redirect()->route('centroindex');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CentroFormacion $centroformacion)
+    public function archive($centro)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($centroformacion)
-    {
-        $centro=CentroFormacion::where('codigo_centro','=',$centroformacion)->get();
-        $id=Administracion::all();
-        return view('centroformacion/edit',['centroformacion'=>$centro, 'administracion'=>$id ]);
-    }
-
-
-   
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        CentroFormacion::where('codigo_centro', $request ->codigo)->update(['codigo_centro'=>$request->codigo_centro,'nr_ambientes'=>$request->nr_ambientes,'id_usuario'=>$request->id_usuario]);
+        $centroformacion=CentroFormacion::where('codigo_centro', $centro)->first();
+        $centrobasura=new centroformacionbasura;
+        $centrobasura->codigo_centro=$centroformacion->codigo_centro;
+        $centrobasura->nombre_centro=$centroformacion->nombre_centro;
+        $centrobasura->nr_ambientes=$centroformacion->nr_ambientes;
+        $centrobasura->id_usuario=$centroformacion->id_usuario;
+        $centrobasura->save();
+        $centroformacion=CentroFormacion::where('codigo_centro', $centro)->delete();
         return redirect()->route('centroindex');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($centroformacion)
+    public function restore($centro)
     {
-        DB::delete('DELETE FROM centro_formacions WHERE codigo_centro = ?', [$centroformacion]);
+        $centrobasura=centroformacionbasura::where('codigo_centro', $centro)->first();
+        $centroformacion=new CentroFormacion;
+        $centroformacion->codigo_centro=$centrobasura->codigo_centro;
+        $centroformacion->nombre_centro=$centrobasura->nombre_centro;
+        $centroformacion->nr_ambientes=$centrobasura->nr_ambientes;
+        $centroformacion->id_usuario=$centrobasura->id_usuario;
+        $centroformacion->save();
+        $centrobasura=centroformacionbasura::where('codigo_centro', $centro)->delete();
+        return redirect()->route('centroindex');
+    }
+    
+
+
+    public function destroy($centro)
+    {
+        Centroformacionbasura::where('codigo_centro', $centro)->delete();
+        return redirect()->route('centroindex');
+    }
+
+    public function edit(Request $request)
+    {      
+        CentroFormacion::where('codigo_centro', $request->codigo)->update(['codigo_centro'=>$request->codigo_centro, 'nombre_centro'=>$request->nombre_centro, 'nr_ambientes'=>$request->nr_ambientes,'id_usuario'=>$request->id_usuario,]);   
         return redirect()->route('centroindex');
     }
 }

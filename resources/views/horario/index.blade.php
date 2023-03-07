@@ -4,18 +4,50 @@
 @section('contenido')
     <div>@include('partials.selectform')</div>
     <h1>Formulario principal de Horario</h1>
+
+@php
+// Create associative arrays for competencias and programas
+        // <!-- PROGRAMA -->
+        $programas = array();
+
+        foreach($nombreprogrm as $prog) {
+            $programas[$prog->codigo_prog] = $prog->nombre;
+        }
+        // <!-- CENTRO -->
+        $centros = array();
+
+        foreach($nombrecentro as $centro) {
+            $centros[$centro->codigo_centro] = $centro->nombre_centro;
+        }
+        // <!-- AMBIENTE -->
+        $ambientes = array();
+        foreach($nombreambiente as $amb) {
+            $ambientes[$amb->codigo_ambiente] = $amb->nombre;
+        }
+        // <!-- INSTRUCTOR -->
+        $instructors = array();
+        foreach($nombreinstructor as $ins) {
+            $instructors[$ins->dni] = $ins->nombre;
+        }
+        // <!-- SEMAFORO -->
+        $semaforos = array();
+        foreach($trimestre as $sema) {
+            $semaforos[$sema->id_semaforo] = $sema->nombre;
+        }
+
+@endphp
     <div>
     <table class="table" >
                                 <thead class="table-success table-striped" >
                                     <tr>
                                         <th>Codigo del Horario</th>
-                                        <th>Codigo del Programa</th>  
+                                        <th>Nombre Programa</th>  
                                         <th>Numero de Ficha</th>
-                                        <th>Codigo del Centro</th>
-                                        <th>Codigo del Ambiente</th>
-                                        <th>Documento de Identidad</th>
-                                        <th>Identificador del Semaforo</th>
-                                        <th>Codigo de Descarga</th>
+                                        <th>Nombre Centro</th>
+                                        <th>Nombre Ambiente</th>
+                                        <th>Instructor</th>
+                                        <th>Trimestre</th>
+                                        <th>Descarga</th>
                                         <th colspan="2"><center>Acción</center></th>                                    
                                     </tr>
                                 </thead>
@@ -24,13 +56,13 @@
                                     @forelse($horario as $horario)                                        
                                     <tr>
                                         <th>{{$horario->codigo_h}}</th>
-                                        <th>{{$horario->codigo_prog}}</th>
+                                        <th>{{ $programas[$horario->codigo] }}</th>
                                         <th>{{$horario->nr_ficha}}</th>
-                                        <th>{{$horario->codigo_centro}}</th>
-                                        <th>{{$horario->codigo_ambiente}}</th>
-                                        <th>{{$horario->dni}}</th>
+                                        <th>{{ $centros[$horario->codigo] }}</th>
+                                        <th>{{ $ambientes[$horario->codigo] }}</th>
+                                        <th>{{$instructors[$horario->codigo]}}</th>
                                         <th>{{$horario->id_semaforo}}</th>
-                                        <th>{{$horario->codigo_desc}}</th>
+                                        <th><img src="" alt="This is a picture"></th>
                                         <th>
                                             <a href="{{route('horarioedit', $horario->codigo_h)}}" class="btn btn-info">Editar</a>                                              
                                             <!--DELETE REGISTERS-->

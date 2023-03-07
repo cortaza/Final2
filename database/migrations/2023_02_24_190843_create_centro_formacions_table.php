@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('centro_formacions', function (Blueprint $table) {
             $table->string('codigo_centro')->primary();
+            $table->string('nombre_centro');
             $table->integer('nr_ambientes');
             $table->string('id_usuario');
             $table->foreign('id_usuario')->references('id_usuario')->on('administracions')->onDelete('cascade')->onUpdate('cascade');

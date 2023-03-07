@@ -3,75 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\TipoFormacion;
+use App\Models\TipoFormacionBasura;
 use Illuminate\Http\Request;
-use DB;
 
-use function PHPUnit\Framework\returnSelf;
 
 class TipoFormacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $tipoformacion=TipoFormacion::all();
-        return view('tipoformacion/index', ['tipoformacion'=>$tipoformacion]);
+        $tipo=TipoFormacion::all();
+        $tipoformaciontrash=TipoFormacionBasura::all();
+        $bin=[];
+        $input=[
+            'codigo_for' => '',
+            'nombre' => ''
+        ];
+        return view('tipoformacion/index',compact('tipo','bin','input','tipoformaciontrash'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        $tipoformacion=TipoFormacion::all();
-        return view('tipoformacion/create', ['tipoformacion'=>$tipoformacion]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $tipoformacion=new TipoFormacion;
+        $tipoformacion = new TipoFormacion;
         $tipoformacion->codigo_for=$request->codigo_for;
-        $tipoformacion->nombre=$request->nombre;
+        $tipoformacion->nombre=$request->nombre;        
         $tipoformacion->save();
         return redirect()->route('formacionindex');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TipoFormacion $tipoFormacion)
+    public function archive($tipo)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($tipo)
-    {
-        $tipo=TipoFormacion::where('codigo_for','=',$tipo)->get();
-        return view('tipoformacion/edit',['tipoformacion'=>$tipo]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        TipoFormacion::where('codigo_for', $request->codigo)->update(['codigo_for'=>$request->codigo_for,'nombre'=>$request->nombre]);
+        $tipoformacion=TipoFormacion::where('codigo_for', $tipo)->first();
+        $tipoformaciontrash=new TipoFormacionBasura;
+        $tipoformaciontrash->codigo_for=$tipoformacion->codigo_for;
+        $tipoformaciontrash->nombre=$tipoformacion->nombre;
+        $tipoformaciontrash->save();
+        $tipoformacion=TipoFormacion::where('codigo_for', $tipo)->delete();
         return redirect()->route('formacionindex');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($tipoFormacion)
+
+    public function restore($tipo)
     {
-        DB::delete('DELETE FROM tipo_formacions WHERE codigo_for = ?', [$tipoFormacion]);
+    $tipoformaciontrash=TipoFormacionBasura::where('codigo_for', $tipo)->first();
+    $tipoformacion=new TipoFormacion;
+    $tipoformacion->codigo_for=$tipoformaciontrash->codigo_for;
+    $tipoformacion->nombre=$tipoformaciontrash->nombre;
+    $tipoformacion->save();
+    $tipoformacion=TipoFormacionBasura::where('codigo_for', $tipo)->delete();
+    return redirect()->route('formacionindex');
+    }
+
+    public function destroy($tipo)
+    {
+        TipoFormacionBasura::where('codigo_for',$tipo)->delete();
+        return redirect()->route('formacionindex');
+    }
+
+    public function edit(Request $request)
+    {
+        TipoFormacion::where('codigo_for', $request->codigo)->update(['codigo_for'=>$request->codigo_for,'nombre'=>$request->nombre]);
         return redirect()->route('formacionindex');
     }
 }

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subsede extends Model
 {
     use HasFactory;
+    protected $primarykey='codigo_sub';
     public $timestamps=true;
     protected $fillable=[
+        'codigo_sub',
         'nombre',
         'codigo_centro'
-
     ];
 }

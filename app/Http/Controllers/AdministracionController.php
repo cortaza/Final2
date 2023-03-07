@@ -20,16 +20,22 @@ class AdministracionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $administracion=Administracion::all();
-        return view('administracion/create', ['administracion'=>$administracion]);
+        $administracion=new Administracion;
+        $administracion->id_usuario=$request->id_usuario;
+        $administracion->rol=$request->rol;
+        $administracion->nombre=$request->nombre;
+        $administracion->apellido=$request->apellido;
+        $administracion->contraseña=$request->contraseña;
+        $administracion->save();
+        return redirect()->route('administracionindex');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function restore(Request $request)
     {
         $administracion=new Administracion;
         $administracion->id_usuario=$request->id_usuario;
@@ -52,10 +58,10 @@ class AdministracionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($administracion)
+    public function edit(Request $request)
     {
-        $administracion=Administracion::where('id_usuario','=',$administracion)->get();
-        return view('administracion/edit',['administracion'=>$administracion]);
+        Administracion::where('id_usuario', $request->id)->update(['id_usuario'=>$request->id,'rol'=>$request->rol,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'contraseña'=>$request->contraseña]);   
+        return redirect()->route('administracionindex');
     }
 
     /**

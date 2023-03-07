@@ -4,21 +4,36 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\AmbienteFormacion;
-use App\Models\Semaforo;
-use App\Models\AreaTematica;
-use App\Models\Competencia;
-use App\Models\Horario;
 use App\Models\RedTematica;
-use App\Models\Resultado;
-use App\Models\Subsede;
-use App\Models\Programa;
+use App\Models\Redbasura;
+use App\Models\AreaTematica;
+use App\Models\Areabasura;
 use App\Models\Instructor;
-use App\Models\Descarga;
-use App\Models\TipoFormacion;
-use App\Models\Ficha;
+use App\Models\Instructorbasura;
 use App\Models\Administracion;
+use App\Models\AdministracionBasura;
 use App\Models\CentroFormacion;
+use App\Models\centroformacionbasura;
+use App\Models\Subsede;
+use App\Models\Subsedebasura;
+use App\Models\Programa;
+use App\Models\Programabasura;
+use App\Models\Descarga;
+use App\Models\Descargabasura;
+use App\Models\TipoFormacion;
+use App\Models\TipoFormacionBasura;
+use App\Models\Ficha;
+use App\Models\Fichabasura;
+use App\Models\AmbienteFormacion;
+use App\Models\Ambienteformacionbasura;
+use App\Models\Competencia;
+use App\Models\Competenciabasura;
+use App\Models\Resultado;
+use App\Models\Resultadobasura;
+use App\Models\Semaforo;
+use App\Models\Semaforobasura;
+use App\Models\Horario;
+use App\Models\Horariobasura;
 use Illuminate\Database\Seeder;
 
 
@@ -34,7 +49,16 @@ class DatabaseSeeder extends Seeder
             'codigo_red'=>'1',
             'nombre'=>'Informática, Diseño y Desarrollo de Software.'
             ]
-            ]);
+        ]);
+        
+        //RED BASURA
+        Redbasura::insert([
+            [
+            'codigo_red'=>'2',
+            'nombre'=>'Informática, Diseño'
+            ]
+        ]);
+
         
         //AREA TEMATICA           
         AreaTematica::insert([
@@ -45,51 +69,70 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        //AREA BASURA           
+        Areabasura::insert([
+            [
+            'codigo_area'=>'2',
+            'nombre'=>'SoftwareSSSS',
+            'codigo_red'=>'1'
+            ]
+        ]);
+
+
         //INSTRUCTOR      
         Instructor::insert([
-                    [
-                    'dni'=>'11111',
-                    'nombre'=>'Arlenys Carolina',
-                    'apellido'=>'Nieves Vasquez',
-                    'telefono'=>'11111',
-                    'correo'=>'acnv@misena.edu.co',
-                    'estado'=>'1',
-                    'tipo_contrato'=>'Planta',
-                    'codigo_red'=>'1',
-                    'codigo_area'=>'1'
-                    ]
-                ]);
-        
-                Instructor::insert([
-                    [
-                    'dni'=>'22222',
-                    'nombre'=>'Neidy Adriana',
-                    'apellido'=>'Espitia Suarez',
-                    'telefono'=>'22222',
-                    'correo'=>'naespitia@sena.edu.co',
-                    'estado'=>'1',
-                    'tipo_contrato'=>'Planta',
-                    'codigo_red'=>'1',
-                    'codigo_area'=>'1'
-                    ]
-                ]);
-        
-                Instructor::insert([
-                    [
-                    'dni'=>'33333',
-                    'nombre'=>'Samuel Ricardo',
-                    'apellido'=>'Padilla Narvaez',
-                    'telefono'=>'3333333333',
-                    'correo'=>'spadilla@sena.edu.co',
-                    'estado'=>'1',
-                    'tipo_contrato'=>'Planta',
-                    'codigo_red'=>'1',
-                    'codigo_area'=>'1'
-                    ]
-                ]);
+            [
+            'dni'=>'11111',
+            'nombre'=>'Arlenys Carolina',
+            'apellido'=>'Nieves Vasquez',
+            'telefono'=>'11111',
+            'correo'=>'acnv@misena.edu.co',
+            'estado'=>'1',
+            'tipo_contrato'=>'Planta',
+            'codigo_red'=>'1',
+            'codigo_area'=>'1'
+            ],
+            [
+            'dni'=>'22222',
+            'nombre'=>'Neidy Adriana',
+            'apellido'=>'Espitia Suarez',
+            'telefono'=>'22222',
+            'correo'=>'naespitia@sena.edu.co',
+            'estado'=>'1',
+            'tipo_contrato'=>'Planta',
+            'codigo_red'=>'1',
+            'codigo_area'=>'1'
+            ],
+            [
+            'dni'=>'33333',
+            'nombre'=>'Samuel Ricardo',
+            'apellido'=>'Padilla Narvaez',
+            'telefono'=>'3333333333',
+            'correo'=>'spadilla@sena.edu.co',
+            'estado'=>'1',
+            'tipo_contrato'=>'Planta',
+            'codigo_red'=>'1',
+            'codigo_area'=>'1'
+            ]
+        ]);
 
-        
-         //ADMINISTRACION     
+        //INSTRUCTOR BASURA
+        Instructorbasura::insert([
+            [
+            'dni'=>'1',
+            'nombre'=>'f f',
+            'apellido'=>'e e',
+            'telefono'=>'1',
+            'correo'=>'u@u.u.u',
+            'estado'=>'1',
+            'tipo_contrato'=>'g',
+            'codigo_red'=>'1',
+            'codigo_area'=>'1'
+            ]
+        ]);
+
+
+        //ADMINISTRACION     
         Administracion::insert([
             [
             'id_usuario'=>'1',
@@ -97,10 +140,7 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'Cristian',
             'apellido'=>'fernando',
             'contraseña'=>'taka123'
-            ]
-        ]);        
-
-        Administracion::insert([
+            ],
             [
             'id_usuario'=>'2',
             'rol'=>'coordinador',
@@ -110,41 +150,64 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
         
+        //ADMINISTRACION BASURA
+        AdministracionBasura::insert([
+            [
+            'id_usuario'=>'1',
+            'rol'=>'A',
+            'nombre'=>'A',
+            'apellido'=>'A',
+            'contraseña'=>'A'
+            ]
+        ]);
+        
 
         //CENTRO FORMACION         
         CentroFormacion::insert([
             [
             'codigo_centro'=>'23471927',
+            'nombre_centro'=>'CIDE',
             'nr_ambientes'=>'20',
             'id_usuario'=>'1'
-            ]
-        ]);
-
-        //CENTROFORMACION
-
-        CentroFormacion::insert([
+            ],
             [
             'codigo_centro'=>'1',
+            'nombre_centro'=>'Tecnoparque',
             'nr_ambientes'=>'20',
             'id_usuario'=>'1',
             ]
         ]);
 
-        
+        //CENTRO FORMACION BASURA
+        centroformacionbasura::insert([
+            [
+            'codigo_centro'=>'1',
+            'nombre_centro'=>'af',
+            'nr_ambientes'=>'1',
+            'id_usuario'=>'1'
+            ]
+        ]);
+
         
         //SUBSEDES           
         Subsede::insert([
             [
-            'codigo_sede'=>'1',
+            'codigo_sub'=>'1',
             'nombre'=>'Uniminuto',
+            'codigo_centro'=>'23471927'
+            ],
+            [
+            'codigo_sub'=>'2',
+            'nombre'=>'Sibate',
             'codigo_centro'=>'23471927'
             ]
         ]);
 
-        Subsede::insert([
+        //SUBSEDES BASURA
+        Subsedebasura::insert([
             [
-            'codigo_sede'=>'2',
-            'nombre'=>'Sibate',
+            'codigo_sub'=>'1',
+            'nombre'=>'A',
             'codigo_centro'=>'23471927'
             ]
         ]);
@@ -154,30 +217,24 @@ class DatabaseSeeder extends Seeder
         Programa::insert([
             [
             'codigo_prog'=>'228106',
-            'nombre'=>'ADSI (Analisis y Desarrollo de Sistemas de Informacion)',
+            'nombre'=>'ADSI',
             'estado'=>'1',
             'nivel_formacion'=>'tecnologo',
              'duracion'=>'24 meses',
              'version'=>'102',
              'codigo_centro'=>'23471927',
              'codigo_area'=>'1'       
-            ]
-        ]);
-
-        Programa::insert([
+            ],
             [
             'codigo_prog'=>'228118',
-            'nombre'=>'ADSO (Analisis y Desarrollo de Software)',
+            'nombre'=>'ADSO',
             'estado'=>'1',
             'nivel_formacion'=>'tecnologo',
             'duracion'=>'3984 horas',
             'version'=>'1',
             'codigo_centro'=>'23471927',
             'codigo_area'=>'1'
-            ]
-        ]);
-
-        Programa::insert([
+            ],
             [
             'codigo_prog'=>'233104',
             'nombre'=>'Programacion de Software',
@@ -190,8 +247,23 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-         //DESCARGAS           
-         Descarga::insert([
+        //PROGRAMAS BASURA
+        Programabasura::insert([
+            [
+            'codigo_prog'=>'1',
+            'nombre'=>'A',
+            'estado'=>'1',
+            'nivel_formacion'=>'A',
+             'duracion'=>'1 M',
+             'version'=>'1',
+             'codigo_centro'=>'23471927',
+             'codigo_area'=>'1'       
+            ]
+        ]);
+
+
+        //DESCARGAS           
+        Descarga::insert([
             [
             'codigo_desc'=>'1',
             'nombre'=>'Trimestre1',
@@ -199,20 +271,37 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        //DESCARGAS BASURA
+        Descargabasura::insert([
+            [
+            'codigo_desc'=>'1',
+            'nombre'=>'1',
+            'codigo_prog'=>'228106'
+            ]
+        ]);
+
+
         //TIPO DE FORMACIÓN 
         TipoFormacion::insert([
             [
             'codigo_for'=>'1',
             'nombre'=>'Cadena de formacion'
-            ]
-        ]);
-
-        TipoFormacion::insert([
+            ],
             [
             'codigo_for'=>'2',
             'nombre'=>'Oferta regular'
             ]
         ]);
+
+        //TIPO DE FORMACIÓN BASURA 
+        TipoFormacionBasura::insert([
+            [
+            'codigo_for'=>'3',
+            'nombre'=>'Cadena'
+            ]
+        ]);
+
+
         //FICHAS
         Ficha::insert([
             [
@@ -225,6 +314,21 @@ class DatabaseSeeder extends Seeder
             'dni'=>'11111'
             ]
         ]);
+
+        //FICHAS BASURA
+        Fichabasura::insert([
+            [
+            'nr_ficha'=>'1',
+            'jornada'=>'A', 
+            'modalidad'=>'A',
+            'nr_aprendices'=>'1',
+            'codigo_prog'=>'228106',
+            'codigo_for'=>'1',
+            'dni'=>'11111'
+            ]
+        ]);
+
+
         //AMBIENTE FORMACION
         AmbienteFormacion::insert([
             [
@@ -232,6 +336,18 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'contac',
             'recursos'=>'tecnologicos',
             'especialidad'=>'informatico',
+            'codigo_centro'=>'1',
+            'nr_ficha'=>'2515397'
+            ]
+        ]);
+
+        //AMBIENTE FORMACION BASURA
+        Ambienteformacionbasura::insert([
+            [
+            'codigo_ambiente'=>'1',
+            'nombre'=>'A',
+            'recursos'=>'A',
+            'especialidad'=>'A',
             'codigo_centro'=>'1',
             'nr_ficha'=>'2515397'
             ]
@@ -313,6 +429,16 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'PROMOVER',
             'descripcion'=>'PROMOVER LA INTERACCIÓN IDÓNEA CONSIGO MISMO, CON LOS DEMÁS Y CON LA
             NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL.',
+            'codigo_prog'=>'228106'
+            ]
+        ]);
+
+        //COMPETENCIA BASURA
+        Competenciabasura::insert([
+            [
+            'codigo_comp'=>'1',
+            'nombre'=>'A',
+            'descripcion'=>'A',
             'codigo_prog'=>'228106'
             ]
         ]);
@@ -607,7 +733,18 @@ class DatabaseSeeder extends Seeder
             'codigo_comp'=>'220501009'
             ]
         ]);
+
+        //RESULTADO BASURA
+        Resultadobasura::insert([
+            [
+            'id_resultado'=>'1',
+            'resultado'=>'A',
+            'estado'=>'1',
+            'codigo_comp'=>'220501009'
+            ]
+        ]);
         
+
         //SEMAFORO
         Semaforo::insert([
             //////////////////////////////
@@ -734,9 +871,34 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        //SEMAFORO BASURA
+        Semaforobasura::insert([
+            [
+            'id_semaforo'=>'1',
+            'dia_semana'=>'1',
+            'trimestre'=>'1',
+            'codigo_comp'=>'220501009',
+            'codigo_prog'=>'228106'
+            ]
+        ]);
+
         
         //HORARIO
         Horario::insert([
+            [
+            'codigo_h'=>'1',
+            'codigo_prog'=>'228106',
+            'nr_ficha'=>'2515397',
+            'codigo_centro'=>'1',
+            'codigo_ambiente'=>'2123',
+            'dni'=>'11111',
+            'id_semaforo'=>'1',
+            'codigo_desc'=>'1'
+            ]
+        ]);
+
+        //HORARIO BASURA
+        Horariobasura::insert([
             [
             'codigo_h'=>'1',
             'codigo_prog'=>'228106',

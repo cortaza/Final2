@@ -12,6 +12,7 @@ class CentroFormacion extends Model
     public $timestamps=true;
     protected $fillable = [
         'Codigo_centro',
+        'Nombre_centro',
         'Nr_ambientes',
         'ID_usuario'
     ];

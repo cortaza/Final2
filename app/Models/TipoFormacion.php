@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TipoFormacion extends Model
 {
     use HasFactory;
-    protected $primarykey='codigo_formacion';
+    protected $primarykey='codigo_for';
     public $timestamps=true;
     protected $fillable=[
-        'codigo_formacion',
+        'codigo_for',
         'nombre'
     ];
 }
