@@ -28,13 +28,21 @@ class AmbienteFormacionController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'codigo_ambiente' => 'required',
+            'nombre' => 'required',
+            'recursos' => 'required',
+            'especialidad' => 'required',
+            'codigo_centro' => 'required',
+            'nr_ficha' => 'required'
+        ]);
         $ambiente = new AmbienteFormacion;
         $ambiente->codigo_ambiente=$request->codigo_ambiente;
         $ambiente->nombre=$request->nombre;
         $ambiente->recursos=$request->recursos;
         $ambiente->especialidad=$request->especialidad;
         $ambiente->codigo_centro=$request->codigo_centro;
-        $ambiente->numero_ficha=$request->numero_ficha;
+        $ambiente->nr_ficha=$request->nr_ficha;
         $ambiente->save();
         return redirect()->route('ambienteindex');
         }
@@ -49,7 +57,7 @@ class AmbienteFormacionController extends Controller
         $ambientebasura->recursos=$ambienteformacion->recursos;
         $ambientebasura->especialidad=$ambienteformacion->especialidad;
         $ambientebasura->codigo_centro=$ambienteformacion->codigo_centro;
-        $ambientebasura->numero_ficha=$ambienteformacion->numero_ficha;
+        $ambientebasura->nr_ficha=$ambienteformacion->nr_ficha;
         $ambientebasura->save();
         $ambienteformacion=AmbienteFormacion::where('codigo_ambiente', $ambiente)->delete();
         return redirect()->route('ambienteindex');
@@ -64,9 +72,9 @@ class AmbienteFormacionController extends Controller
         $ambienteformacion->codigo_ambiente=$ambientebasura->codigo_ambiente;
         $ambienteformacion->nombre=$ambientebasura->nombre;
         $ambienteformacion->recursos=$ambientebasura->recursos;
-        $ambienteformacion->especialida=$ambientebasura->especialida;
+        $ambienteformacion->especialidad=$ambientebasura->especialidad;
         $ambienteformacion->codigo_centro=$ambientebasura->codigo_centro;
-        $ambienteformacion->numero_ficha=$ambientebasura->numero_ficha;
+        $ambienteformacion->nr_ficha=$ambientebasura->nr_ficha;
         $ambienteformacion->save();
         $ambientebasura=Ambienteformacionbasura::where('codigo_ambiente', $ambiente)->delete();
         return redirect()->route('ambienteindex');
@@ -79,9 +87,9 @@ class AmbienteFormacionController extends Controller
     {
         //
     }
-    public function destroy($ambienteFormacion)
+    public function destroy($ambiente)
     {
-        DB::delete('DELETE FROM ambiente_formacions WHERE codigo_ambiente = ?', [$ambienteFormacion]);
+        Ambienteformacionbasura::where('codigo_ambiente', $ambiente)->delete();
         return redirect()->route('ambienteindex');
     }
 
@@ -90,7 +98,7 @@ class AmbienteFormacionController extends Controller
      */
     public function edit(Request $request)
     {
-        AmbienteFormacion::where('codigo_ambiente', $request->codigo)->update(['codigo_ambiente'=>$request->codigo_ambiente,'nombre'=>$request->nombre,'recursos'=>$request->recursos,'especialidad'=>$request->especialidad,'codigo_centro'=>$request->codigo_centro,'numero_ficha'=>$request->numero_ficha]);   
+        AmbienteFormacion::where('codigo_ambiente', $request->codigo)->update(['codigo_ambiente'=>$request->codigo_ambiente,'nombre'=>$request->nombre,'recursos'=>$request->recursos,'especialidad'=>$request->especialidad,'codigo_centro'=>$request->codigo_centro,'nr_ficha'=>$request->nr_ficha]);   
         return redirect()->route('ambienteindex');
     }
 

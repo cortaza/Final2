@@ -12,67 +12,62 @@ use Illuminate\Support\Facades\Redis;
 
 class FichaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $programa=Programa::all();
         $tipoformacion=TipoFormacion::all();
         $instructor=Instructor::all();
-        $ficha=Ficha::all();
+        $fichas=Ficha::all();
         $fichabasura=Fichabasura::all();
-        return view('ficha/index', compact('ficha', 'fichabasura', 'instructor', 'tipoformacion', 'programa'));
+        return view('ficha/index', compact('fichas', 'fichabasura', 'instructor', 'tipoformacion', 'programa'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
-        $ficha = new Ficha;
-        $ficha->nr_ficha=$request->nr_ficha;
-        $ficha->jornada=$request->jornada;
-        $ficha->modalidad=$request->modalidad;
-        $ficha->nr_aprendices=$request->nr_aprendices;
-        $ficha->codigo_for=$request->codigo_for;
-        $ficha->codigo_prog=$request->codigo_prog;
-        $ficha->dni=$request->dni;
-        $ficha->save();
+        $fichas = new Ficha;
+        $fichas->nr_ficha=$request->nr_ficha;
+        $fichas->jornada=$request->jornada;
+        $fichas->modalidad=$request->modalidad;
+        $fichas->nr_aprendices=$request->nr_aprendices;
+        $fichas->codigo_for=$request->codigo_for;
+        $fichas->codigo_prog=$request->codigo_prog;
+        $fichas->dni=$request->dni;
+        $fichas->save();
         return redirect()->route('fichaindex');
     }
 
     public function archive($ficha)
     {
-        $ficha=Ficha::where('nr_ficha', $ficha)->first();
+        $fichas=Ficha::where('nr_ficha', $ficha)->first();
         $fichabasura=new Fichabasura();
-        $fichabasura->nr_ficha=$ficha->nr_ficha;
-        $fichabasura->jornada=$ficha->jornada;
-        $fichabasura->modalidad=$ficha->modalidad;
-        $fichabasura->nr_aprendices=$ficha->nr_aprendices;
-        $fichabasura->codigo_for=$ficha->codigo_for;
-        $fichabasura->codigo_prog=$ficha->codigo_prog;
-        $fichabasura->dni=$ficha->dni;
+        $fichabasura->nr_ficha=$fichas->nr_ficha;
+        $fichabasura->jornada=$fichas->jornada;
+        $fichabasura->modalidad=$fichas->modalidad;
+        $fichabasura->nr_aprendices=$fichas->nr_aprendices;
+        $fichabasura->codigo_for=$fichas->codigo_for;
+        $fichabasura->codigo_prog=$fichas->codigo_prog;
+        $fichabasura->dni=$fichas->dni;
         $fichabasura->save();
-        $ficha=Ficha::where('nr_ficha', $ficha)->delete();
+        $fichas=Ficha::where('nr_ficha', $ficha)->delete();
         return redirect()->route('fichaindex');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store($ficha)
+    public function restore($ficha)
     {
         $fichabasura=Fichabasura::where('nr_ficha', $ficha)->first();
-        $ficha=new Ficha;
-        $ficha->nr_ficha=$fichabasura->nr_ficha;
-        $ficha->jornada=$fichabasura->jornada;
-        $ficha->modalidad=$fichabasura->modalidad;
-        $ficha->nr_aprendices=$fichabasura->nr_aprendices;
-        $ficha->codigo_for=$fichabasura->codigo_for;
-        $ficha->codigo_prog=$fichabasura->codigo_prog;
-        $ficha->dni=$fichabasura->dni;
-        $ficha->save();
+        $fichas=new Ficha;
+        $fichas->nr_ficha=$fichabasura->nr_ficha;
+        $fichas->jornada=$fichabasura->jornada;
+        $fichas->modalidad=$fichabasura->modalidad;
+        $fichas->nr_aprendices=$fichabasura->nr_aprendices;
+        $fichas->codigo_for=$fichabasura->codigo_for;
+        $fichas->codigo_prog=$fichabasura->codigo_prog;
+        $fichas->dni=$fichabasura->dni;
+        $fichas->save();
         $fichabasura=Fichabasura::where('nr_ficha', $ficha)->delete();
         return redirect()->route('fichaindex');
     }

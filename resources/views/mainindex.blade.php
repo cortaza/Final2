@@ -3,9 +3,9 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Horario</title>
+  <title>Principal</title>
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -95,7 +95,7 @@
   <nav>
     <a href="#0" aria-label="forecastr logo" class="logo">
       <svg width="140" height="49">
-      <img src="{!! asset('public/img/Sena verde.jpg') !!}">
+      <img style="height:130px; width:130px;" src="{{asset('img/Logo-de-SENA-png-verde.png')}}">
       </svg>
     </a>
     <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
@@ -108,7 +108,7 @@
         <h3>Administrador</h3>
       </li>
       <li>
-        <a href="{{ route('mainhorario')}}">
+        <a href="{{route('mainhindex')}}">
           <svg>
             <use xlink:href="#collection"></use>
           </svg>
@@ -126,7 +126,7 @@
       <li>
         <a href="#0">
           <svg>
-            <use xlink:href="#users"></use>
+            <use xlink:href="#users" style="color:blue;"></use>
           </svg>
           <span>Users</span>
         </a>
@@ -178,7 +178,7 @@
           <svg aria-hidden="true">
             <use xlink:href="#collapse"></use>
           </svg>
-          <span>Collapse</span>
+          <span>Minimizar</span>
         </button>
       </li>
     </ul>
@@ -195,7 +195,7 @@
       </button>
     </form>
     <div class="admin-profile">
-      <span class="greeting">Hello admin</span>
+      <span class="greeting">Perfil</span>
       <div class="notifications">
         <span class="badge">1</span>
         <svg>
@@ -205,14 +205,29 @@
     </div>
   </section>
   <section class="grid">
-    <article></article>
-    <article></article>
-    <article></article>
-    <article></article>
-    <article></article>
-    <article></article>
-    <article></article>
-    <article></article>
+    <article>
+    <img style="height:100%; width:100%;" src="{{asset('/img/sofia.jfif')}}">
+      
+    </article>
+    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
+    </article>
+    </article>
+    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fradad t
+    </article>
+    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragme renciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
+    </article>
+    </article>
+    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragmentoo con unidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
+    </article>
+    </article>
+    <article><img style="height:90%; width:40%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <h3 style="margin-left:15px; margin-top:15px; width:60%;">Umbiéndo parágrafo, es una unidad comunicativa del lenguaje escrito compuesta por un conjunto de oraciones que tienen cierta unidad temática o que, sin tenerla, se enuncian juntas. Es un componente del texto que en su aspecto externo termina en un punto y aparte. de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.
+    </h3>
+  </article>
 </section>
 </section>
 <!-- partial -->
@@ -230,15 +245,16 @@
   --page-header-bgColor: #242e42;
   --page-header-bgColor-hover: #1d2636;
   --page-header-txtColor: #dde9f8;
-  --page-header-headingColor: #7889a4;
+  --page-header-headingColor: green;
   --page-header-width: 220px;
-  --page-content-bgColor: #f0f1f6;
+  --page-content-bgColor: #53607a;
   --page-content-txtColor: #171616;
   --page-content-blockColor: #fff;
   --white: #fff;
   --black: #333;
   --blue: #00b9eb;
   --red: #ec1848;
+  --green:green;
   --border-radius: 4px;
   --box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.075);
   --switch-bgLightModeColor: #87cefa;
@@ -251,6 +267,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
 }
 
 ul {
@@ -417,7 +440,7 @@ body {
 .page-header .admin-menu button:hover,
 .page-header .admin-menu button:focus {
   background: var(--page-header-bgColor-hover);
-  color: var(--blue);
+  color: var(--green);
   outline: none;
 }
 
@@ -425,7 +448,7 @@ body {
 .page-header .admin-menu a:focus svg,
 .page-header .admin-menu button:hover svg,
 .page-header .admin-menu button:focus svg {
-  fill: var(--blue);
+  fill: var(--green);
 }
 
 
@@ -755,8 +778,9 @@ body {
   --page-header-bgColor: #f1efec;
   --page-header-bgColor-hover: #b9e4e0;
   --page-header-txtColor: #2c303a;
-  --page-header-headingColor: #979595;
+  --page-header-headingColor: green;
   --page-content-bgColor: #fff;
+  --green:green;
   --box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.25);
 }
 
@@ -764,7 +788,7 @@ body {
 .light-mode .page-header .admin-menu a:focus,
 .light-mode .page-header .admin-menu button:hover,
 .light-mode .page-header .admin-menu button:focus {
-  color: var(--black);
+  color: var(--green);
 }
 
 .light-mode .page-header .logo svg,
@@ -772,7 +796,7 @@ body {
 .light-mode .page-header .admin-menu a:focus svg,
 .light-mode .page-header .admin-menu button:hover svg,
 .light-mode .page-header .admin-menu button:focus svg {
-  fill: var(--black);
+  fill: var(--green);
 }
 
 .light-mode .switch [type="checkbox"]:focus + label span:first-child {

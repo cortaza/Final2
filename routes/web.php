@@ -10,6 +10,7 @@ use App\Http\Controllers\DescargaController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\MainhorarioController;
 use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\RedTematicaController;
 use App\Http\Controllers\ResultadoController;
@@ -23,9 +24,19 @@ use App\Http\Controllers\TipoFormacionController;
 // /*-----------------PAGINA PRINCIPAL-----------------*/
 Route::get('/paginaprincipal', function () {return view('mainindex');})->name('mainindex');
 // /*-----------------HORARIO PRINCIPAL-----------------*/
-Route::get('/horario-principal', function () {return view('horario');})->name('mainhorario');
+
+    Route::controller(MainhorarioController::class)->group(function(){
+        //INDEX
+        Route::get('/horario/principal','index')->name('mainhindex');        
+        //CREATE
+        Route::post('/horario/principal/crear','create')->name('mainhcreate');        
+        //EDIT
+        Route::match(['get', 'post'], '/horario/principal/editar', 'edit' )->name('mainhedit');
+        //DELETE 
+        Route::delete('/horario/principal/delete/{horario}','destroy')->name('mainhdestroy');   
+        });
 // /*-----------------ELEGIR CRUD-----------------*/
-Route::get('/elegir_crud', function () {return view('choosecrud');})->name('choosecrud');
+    Route::get('/elegir_crud', function () {return view('choosecrud');})->name('choosecrud');
 // /*-----------------CRUDS-----------------*/
 
 // /*RED*/
@@ -141,7 +152,7 @@ Route::get('/elegir_crud', function () {return view('choosecrud');})->name('choo
     //Archive
     Route::post('programa/archive/{programa}','archive')->name('programaarchive');                                     
     //Restore
-    Route::post('/programa/crearprograma/{programa}','restore')->name('programastore'); 
+    Route::post('/programa/crearprograma/{programa}','restore')->name('programarestore'); 
     //EDIT      
     Route::match(['get', 'post'], '/programa/edit/', 'edit' )->name('programaedit');
     });

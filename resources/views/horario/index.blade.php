@@ -56,10 +56,10 @@
                                     @forelse($horario as $horario)                                        
                                     <tr>
                                         <th>{{$horario->codigo_h}}</th>
-                                        <th>{{ $programas[$horario->codigo] }}</th>
+                                        <th>{{$programas[$horario->codigo] }}</th>
                                         <th>{{$horario->nr_ficha}}</th>
-                                        <th>{{ $centros[$horario->codigo] }}</th>
-                                        <th>{{ $ambientes[$horario->codigo] }}</th>
+                                        <th>{{$centros[$horario->codigo] }}</th>
+                                        <th>{{$ambientes[$horario->codigo] }}</th>
                                         <th>{{$instructors[$horario->codigo]}}</th>
                                         <th>{{$horario->id_semaforo}}</th>
                                         <th><img src="" alt="This is a picture"></th>

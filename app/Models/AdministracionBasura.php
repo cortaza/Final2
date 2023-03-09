@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AdministracionBasura extends Model
 {
     use HasFactory;
-    protected $primarykey='id_usuario';
+    protected $primarykey='idusuario';
     public $timestamps=true;
     protected $fillable = [
-        'id_usuario',
+        'idusuario',
         'rol',
         'nombre',
         'apellido',

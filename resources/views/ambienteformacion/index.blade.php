@@ -1,9 +1,9 @@
 @extends('layouts.structure')
 @section('titulo','Formulario principal Ambiente Formacion')
 
-
 @section('contenido')
     <div>@include('partials.selectform')</div>
+
 <!-- partial:index.partial.html -->
 <div id="app">
     <h1>Formulario principal Ambiente de Formacion</h1>
@@ -28,7 +28,7 @@
               <td>{{$a->recursos}}</td>
               <td>{{$a->especialidad}}</td>
               <td>{{$a->codigo_centro}}</td>
-              <td>{{$a->numero_ficha}}</td>
+              <td>{{$a->nr_ficha}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('ambientearchive',$a->codigo_ambiente)}}" method="POST">
@@ -46,7 +46,10 @@
             <td colspan="2">
                 <div class="input-field">
                     <label for="lname">Codigo ambiente</label>
-                    <input placeholder="codigo_ambiente" ref="lname" v-model="input.lname" name="dni" id="lname" type="text">
+                    <input placeholder="codigo_ambiente" ref="lname" v-model="input.lname" name="codigo_ambiente" id="lname" type="text">
+                    @error('codigo_ambiente')                  
+                    <small style="color:red; position:static;">El campo codigo ambiente no puede estar vacio</small>
+                    @enderror
                 </div>
             </td>
             <td>
@@ -58,13 +61,13 @@
             <td>
                 <div class="input-field">
                     <label for="fname">Recursos</label>
-                    <input placeholder="recursos" v-model="input.fname" name="apellido" id="fname" type="text">                
+                    <input placeholder="recursos" v-model="input.fname" name="recursos" id="fname" type="text">                
                 </div>
             </td>
             <td>
                 <div class="input-field">
                     <label for="fname">Especialidad</label>
-                    <input placeholder="especialidad" v-model="input.fname" name="telefono" id="fname" type="text">                
+                    <input placeholder="especialidad" v-model="input.fname" name="especialidad" id="fname" type="text">                
                 </div>
             </td>
             <td>
@@ -105,7 +108,7 @@
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @forelse($ambiente as $a)
+        @forelse($amba as $a)
         <tbody>
           <tr v-for="(person,index) in bin">
               <td>{{$a->codigo_ambiente}}</td>
@@ -113,7 +116,7 @@
               <td>{{$a->recursos}}</td>
               <td>{{$a->especialidad}}</td>
               <td>{{$a->codigo_centro}}</td>
-              <td>{{$a->numero_ficha}}</td>
+              <td>{{$a->nur_ficha}}</td>
             <td>
             <form action="{{route('ambienterestore', $a->codigo_ambiente)}}" method="POST">
                     @csrf

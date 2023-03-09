@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreign('codigo_prog')->references('codigo_prog')->on('programas')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('codigo_for');
             $table->foreign('codigo_for')->references('codigo_for')->on('tipo_formacions')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('dni');
-            $table->foreign('dni')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

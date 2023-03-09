@@ -10,59 +10,46 @@
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
-            <th v-for="column in columns">
-              codigo programa
-            </th>
-            <th v-for="column in columns">
-              Nombre
-            </th>
-            <th v-for="column in columns">
-              Estado
-            </th>
-            <th v-for="column in columns">
-              Nivel de formacion
-            </th>
-            <th v-for="column in columns">
-              Duracion
-            </th>
-            <th v-for="column in columns">
-              Version
-            </th>
-            <th v-for="column in columns">
-              Codigo centro
-            </th>
-            <th v-for="column in columns">
-              Codigo area
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+          <th v-for="column in columns">codigo programa</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Estado</th>
+            <th v-for="column in columns">Nivel de formacion</th>
+            <th v-for="column in columns">duracion</th>
+            <th v-for="column in columns">version</th>
+            <th v-for="column in columns">codigo centro</th>
+            <th v-for="column in columns">codigo Area</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($area as $a)
+        @foreach ($programa as $p)
         <tbody>
           <tr v-for="(person,index) in persons">
-            <td>{{$a->codigo_area}}</td>
-            <td>{{$a->nombre}}</td>
-            <td>{{$a->codigo_red}}</td>
-            <td style="width: 18%;">
+          <td>{{$p->codigo_prog}}</td>
+          <td>{{$p->nombre}}</td>
+          <td>{{$p->estado}}</td>
+          <td>{{$p->nivel_formacion}}</td>
+          <td>{{$p->duracion}}</td>
+          <td>{{$p->version}}</td>
+          <td>{{$p->codigo_centro}}</td>
+          <td>{{$p->codigo_area}}</td>
+          <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('areaarchive', $a->codigo_area )}}" method="POST">
+              <form action="{{route('programaarchive', $p->codigo_prog )}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
             </td>
           </tr>
                   <!-- Pop window -->
-            @include('popupwindows.area')  
+            @include('popupwindows.programa')  
           @endforeach
           <tr>
-        <form action="{{ route('areacreate') }}" method="post">
+        <form action="{{ route('programacreate') }}" method="post">
         @csrf
               <td colspan="2">
                 <div class="input-field">
-                    <label for="lname">Codigo Area</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text">
+                    <label for="lname">Codigo programa</label>
+                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_prog" id="lname" type="text">
                 </div>
               </td>
               <td>
@@ -71,17 +58,50 @@
                     <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text">                
                 </div>
               </td>
+              <div class="input-field">
+                    <label for="fname">Estado</label>
+                    <input placeholder="Placeholder" v-model="input.fname" name="estado" id="fname" type="text">                
+                </div>
+              </td>
+              <div class="input-field">
+                    <label for="fname">Nivel formacion</label>
+                    <input placeholder="Placeholder" v-model="input.fname" name="nivel_formacion" id="fname" type="text">                
+                </div>
+              </td>
+              <div class="input-field">
+                    <label for="fname">Duracion</label>
+                    <input placeholder="Placeholder" v-model="input.fname" name="duracion" id="fname" type="text">                
+                </div>
+              </td>
+              <div class="input-field">
+                    <label for="fname">Version</label>
+                    <input placeholder="Placeholder" v-model="input.fname" name="version" id="fname" type="text">                
+                </div>
+              </td>
               
               <td>
 
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Centro</font></font></label>
                 
-                <select class="form-select" id="validationCustom04" required="" name="codigo_red">
+                <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($red as $r)     
-                    <option>{{$r->codigo_red}}</option>     
+                @foreach($centro as $p)     
+                    <option>{{$p->codigo_centro}}</option>     
                 @endforeach     
                 </select>
+
+              </td>
+
+              <td>
+
+              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Area</font></font></label>
+
+              <select class="form-select" id="validationCustom04" required="" name="codigo_area">
+                  <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
+              @foreach($area as $p)     
+                  <option>{{$p->codigo_area}}</option>     
+              @endforeach     
+              </select>
 
               </td>
           
@@ -94,35 +114,37 @@
 
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
-          <tr>
-            <th v-for="column in columns">
-              codigo area
-            </th>
-            <th v-for="column in columns">
-              Nombre
-            </th>
-            <th v-for="column in columns">
-              Codigo red
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+        <tr>
+          <th v-for="column in columns">codigo programa</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Estado</th>
+            <th v-for="column in columns">Nivel de formacion</th>
+            <th v-for="column in columns">duracion</th>
+            <th v-for="column in columns">version</th>
+            <th v-for="column in columns">codigo centro</th>
+            <th v-for="column in columns">codigo Area</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($areatrash as $trash)
+        @foreach ($programatrash as $trash)
         <tbody>
           <tr v-for="(person,index) in bin">
-            <td>{{$trash->codigo_area}}</td>
-            <td>{{$trash->nombre}}</td>
-            <td>{{$trash->codigo_red}}</td>
+          <td>{{$trash->codigo_prog}}</td>
+          <td>{{$trash->nombre}}</td>
+          <td>{{$trash->estado}}</td>
+          <td>{{$trash->nivel_formacion}}</td>
+          <td>{{$trash->duracion}}</td>
+          <td>{{$trash->version}}</td>
+          <td>{{$trash->codigo_centro}}</td>
+          <td>{{$trash->codigo_area}}</td>
             <td>
-            <form action="{{route('arearestore', $trash->codigo_area )}}" method="POST">
+            <form action="{{route('programarestore', $trash->codigo_prog )}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('areadestroy', $trash->codigo_area )}}" method="POST">
+              <form action="{{route('programadestroy', $trash->codigo_prog )}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

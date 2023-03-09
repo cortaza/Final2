@@ -1,4 +1,4 @@
-@extends('layouts.structure')
+  @extends('layouts.structure')
 @section('titulo','Formulario principal administracion')
 
 @section('contenido')
@@ -28,18 +28,18 @@
                 <th colspan="2"><center>Acción</center></th>          
             </tr>
         </thead>
-        @foreach ($administracion as $adminis)   
+        @foreach ($administracion as $a)   
         <tbody>
             <tr v-for="(person,index) in persons">
-            <td>{{$adminis->id_usuario}}</td>
-            <td>{{$adminis->rol}}</td>
-            <td>{{$adminis->nombre}}</td>
-            <td>{{$adminis->apellido}}</td>
-            <td>{{$adminis->contraseña}}</td>
+            <td>{{$a->idusuario}}</td>
+            <td>{{$a->rol}}</td>
+            <td>{{$a->nombre}}</td>
+            <td>{{$a->apellido}}</td>
+            <td>{{$a->contraseña}}</td>
             <td style="width: 18%;">
                 <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
                 <!-- <a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a> -->
-                <form action="{{route('administracionarchive', $adminis->id_usuario )}}" method="POST">
+                <form action="{{route('administracionarchive', $administracion->idusuario )}}" method="POST">
                       @csrf
                       <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
                 </form>  
@@ -108,21 +108,21 @@
         </tr>
         </thead>
 
-        @foreach ($administracion as $adminis)  
+        @foreach ($administracion as $a)  
         <tbody>
           <tr v-for="(person,index) in bin">
-            <td>{{$adminis->id_usuario}}</td>
-            <td>{{$adminis->rol}}</td>
-            <td>{{$adminis->nombre}}</td>
-            <td>{{$adminis->apellido}}</td>
-            <td>{{$adminis->contraseña}}</td>
-            <form action="{{route('administracionrestore', $adminis->id_usuario)}}" method="POST">
+            <td>{{$a->idusuario}}</td>
+            <td>{{$a->rol}}</td>
+            <td>{{$a->nombre}}</td>
+            <td>{{$a->apellido}}</td>
+            <td>{{$a->contraseña}}</td>
+            <form action="{{route('administracionrestore', $admin->idusuario)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('administraciondestroy', $adminis->id_usuario )}}" method="POST">
+              <form action="{{route('administraciondestroy', $admin->idusuario)}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

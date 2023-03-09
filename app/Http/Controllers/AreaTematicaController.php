@@ -21,6 +21,11 @@ class AreaTematicaController extends Controller
 
     public function create(Request $request)
     {   
+        $request->validate([
+            'codigo_area' => 'required',
+            'nombre' => 'required',
+            'codigo_red' => 'required'
+        ]);
         $areatematica = new AreaTematica;
         $areatematica->codigo_area=$request->codigo_area;
         $areatematica->nombre=$request->nombre;

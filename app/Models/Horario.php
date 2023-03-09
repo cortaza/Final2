@@ -14,10 +14,10 @@ class Horario extends Model
         'codigo_h',
         'codigo_prog',
         'nr_ficha',
-        'codigo_centro',
         'codigo_ambiente',
         'dni',
         'id_semaforo',
+        'codigo_comp',
         'codigo_descarga'
     ];
 }

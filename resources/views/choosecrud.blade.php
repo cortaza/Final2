@@ -1,8 +1,10 @@
-
+<head>
+  <title>Selector</title>
+</head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
+<link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
 
 <body>
 <!-- partial:index.partial.html -->
@@ -37,24 +39,37 @@
     @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 
+#divmain{
+    width: 100%;
+	height: auto;
+}
 
-.left{
+
+#left{
     float: left;
+	width: 35%;
+	height: auto;
 }
-.center{
-    float: center;
+#center{
+    float: left;
+	width: 30%;
+	height: auto;
 }
-.right{
-    float: right;
+#right{
+    float: left;
+	width: 35%;
+	height: auto;
 }
 
 
 a.boton{
+	width: 50%;
+	height: 5%;
 	font-family: 'Montserrat', sans-serif;
 	text-transform:uppercase;
 	letter-spacing:5px;
 	display:inline-block;
-	margin: 15px 20%;
+	margin: 15px 15%;
 	text-decoration:none;
 	color:#29870E;
 	padding:20px 40px;

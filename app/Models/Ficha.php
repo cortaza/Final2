@@ -16,7 +16,6 @@ class Ficha extends Model
         'modalidad',
         'nr_aprendices',
         'codigo_prog',
-        'codigo_formacion',
-        'dni'
+        'codigo_formacion'
     ];
 }

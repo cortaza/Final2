@@ -20,7 +20,7 @@
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($ficha as $f)
+        @foreach ($fichas as $f)
         <tbody>
           <tr v-for="(person,index) in persons">
             <td>{{$f->nr_ficha}}</td>

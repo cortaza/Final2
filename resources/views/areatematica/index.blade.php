@@ -47,13 +47,19 @@
               <td colspan="2">
                 <div class="input-field">
                     <label for="lname">Codigo Area</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text">
+                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text" value="{{old('codigo_area')}}">
+                  @error('codigo_area')                  
+                    <small style="color:red; position:static;">El campo codigo area no puede estar vacio</small>
+                  @enderror
                 </div>
               </td>
               <td>
                 <div class="input-field">
                     <label for="fname">Nombre</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text">                
+                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">  
+                  @error('nombre')                  
+                    <small style="color:red; position:static;">El campo nombre no puede estar vacio</small>
+                  @enderror              
                 </div>
               </td>
               
@@ -65,8 +71,11 @@
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
                 @foreach($red as $r)     
                     <option>{{$r->codigo_red}}</option>     
-                @endforeach     
+                @endforeach                     
                 </select>
+                @error('codigo_red')                  
+                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
+                @enderror
 
               </td>
           

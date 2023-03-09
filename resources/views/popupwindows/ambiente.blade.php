@@ -7,7 +7,7 @@
             <div class="row">
               <div class="input-field col s6">                
                   <input name="codigo_ambiente" id="last_name" type="text" v-model="editInput.lname">
-                  <label for="last_name">Codigo de ambiente</label>                
+                  <label for="last_name">codigo de ambiente</label>                
               </div>
             </div>
             <div class="row">
@@ -30,19 +30,18 @@
               </div>
               <div class="row">
             <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
-            <select class="form-select" id="validationCustom04" required="" name="codigo_red">
+            <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
               <option>{{$a->codigo_centro}}</option>     
             </select>
           </div>
           <div class="row">
             <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
-            <select class="form-select" id="validationCustom04" required="" name="codigo_red">
+            <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              <option>{{$a->numero_ficha}}</option>     
+              <option>{{$a->nr_ficha}}</option>     
             </select>
-          </div>
-              </div>  
+          </div> 
               <div class="input-field col s6">                
                   <button type="submit">ENVIAR</button>   
                   <input type="hidden" value="{{$a->codigo_ambiente}}" name="codigo">             

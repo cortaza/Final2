@@ -310,8 +310,7 @@ class DatabaseSeeder extends Seeder
             'modalidad'=>'Presencial',
             'nr_aprendices'=>'25',
             'codigo_prog'=>'228106',
-            'codigo_for'=>'1',
-            'dni'=>'11111'
+            'codigo_for'=>'1'
             ]
         ]);
 
@@ -323,8 +322,7 @@ class DatabaseSeeder extends Seeder
             'modalidad'=>'A',
             'nr_aprendices'=>'1',
             'codigo_prog'=>'228106',
-            'codigo_for'=>'1',
-            'dni'=>'11111'
+            'codigo_for'=>'1'
             ]
         ]);
 
@@ -332,8 +330,8 @@ class DatabaseSeeder extends Seeder
         //AMBIENTE FORMACION
         AmbienteFormacion::insert([
             [
-            'codigo_ambiente'=>'2123',
-            'nombre'=>'contac',
+            'codigo_ambiente'=>'102',
+            'nombre'=>'contac center',
             'recursos'=>'tecnologicos',
             'especialidad'=>'informatico',
             'codigo_centro'=>'1',
@@ -889,10 +887,10 @@ class DatabaseSeeder extends Seeder
             'codigo_h'=>'1',
             'codigo_prog'=>'228106',
             'nr_ficha'=>'2515397',
-            'codigo_centro'=>'1',
-            'codigo_ambiente'=>'2123',
+            'codigo_ambiente'=>'102',
             'dni'=>'11111',
             'id_semaforo'=>'1',
+            'codigo_comp'=>'220501006',
             'codigo_desc'=>'1'
             ]
         ]);
@@ -903,10 +901,10 @@ class DatabaseSeeder extends Seeder
             'codigo_h'=>'1',
             'codigo_prog'=>'228106',
             'nr_ficha'=>'2515397',
-            'codigo_centro'=>'1',
-            'codigo_ambiente'=>'2123',
+            'codigo_ambiente'=>'102',
             'dni'=>'11111',
             'id_semaforo'=>'1',
+            'codigo_comp'=>'220501006',
             'codigo_desc'=>'1'
             ]
         ]);

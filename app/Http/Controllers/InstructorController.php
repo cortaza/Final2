@@ -22,6 +22,19 @@ class InstructorController extends Controller
 
     public function create(Request $request)
     {
+
+        $request->validate([
+            'dni' => 'required',
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required',
+            'correo' => 'required',
+            'estado' => 'required',
+            'tipo_contrato' => 'required',
+            'codigo_red' => 'required',
+            'codigo_area' => 'required'
+        ]);
+
         $instructor = new Instructor;
         $instructor->dni=$request->dni;
         $instructor->nombre=$request->nombre;
@@ -80,7 +93,7 @@ class InstructorController extends Controller
 
     public function edit(Request $request)
     { 
-        Instructor::where('dni', $request->dni)->update(['dni'=>$request->dni,'nombre'=>$request->nombre,'apellido'=>$request->apellido, 'telefono'=>$request->telefono, 'correo'=>$request->correo,'estado'=>$request->estado,'tipo_contrato'=>$request->tipo_contrato, 'codigo_red'=>$request->codigo_red, 'codigo_area'=>$request->codigo_area,]);
+        Instructor::where('dni', $request->d)->update(['dni'=>$request->dni,'nombre'=>$request->nombre,'apellido'=>$request->apellido, 'telefono'=>$request->telefono, 'correo'=>$request->correo,'estado'=>$request->estado,'tipo_contrato'=>$request->tipo_contrato, 'codigo_red'=>$request->codigo_red, 'codigo_area'=>$request->codigo_area,]);
         return redirect()->route('instructorindex');
     }
 }

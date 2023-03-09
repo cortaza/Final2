@@ -63,7 +63,7 @@
           </div>  
             <div class="input-field col s6">                
                 <button type="submit">ENVIAR</button>   
-                <input type="hidden" value="{{$i->dni}}" name="dni">             
+                <input type="hidden" value="{{$i->dni}}" name="d">             
             </div>
           </div>
         </form>  
