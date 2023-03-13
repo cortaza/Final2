@@ -1,11 +1,11 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Ficha')
+@section('titulo','Ficha')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario Ficha</h4>
+    <h4 class="head"><center>Ficha</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
@@ -16,7 +16,6 @@
             <th v-for="column in columns">Numero de Aprendices</th>
             <th v-for="column in columns">Codigo del Programa</th>
             <th v-for="column in columns">Tipo de Formacion</th>
-            <th v-for="column in columns">Documento de Identidad</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
@@ -29,7 +28,6 @@
             <td>{{$f->nr_aprendices}}</td>
             <td>{{$f->codigo_for}}</td>
             <td>{{$f->codigo_prog}}</td>
-            <td>{{$f->dni}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('fichaarchive', $f->nr_ficha )}}" method="POST">
@@ -92,19 +90,6 @@
                 </select>
 
               </td>
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo de Formacion</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="dni">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($instructor as $instruc)     
-                    <option>{{$instruc->dni}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-          
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
           </tbody>
@@ -121,7 +106,6 @@
             <th v-for="column in columns">Numero de Aprendices</th>
             <th v-for="column in columns">Codigo del Programa</th>
             <th v-for="column in columns">Tipo de Formacion</th>
-            <th v-for="column in columns">Documento de Identidad</th>
             <th v-for="column in columns">Acción</th>
           </tr>
           </tr>
@@ -135,7 +119,6 @@
             <td>{{$fe->nr_aprendices}}</td>
             <td>{{$fe->codigo_for}}</td>
             <td>{{$fe->codigo_prog}}</td>
-            <td>{{$fe->dni}}</td>
             <td>
             <form action="{{route('fichastore', $fe->nr_ficha )}}" method="POST">
                     @csrf

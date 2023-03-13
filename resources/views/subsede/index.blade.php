@@ -1,11 +1,11 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Sub sede')
+@section('titulo','Sub sede')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario Sub sede</h4>
+    <h4 class="head"><center>Sub-Sede</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
@@ -24,7 +24,7 @@
             </th>
           </tr>
         </thead>
-        @foreach ($sub as $s)
+        @foreach ($subsede as $s)
         <tbody>
           <tr v-for="(person,index) in persons">
             <td>{{$s->codigo_sub}}</td>
@@ -32,14 +32,14 @@
             <td>{{$s->codigo_centro}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('subsedearchive', $s->codigo_centro )}}" method="POST">
+              <form action="{{route('subsedearchive', $s->codigo_sub)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
             </td>
           </tr>
                   <!-- Pop window -->
-            @include('popupwindows.subsede')  
+            @include('popupwindows.subsede')
           @endforeach
           <tr>
         <form action="{{ route('subsedecreate') }}" method="post">
@@ -53,7 +53,7 @@
               <td>
                 <div class="input-field">
                     <label for="fname">Nombre</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text">                
+                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="name" type="text">                
                 </div>
               </td>
               
@@ -63,8 +63,8 @@
                 
                 <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($sub as $s)     
-                    <option>{{$s->codigo_centro}}</option>     
+                @foreach($centro as $c)     
+                    <option>{{$c->codigo_centro}}</option>     
                 @endforeach     
                 </select>
 
@@ -94,20 +94,20 @@
             </th>
           </tr>
         </thead>
-        @foreach ($subsedetrash as $trash)
+        @foreach ($subsedetrash as $subb)
         <tbody>
           <tr v-for="(person,index) in bin">
-            <td>{{$trash->codigo_sub}}</td>
-            <td>{{$trash->nombre}}</td>
-            <td>{{$trash->codigo_centro}}</td>
+            <td>{{$subb->codigo_sub}}</td>
+            <td>{{$subb->nombre}}</td>
+            <td>{{$subb->codigo_centro}}</td>
             <td>
-            <form action="{{route('subsederestore', $trash->codigo_centro )}}" method="POST">
+            <form action="{{route('subsederestore', $subb->codigo_sub )}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('subsededestroy', $trash->codigo_centro )}}" method="POST">
+              <form action="{{route('subsededestroy', $subb->codigo_sub )}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

@@ -1,24 +1,18 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Red Tematica')
+@section('titulo','Red Tematica')
 @section('contenido')
     <div>@include('partials.selectform')</div>
 
-
 <!-- partial:index.partial.html -->
 <div id="app">
+  <h4 class="head"><center>Red Tematica</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
-            <th v-for="column in columns">
-              codigo red
-            </th>
-            <th v-for="column in columns">  
-              Nombre
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
         @foreach ($red as $r )
@@ -43,7 +37,7 @@
         @csrf
               <td colspan="2">
                 <div class="input-field">
-                <label for="lname">Codigo Red</label>
+                <label for="lname">Codigo de Red</label>
                   <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_red" id="lname" type="text" value="{{old('codigo_red')}}">
                   @error('codigo_red')                  
                     <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
@@ -69,15 +63,9 @@
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
           <tr>
-            <th v-for="column in columns">
-              codigo red
-            </th>
-            <th v-for="column in columns">
-              Nombre
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
         @foreach ($redtrash as $trash)
@@ -87,15 +75,14 @@
             <td>{{$trash->nombre}}</td>
             <td>
             <form action="{{route('redrestore', $trash->codigo_red )}}" method="POST">
-                    @csrf
-                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
-              </form>  
-              <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
+              @csrf
+              <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
+            </form>  
               <!--DELETE REGISTERS-->
               <form action="{{route('reddestroy', $trash->codigo_red )}}" method="POST">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              
+                  @csrf
+                  @method('delete')
+                <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>
               </form>  
             </td>
           </tr>
@@ -103,7 +90,6 @@
         @endforeach
       </table>
     </div>
-
 
 <style>
   /* POPUP ACTIVE */

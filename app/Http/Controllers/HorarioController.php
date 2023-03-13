@@ -7,6 +7,7 @@ use App\Models\CentroFormacion;
 use App\Models\Descarga;
 use App\Models\Ficha;
 use App\Models\Horario;
+use App\Models\Horariobasura;
 use App\Models\Instructor;
 use App\Models\Programa;
 use App\Models\Semaforo;
@@ -20,23 +21,25 @@ class HorarioController extends Controller
      */
     public function index()
     {
+        /*-----------------------------------------NORMAL-----------------------------------------*/
         $horario=Horario::all();
-        //NOMBRE PROGRAMA       
+        //NUMERO DE FICHA ==DONE
+        //PROGTRAMA DE FORMACION
         $nombreprogrm = Horario::select('horarios.codigo_h', 'programas.nombre')
         ->join('programas', 'horarios.codigo_prog', '=', 'programas.codigo_prog')
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();
-        //NOMBRE CENTRO FORMACIÓN
-        $nombrecentro = Horario::select('horarios.codigo_h', 'centro_formacions.nombre_centro')
-        ->join('centro_formacions', 'horarios.codigo_centro', '=', 'centro_formacions.codigo_centro')
-        ->orderBy('horarios.codigo_h', 'ASC')
-        ->get();
-        //NOMBRE AMBIENTE
+        //AMBIENTE
         $nombreambiente=Horario::select('horarios.codigo_h', 'ambiente_formacions.nombre')
         ->join('ambiente_formacions', 'horarios.codigo_ambiente', '=', 'ambiente_formacions.codigo_ambiente')
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();
-        //NOMBRE DEL INSTRUCTOR
+        //JORNADA
+        $jornada=Horario::select('horarios.codigo_h', 'fichas.jornada')
+        ->join('fichas', 'horarios.nr_ficha', '=', 'fichas.nr_ficha')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //INSTRUCTOR
         $nombreinstructor=Horario::select('horarios.codigo_h', 'instructors.nombre')
         ->join('instructors', 'horarios.dni', '=', 'instructors.dni')
         ->orderBy('horarios.codigo_h', 'ASC')
@@ -46,7 +49,47 @@ class HorarioController extends Controller
         ->join('semaforos', 'horarios.id_semaforo', '=', 'semaforos.id_semaforo')
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();
-        return view('horario/index', ['horario'=>$horario,'nombreprogrm'=>$nombreprogrm,'nombrecentro'=>$nombrecentro,'nombreambiente'=>$nombreambiente,'nombreinstructor'=>$nombreinstructor, 'trimestre'=>$trimestre ]);
+        //DIAS SEMANA= COMPETENCIA->NOMBRE
+        $competencia=Horario::select('horarios.codigo_h', 'competencias.nombre')
+        ->join('competencias', 'horarios.codigo_comp', '=', 'competencias.codigo_comp')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+
+        /*-----------------------------------------TRASH-----------------------------------------*/
+        $horariobasura=Horariobasura::all();
+        //NUMERO DE FICHA ==DONE
+        //PROGTRAMA DE FORMACION
+        $nombreprogrmbasura = Horariobasura::select('horarios.codigo_h', 'programabasuras.nombre')
+        ->join('programabasuras', 'horarios.codigo_prog', '=', 'programabasuras.codigo_prog')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //AMBIENTE
+        $nombreambientebasura=Horariobasura::select('horarios.codigo_h', 'ambienteformacionbasuras.nombre')
+        ->join('ambienteformacionbasuras', 'horarios.codigo_ambiente', '=', 'ambienteformacionbasuras.codigo_ambiente')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //JORNADA
+        $jornadabasura=Horariobasura::select('horarios.codigo_h', 'fichabasuras.jornada')
+        ->join('fichabasuras', 'horarios.nr_ficha', '=', 'fichabasuras.nr_ficha')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //INSTRUCTOR
+        $nombreinstructorbasura=Horariobasura::select('horarios.codigo_h', 'instructorbasuras.nombre')
+        ->join('instructorbasuras', 'horarios.dni', '=', 'instructorbasuras.dni')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //TRIMESTRE
+        $trimestrebasura=Horariobasura::select('horarios.codigo_h', 'semaforobasuras.trimestre')
+        ->join('semaforobasuras', 'horarios.id_semaforo', '=', 'semaforobasuras.id_semaforo')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+        //DIAS SEMANA= COMPETENCIA->NOMBRE
+        $competenciabasura=Horariobasura::select('horarios.codigo_h', 'competenciabasuras.nombre')
+        ->join('competenciabasuras', 'horarios.codigo_comp', '=', 'competenciabasuras.codigo_comp')
+        ->orderBy('horarios.codigo_h', 'ASC')
+        ->get();
+
+        return view('horario', ['horario'=>$horario,'nombreprogrm'=>$nombreprogrm,'nombreambiente'=>$nombreambiente,'nombreinstructor'=>$nombreinstructor, 'trimestre'=>$trimestre, 'jornada'=>$jornada, 'competencia'=>$competencia, 'horariobasura'=>$horariobasura,'nombreprogrmbasura'=>$nombreprogrmbasura,'nombreambientebasura'=>$nombreambientebasura,'jornadabasura'=>$jornadabasura, 'nombreinstructorbasura'=>$nombreinstructorbasura, 'trimestrebasura'=>$trimestrebasura, 'competenciabasura'=>$competenciabasura]);
     }
 
     /**

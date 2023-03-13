@@ -104,6 +104,15 @@
       </svg>
     </button>
     <ul class="admin-menu">
+    <li>
+      <div class="switch">
+          <input type="checkbox" id="mode" checked>
+          <label for="mode">
+            <span></span>
+            <span>Dark</span>
+          </label>
+        </div>
+      </li>
       <li class="menu-heading">
         <h3>Administrador</h3>
       </li>
@@ -124,42 +133,18 @@
         </a>
       </li>
       <li>
-        <a href="#0">
+      <a href="{{route('contratoindex')}}">
           <svg>
             <use xlink:href="#users" style="color:blue;"></use>
           </svg>
-          <span>Users</span>
-        </a>
-      </li>
-      <li>
-        <a href="#0">
-          <svg>
-            <use xlink:href="#trends"></use>
-          </svg>
-          <span>Trends</span>
-        </a>
-      </li>
-      <li>
-        <a href="#0">
-          <svg>
-            <use xlink:href="#comments"></use>
-          </svg>
-          <span>Comments</span>
-        </a>
-      </li>
-      <li>
-        <a href="#0">
-          <svg>
-            <use xlink:href="#appearance"></use>
-          </svg>
-          <span>Appearance</span>
-        </a>
+          <span>Contratos</span>
+      </a>
       </li>
       <li class="menu-heading">
         <h3>Settings</h3>
       </li>
       <li>
-        <a href="#0">
+        <a href="{{route('opcionesindex')}}">
           <svg>
             <use xlink:href="#options"></use>
           </svg>
@@ -167,13 +152,6 @@
         </a>
       </li>
       <li>
-        <div class="switch">
-          <input type="checkbox" id="mode" checked>
-          <label for="mode">
-            <span></span>
-            <span>Dark</span>
-          </label>
-        </div>
         <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
           <svg aria-hidden="true">
             <use xlink:href="#collapse"></use>
@@ -187,31 +165,27 @@
 <section class="page-content">
   <section class="search-and-user">
     <form>
-      <input type="search" placeholder="Search Pages...">
+      <input type="search" placeholder="Buscar...">
       <button type="submit" aria-label="submit form">
         <svg aria-hidden="true">
           <use xlink:href="#search"></use>
         </svg>
       </button>
     </form>
+    <a href="{{route('perfilindex')}}">
     <div class="admin-profile">
-      <span class="greeting">Perfil</span>
-      <div class="notifications">
-        <span class="badge">1</span>
-        <svg>
-          <use xlink:href="#users"></use>
-        </svg>
+        <img style="height:50px; width:50px; margin-left:10px;"; src="{{asset('img/Logo-de-SENA-png-verde.png')}}">
       </div>
+    </a>
     </div>
-  </section>
+  </section>  
   <section class="grid">
-    <article>
+   <article style="height:80%;">
     <img style="height:100%; width:100%;" src="{{asset('/img/sofia.jfif')}}">
-      
     </article>
-    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <article >
+      <img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
     <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
-    </article>
     </article>
     <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
     <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fradad t
@@ -330,7 +304,7 @@ body {
   right: 0;
   bottom: 0;
   overflow: auto;
-  padding-top: 20px;
+  padding-top: 5px;
   width: var(--page-header-width);
   color: var(--page-header-txtColor);
   background: var(--page-header-bgColor);
@@ -362,6 +336,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  margin-left: 10%;
 }
 
 .page-header .logo {
@@ -478,10 +453,11 @@ body {
 }
 
 .search-and-user [type="search"] {
-  width: 100%;
-  height: 50px;
+  width: 40%;
+  height: 30px;
   font-size: 1.5rem;
   padding-left: 15px;
+  margin-left:65%;
   background: var(--page-content-blockColor);
   color: var(--white);
   border-radius: var(--border-radius);
@@ -509,7 +485,7 @@ body {
 .search-and-user form button {
   position: absolute;
   top: 50%;
-  right: 15px;
+  left: 100%;
   transform: translateY(-50%);
 }
 
@@ -619,7 +595,7 @@ body {
     display: none;
   }
 
-  .page-content {
+  .page-content{
     min-height: 0;
     padding: 10px;
   }
@@ -755,7 +731,7 @@ body {
 }
 
 .switch [type="checkbox"]:focus + label span:first-child {
-  box-shadow: 0 3px 5px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 3px 5px rgba(255, 255, 255);
 }
 
 .switch [type="checkbox"]:checked + label span:first-child::before {

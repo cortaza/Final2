@@ -7,13 +7,13 @@
             @csrf
             <div class="row">
               <div class="input-field col s6">                
-                  <input name="codigo_red" id="last_name" type="text" v-model="editInput.lname">
-                  <label for="last_name">Id_usuario</label>                
+                  <input name="id_usuario" id="last_name" type="text" v-model="editInput.lname">
+                  <label for="last_name">Usuario</label>                
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6">                
-                  <input name="nombre" id="last_name" type="text" v-model="editInput.lname">
+                  <input name="rol" id="last_name" type="text" v-model="editInput.lname">
                   <label for="last_name">Rol</label>                
               </div>
             </div>
@@ -25,19 +25,19 @@
               </div>
               <div class="row">
                 <div class="input-field col s6">                
-                    <input name="nombre" id="last_name" type="text" v-model="editInput.lname">
+                    <input name="apellido" id="last_name" type="text" v-model="editInput.lname">
                     <label for="last_name">Apellido</label>                
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">                
-                    <input name="nombre" id="last_name" type="text" v-model="editInput.lname">
+                    <input name="contraseña" id="last_name" type="text" v-model="editInput.lname">
                     <label for="last_name">Contraseña</label>                
                 </div>
               </div>  
               <div class="input-field col s6">                
                   <button type="submit">ENVIAR</button>   
-                  <input type="hidden" value="{{$adminis->id_usuario}}" name="codigo">             
+                  <input type="hidden" value="{{$ad->id_usuario}}" name="codigo">             
               </div>
             </div>
           </form>  

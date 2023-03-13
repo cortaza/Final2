@@ -19,7 +19,7 @@
     </header>
   <script>
     function ConfirmDelete(){
-      var respuesta=confirm("Estas seguro que deseas eliminar la red?")
+      var respuesta=confirm("Estas seguro que deseas eliminar?")
       if (respuesta == true) {
         return true;
       } else {

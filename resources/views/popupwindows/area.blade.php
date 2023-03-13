@@ -21,7 +21,9 @@
             <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
             <select class="form-select" id="validationCustom04" required="" name="codigo_red">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              <option>{{$a->codigo_red}}</option>     
+              @foreach ($red as $r )
+                <option>{{$r->codigo_red}}</option>
+              @endforeach
             </select>
           </div>  
             <div class="input-field col s6">                

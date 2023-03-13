@@ -29,7 +29,7 @@ class ProgramaController extends Controller
         $programa->nombre=$request->nombre;
         $programa->estado=$request->estado;
         $programa->nivel_formacion=$request->nivel_formacion;
-        $programa->duracion=$request->estado;
+        $programa->duracion=$request->duracion;
         $programa->version=$request->version;
         $programa->codigo_centro=$request->codigo_centro;
         $programa->codigo_area=$request->codigo_area; 
@@ -68,14 +68,14 @@ class ProgramaController extends Controller
         $programa->codigo_centro=$programabasura->codigo_centro;
         $programa->codigo_area=$programabasura->codigo_area;
         $programa->save();
-        $areabasura=Areabasura::where('codigo_prog', $prog)->delete();
+        $programabasura=Programabasura::where('codigo_prog', $prog)->delete();
         return redirect()->route('programaindex');
     }
 
 
     public function destroy($prog)
     {
-        Areabasura::where('codigo_prog', $prog)->delete();
+        programabasura::where('codigo_prog', $prog)->delete();
         return redirect()->route('programaindex');
     }
 

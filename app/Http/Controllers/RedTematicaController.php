@@ -67,8 +67,6 @@ class RedTematicaController extends Controller
 
     public function edit(Request $request)
     {   
-        // $redtematica=RedTematica::where('codigo_red', $red)->get();
-        // return $redtematica;   
         RedTematica::where('codigo_red', $request->codigo)->update(['codigo_red'=>$request->codigo_red,'nombre'=>$request->nombre]);   
         return redirect()->route('redindex');
     }

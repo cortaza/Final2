@@ -1,27 +1,19 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Area Tematica')
+@section('titulo','Area Tematica')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario Area Tematica</h4>
+    <h4 class="head"><center>Area Tematica</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
-            <th v-for="column in columns">
-              codigo area
-            </th>
-            <th v-for="column in columns">
-              Nombre
-            </th>
-            <th v-for="column in columns">
-                codigo red
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+            <th v-for="column in columns">Codigo de Area</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
         @foreach ($area as $a)
@@ -46,7 +38,7 @@
         @csrf
               <td colspan="2">
                 <div class="input-field">
-                    <label for="lname">Codigo Area</label>
+                    <label for="lname">Codigo de Area</label>
                     <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text" value="{{old('codigo_area')}}">
                   @error('codigo_area')                  
                     <small style="color:red; position:static;">El campo codigo area no puede estar vacio</small>
@@ -65,7 +57,7 @@
               
               <td>
 
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
                 
                 <select class="form-select" id="validationCustom04" required="" name="codigo_red">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
@@ -89,18 +81,10 @@
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
           <tr>
-            <th v-for="column in columns">
-              codigo area
-            </th>
-            <th v-for="column in columns">
-              Nombre
-            </th>
-            <th v-for="column in columns">
-              Codigo red
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
+            <th v-for="column in columns">Codigo de Area</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
         @foreach ($areatrash as $trash)

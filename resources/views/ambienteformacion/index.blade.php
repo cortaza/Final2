@@ -1,55 +1,65 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Ambiente Formacion')
+@section('titulo','Instructor')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
-
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h1>Formulario principal Ambiente de Formacion</h1>
+    <h4 class="head"><center>Instructor</center></h4>
+    <div class="">
+    <form action="{{route('instructorindex')}}" method="GET">
+        <div class="">
+            <input type="text" name="busqueda" class="">
+            <input type="submit" value="Buscar" class="">
+        </div>
+    </form>
+</div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
-            <th v-for="column in columns">Codigo de ambiente</th>
+            <th v-for="column in columns">Documento de Identidad</th>
             <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Recursos</th>
-            <th v-for="column in columns">Especialidad</th>
-            <th v-for="column in columns">Codigo Centro</th>
-            <th v-for="column in columns">Numero ficha</th>
+            <th v-for="column in columns">Apellido</th>
+            <th v-for="column in columns">Telefono</th>
+            <th v-for="column in columns">Correo</th>
+            <th v-for="column in columns">Estado</th>
+            <th v-for="column in columns">Tipo de Contrato</th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Codigo de Area</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @forelse($ambiente as $a)          
+        @foreach ($instruc as $i)
         <tbody>
             <tr v-for="(person,index) in persons">
-              <td>{{$a->codigo_ambiente}}</td>
-              <td>{{$a->nombre}}</td>
-              <td>{{$a->recursos}}</td>
-              <td>{{$a->especialidad}}</td>
-              <td>{{$a->codigo_centro}}</td>
-              <td>{{$a->nr_ficha}}</td>
+              <td>{{$i->dni}}</td>
+              <td>{{$i->nombre}}</td>
+              <td>{{$i->apellido}}</td>
+              <td>{{$i->telefono}}</td>
+              <td>{{$i->correo}}</td>
+              <td>{{$i->estado}}</td>
+              <td>{{$i->tipo_contrato}}</td>
+              <td>{{$i->codigo_red}}</td>
+              <td>{{$i->codigo_area}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('ambientearchive',$a->codigo_ambiente)}}" method="POST">
+              <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
             </td>
           </tr>
                   <!-- Pop window -->
-            @include('popupwindows.ambiente')  
+            @include('popupwindows.instructor')  
           @endforeach
           <tr>
-        <form action="{{ route('ambientecreate') }}" method="post">
+        <form action="{{ route('instructorcreate') }}" method="post">
         @csrf
             <td colspan="2">
                 <div class="input-field">
-                    <label for="lname">Codigo ambiente</label>
-                    <input placeholder="codigo_ambiente" ref="lname" v-model="input.lname" name="codigo_ambiente" id="lname" type="text">
-                    @error('codigo_ambiente')                  
-                    <small style="color:red; position:static;">El campo codigo ambiente no puede estar vacio</small>
-                    @enderror
+                    <label for="lname">Documento de Identidad</label>
+                    <input placeholder="dni" ref="lname" v-model="input.lname" name="dni" id="lname" type="text">
                 </div>
             </td>
             <td>
@@ -60,31 +70,50 @@
             </td>
             <td>
                 <div class="input-field">
-                    <label for="fname">Recursos</label>
-                    <input placeholder="recursos" v-model="input.fname" name="recursos" id="fname" type="text">                
+                    <label for="fname">Apellido</label>
+                    <input placeholder="apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
                 </div>
             </td>
             <td>
                 <div class="input-field">
-                    <label for="fname">Especialidad</label>
-                    <input placeholder="especialidad" v-model="input.fname" name="especialidad" id="fname" type="text">                
+                    <label for="fname">Telefono</label>
+                    <input placeholder="telefono" v-model="input.fname" name="telefono" id="fname" type="text">                
                 </div>
             </td>
             <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo centro</font></font></label>
-              <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
+                <div class="input-field">
+                    <label for="fname">Correo</label>
+                    <input placeholder="correo" v-model="input.fname" name="correo" id="fname" type="text">                
+                </div>
+            </td>
+            <td>
+                <div class="input-field">
+                    <label for="fname">Estado</label>
+                    <input placeholder="estado" v-model="input.fname" name="estado" id="fname" type="text">                
+                </div>
+            </td>
+            <td>
+                <div class="input-field">
+                    <label for="fname">Tipo de Contrato</label>
+                    <input placeholder="contrato" v-model="input.fname" name="tipo_contrato" id="fname" type="text">                
+                </div>
+            </td>
+            
+            <td>
+              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
+              <select class="form-select" id="validationCustom04" required="" name="codigo_red">
                   <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($codigo as $a)     
-                  <option>{{$a->codigo_centro}}</option>     
+              @foreach($red as $r)     
+                  <option>{{$r->codigo_red}}</option>     
               @endforeach     
               </select>
           </td>
         <td>
-          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Numero ficha</font></font></label>
-          <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
+          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Area</font></font></label>
+          <select class="form-select" id="validationCustom04" required="" name="codigo_area">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach($numero as $n)     
-              <option>{{$n->nr_ficha}}</option>     
+          @foreach($area as $a)     
+              <option>{{$a->codigo_area}}</option>     
           @endforeach     
           </select>
       </td>
@@ -99,32 +128,38 @@
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
           <tr>
-            <th v-for="column in columns">Codigo de ambiente</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Recursos</th>
-            <th v-for="column in columns">Especialidad</th>
-            <th v-for="column in columns">Codigo Centro</th>
-            <th v-for="column in columns">Numero ficha</th>
-            <th v-for="column in columns">Acción</th>
+              <th v-for="column in columns">Documento de Identidad</th>
+              <th v-for="column in columns">Nombre</th>
+              <th v-for="column in columns">Apellido</th>
+              <th v-for="column in columns">Telefono</th>
+              <th v-for="column in columns">Correo</th>
+              <th v-for="column in columns">Estado</th>
+              <th v-for="column in columns">Tipo de Contrato</th>
+              <th v-for="column in columns">Codigo de Red</th>
+              <th v-for="column in columns">codigo de Area</th>
+              <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @forelse($amba as $a)
+        @foreach ($instructrash as $trash)
         <tbody>
           <tr v-for="(person,index) in bin">
-              <td>{{$a->codigo_ambiente}}</td>
-              <td>{{$a->nombre}}</td>
-              <td>{{$a->recursos}}</td>
-              <td>{{$a->especialidad}}</td>
-              <td>{{$a->codigo_centro}}</td>
-              <td>{{$a->nur_ficha}}</td>
+              <td>{{$trash->dni}}</td>
+              <td>{{$trash->nombre}}</td>
+              <td>{{$trash->apellido}}</td>
+              <td>{{$trash->telefono}}</td>
+              <td>{{$trash->correo}}</td>
+              <td>{{$trash->estado}}</td>
+              <td>{{$trash->tipo_contrato}}</td>
+              <td>{{$trash->codigo_red}}</td>
+              <td>{{$trash->codigo_area}}</td>
             <td>
-            <form action="{{route('ambienterestore', $a->codigo_ambiente)}}" method="POST">
+            <form action="{{route('instructorstore', $trash->dni )}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('ambientedestroy', $a->codigo_ambiente)}}" method="POST">
+              <form action="{{route('instructordestroy', $trash->dni )}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

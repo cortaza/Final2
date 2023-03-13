@@ -96,7 +96,8 @@
 	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	float: left;
 	width: 100%;
-	padding: 97px 0;
+	padding: 40px;
+	margin: auto;
 }
 
 .banner-sec {

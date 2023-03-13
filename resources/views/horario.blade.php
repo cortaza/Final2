@@ -14,6 +14,13 @@
         foreach($nombreprogrm as $prog) {
             $programas[$prog->codigo_prog] = $prog->nombre;
         }
+        // <!-- JORNADA -->
+
+        $jornadas = array();
+        foreach($jornada as $jor) {
+            $jornadas[$jor->nr_ficha] = $jor->jornada;
+        }
+
         // <!-- AMBIENTE -->
         $ambientes = array();
         foreach($nombreambiente as $amb) {
@@ -27,7 +34,7 @@
         // <!-- SEMAFORO -->
         $semaforos = array();
         foreach($trimestre as $sema) {
-            $semaforos[$sema->id_semaforo] = $sema->nombre;
+            $semaforos[$sema->id_semaforo] = $sema->trimestre;
         }
         // <!-- COMPETENCIA -->
         $competencias = array();
@@ -38,7 +45,7 @@
 @endphp
 
     <div>
-        <a href="{{route('horariocreate')}}" class="btn btn-info" style="background-color:green; border-color:green;">Crear</a> 
+        <a href="{{route('horarioindex')}}" class="btn btn-info" style="background-color:green; border-color:green;">Editar horario</a> 
     </div>
     <div>
     <table style="border: 1px solid black; border-radius:10px; border-color: #96D4D4; border-style:outset;" class="table" >
@@ -46,7 +53,7 @@
                                     <tr>
                                         <th>N Ficha</th><!--1-->
                                         <th>Programa de formación</th><!--2-->                                    
-                                        <th>Ambiente</th><!--3-->
+                                        <th>Aula</th><!--3-->
                                         <th>Jornada</th><!--4-->
                                         <th>Instructor</th><!--5-->
                                         <th>Trimestre</th><!--6-->                             
@@ -62,20 +69,20 @@
                                 </thead>
                                 <tbody style="border: 1px solid black;">
                                     @forelse($horario as $horario)                                        
-                                    <tr style="padding-bottom:50px;  padding-top:50px;">
+                                    <tr>
                                         <th>{{$horario->nr_ficha}}</th><!--1-->
                                         <th>{{$programas[$horario->codigo]}}</th><!--2-->
-                                        <th>{{$ambientes[$horario->codigo]}}</th><!--3-->
-                                        <th></th><!--4-->                                     
+                                        <th>{{$horario->codigo_ambiente}}</th><!--3-->
+                                        <th>{{$jornadas[$horario->codigo]}}</th><!--4-->                                     
                                         <th>{{$instructors[$horario->codigo]}}</th><!--5-->
-                                        <th></th><!--6-->
-                                        <th></th><!--7-->
-                                        <th></th><!--8-->
-                                        <th></th><!--9-->
-                                        <th></th><!--10-->
-                                        <th></th><!--11-->
-                                        <th></th><!--12-->
-                                        <th></th><!--13-->
+                                        <th>{{$semaforos[$horario->codigo]}}</th><!--6-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--7-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--8-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--9-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--10-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--11-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--12-->
+                                        <th>{{$competencias[$horario->codigo]}}</th><!--13-->
                                         <th><img src="{{asset('/img/descargar.png')}}" style="height:50px; width:50px;" alt="This is a picture"></th><!--14-->
                                     </tr>
                                     @empty

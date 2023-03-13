@@ -1,16 +1,16 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal tipo formacion')
+@section('titulo','Tipo Formacion')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <div id="app">
-    <h4 class="head">Formulario tipo formacion</h4>
+    <h4 class="head"><center>Tipo Formacion</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
             <th v-for="column in columns">
-              codigo formacion
+              Codigo de la Formacion
             </th>
             <th v-for="column in columns">
               Nombre

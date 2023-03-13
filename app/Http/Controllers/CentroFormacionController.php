@@ -14,7 +14,8 @@ class CentroFormacionController extends Controller
     {
         $centro=CentroFormacion::all();
         $centrotrash=centroformacionbasura::all();
-        return view('centroformacion/index', compact('centro', 'centrotrash'));
+        $administracion=Administracion::all();
+        return view('centroformacion/index', compact('centro', 'centrotrash', 'administracion'));
     }
 
 

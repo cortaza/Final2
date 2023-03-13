@@ -10,11 +10,11 @@
 <!-- partial:index.partial.html -->
 <div id="divmain">
     <div id="left">
-	    <a href="{{ route('redindex') }}" target="_blank" class="boton">Red tematica <span class="left"></span></a>
-	    <a href="{{ route('areaindex') }}" target="_blank" class="boton">Area tematica <span class="left"></span></a>
+	    <a href="{{ route('redindex') }}" target="_blank" class="boton">Red Tematica<span class="left"></span></a>
+	    <a href="{{ route('areaindex') }}" target="_blank" class="boton">Area Tematica <span class="left"></span></a>
         <a href="{{ route('instructorindex') }}" target="_blank" class="boton">Instructor <span class="left"></span></a>
 	    <a href="{{ route('administracionindex') }}" target="_blank" class="boton">Administracion <span class="left"></span></a>
-	    <a href="{{ route('centroindex') }}" target="_blank" class="boton">Centro de formacion <span class="left"></span></a>
+	    <a href="{{ route('centroindex') }}" target="_blank" class="boton">Centro de formacion<span class="left"></span></a>
     </div>
     <div id="center">
 	    <a href="{{ route('subsedeindex') }}" target="_blank" class="boton">Subsedes <span class="top"></span></a>

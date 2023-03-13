@@ -1,11 +1,19 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal instructor')
+@section('titulo','Instructor')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario Instructor</h4>
+    <h4 class="head"><center>Instructor</center></h4>
+    <div class="">
+    <form action="{{route('instructorindex')}}" method="GET">
+        <div class="">
+            <input type="text" name="busqueda" class="">
+            <input type="submit" value="Buscar" class="">
+        </div>
+    </form>
+</div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
@@ -17,8 +25,8 @@
             <th v-for="column in columns">Correo</th>
             <th v-for="column in columns">Estado</th>
             <th v-for="column in columns">Tipo de Contrato</th>
-            <th v-for="column in columns">codigo Area</th>
-            <th v-for="column in columns">codigo Red</th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Codigo de Area</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
@@ -32,8 +40,8 @@
               <td>{{$i->correo}}</td>
               <td>{{$i->estado}}</td>
               <td>{{$i->tipo_contrato}}</td>
-              <td>{{$i->codigo_area}}</td>
               <td>{{$i->codigo_red}}</td>
+              <td>{{$i->codigo_area}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
@@ -92,20 +100,20 @@
             </td>
             
             <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
+              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
               <select class="form-select" id="validationCustom04" required="" name="codigo_red">
                   <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($red as $i)     
-                  <option>{{$i->codigo_red}}</option>     
+              @foreach($red as $r)     
+                  <option>{{$r->codigo_red}}</option>     
               @endforeach     
               </select>
           </td>
         <td>
-          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Area</font></font></label>
+          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Area</font></font></label>
           <select class="form-select" id="validationCustom04" required="" name="codigo_area">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach($area as $i)     
-              <option>{{$i->codigo_area}}</option>     
+          @foreach($area as $a)     
+              <option>{{$a->codigo_area}}</option>     
           @endforeach     
           </select>
       </td>
@@ -127,8 +135,8 @@
               <th v-for="column in columns">Correo</th>
               <th v-for="column in columns">Estado</th>
               <th v-for="column in columns">Tipo de Contrato</th>
-              <th v-for="column in columns">Codigo red</th>
-              <th v-for="column in columns">codigo area</th>
+              <th v-for="column in columns">Codigo de Red</th>
+              <th v-for="column in columns">codigo de Area</th>
               <th v-for="column in columns">Acción</th>
           </tr>
         </thead>

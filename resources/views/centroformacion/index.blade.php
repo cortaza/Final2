@@ -4,13 +4,13 @@
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario Centro de formacion</h4>
+    <h4 class="head"><center>Centro de Formacion</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
             <th v-for="column in columns">
-              codigo Centro
+              Codigo Centro
             </th>
             <th v-for="column in columns">
               Nombre de Centro
@@ -19,7 +19,7 @@
               Numero de ambientes
             </th>
             <th v-for="column in columns">
-                id usuario
+                Usuario
             </th>
             <th v-for="column in columns">
               Acción
@@ -68,12 +68,12 @@
               
               <td>
 
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">id usuario</font></font></label>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuario</font></font></label>
                 
                 <select class="form-select" id="validationCustom04" required="" name="id_usuario">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($centro as $c)     
-                    <option>{{$c->id_usuario}}</option>     
+                @foreach($administracion as $ad)     
+                    <option>{{$ad->id_usuario}}</option>     
                 @endforeach     
                 </select>
 

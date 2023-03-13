@@ -11,13 +11,17 @@ use Illuminate\Http\Request;
 class InstructorController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $busqueda = $request->busqueda;     
         $red=RedTematica::all();
         $area=AreaTematica::all();
         $instruc=Instructor::all();
+        $bsinstru= Instructor::where('nombre','LIKE','%'.$busqueda.'%')
+                            ->orWhere('apellido','LIKE','%'.$busqueda.'%')
+                            ->latest('dni');
         $instructrash=Instructorbasura::all();
-        return view('instructor/index', compact('instruc', 'instructrash','area','red'));
+        return view('instructor/index', compact('instruc', 'instructrash','area','red','bsinstru'));
     }
 
     public function create(Request $request)

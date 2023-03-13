@@ -23,6 +23,16 @@ use App\Http\Controllers\TipoFormacionController;
 
 // /*-----------------PAGINA PRINCIPAL-----------------*/
 Route::get('/paginaprincipal', function () {return view('mainindex');})->name('mainindex');
+
+// /*-----------------PAGINA CONTRARO-----------------*/
+Route::get('/paginacontrato', function () {return view('contrato.contrato');})->name('contratoindex');
+
+// /*-----------------PAGINA OPCIONES-----------------*/
+Route::get('/paginaopciones', function () {return view('opciones.opciones');})->name('opcionesindex');
+
+// /*-----------------PAGINA OPCIONES-----------------*/
+Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('perfilindex');
+
 // /*-----------------HORARIO PRINCIPAL-----------------*/
 
     Route::controller(MainhorarioController::class)->group(function(){

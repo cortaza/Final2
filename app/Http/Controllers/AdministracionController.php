@@ -5,34 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Administracion;
 use App\Models\AdministracionBasura;
 use Illuminate\Http\Request;
-use DB;
 
 class AdministracionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $adminis=AdministracionBasura::all();
-        $administracion=Administracion::all();
-        return view('administracion/index', compact('adminis', 'administracion'));
+        $admin=Administracion::all();
+        $adminbasura=AdministracionBasura::all();
+        return view('administracion/index', compact('admin', 'adminbasura'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
-        $request->validate([
-            'idusuario' => 'required',
-            'rol' => 'required',
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'contraseña' => 'required',
-        ]);
         $administracion=new Administracion;
-        $administracion->idusuario=$request->idusuario;
+        $administracion->id_usuario=$request->id_usuario;
         $administracion->rol=$request->rol;
         $administracion->nombre=$request->nombre;
         $administracion->apellido=$request->apellido;
@@ -41,34 +27,33 @@ class AdministracionController extends Controller
         return redirect()->route('administracionindex');
     }
 
-
-    public function archive($administracion)
+    public function archive($admin)
     {
-        $administracion=Administracion::where('id_usuario', $administracion)->first();
+        $administracion=Administracion::where('id_usuario', $admin)->first();
         $administracionbasura=new AdministracionBasura;
-        $administracionbasura->idusuario=$administracion->idusuario;
+        $administracionbasura->id_usuario=$administracion->id_usuario;
         $administracionbasura->rol=$administracion->rol;
         $administracionbasura->nombre=$administracion->nombre;
         $administracionbasura->apellido=$administracion->apellido;
         $administracionbasura->contraseña=$administracion->contraseña;
         $administracionbasura->save();
-        $administracion=Administracion::where('id_usuario', $administracion)->delete();
+        $administracion=Administracion::where('id_usuario', $admin)->delete();
         return redirect()->route('administracionindex');
     }
     /**
      * Store a newly created resource in storage.
      */
-    public function restore($administracion)
+    public function restore($admin)
     {
-        $administracionbasura=AdministracionBasura::where('id_usuario', $administracion)->first();
+        $administracionbasura=AdministracionBasura::where('id_usuario', $admin)->first();
         $administracion=new Administracion;
-        $administracion->idusuario=$administracionbasura->idusuario;
+        $administracion->id_usuario=$administracionbasura->id_usuario;
         $administracion->rol=$administracionbasura->rol;
         $administracion->nombre=$administracionbasura->nombre;
         $administracion->apellido=$administracionbasura->apellido;
         $administracion->contraseña=$administracionbasura->contraseña;
         $administracion->save();
-        $administracionbasura=AdministracionBasura::where('id_usuario', $administracion)->delete();
+        $administracionbasura=AdministracionBasura::where('id_usuario', $admin)->delete();
         return redirect()->route('administracionindex');
     }
 
@@ -80,9 +65,9 @@ class AdministracionController extends Controller
         //
     }
 
-    public function destroy($administracion)
+    public function destroy($admin)
     {
-        AdministracionBasura::where('idusuario', $administracion)->delete();
+        AdministracionBasura::where('id_usuario', $admin)->delete();
         return redirect()->route('administracionindex');
     }
     /**
@@ -90,15 +75,7 @@ class AdministracionController extends Controller
      */
     public function edit(Request $request)
     {
-        Administracion::where('idusuario', $request->idusuario)->update(['idusuario'=>$request->id,'rol'=>$request->rol,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'contraseña'=>$request->contraseña]);   
+        Administracion::where('id_usuario', $request->codigo)->update(['id_usuario'=>$request->id_usuario, 'rol'=>$request->rol,'nombre'=>$request->nombre,'apellido'=>$request->apellido,'contraseña'=>$request->contraseña]);   
         return redirect()->route('administracionindex');
     }
-
-    /**
-     * Update the specified resource in storage.
-  
-    /**
-     * Remove the specified resource from storage.
-     */
-   
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\AreaTematica;
 use App\Models\RedTematica;
-use App\Models\Redbasura;
 use App\Models\Areabasura;
 use Illuminate\Http\Request;
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Subsede;
 use App\Models\CentroFormacion;
-use App\Models\centroformacionbasura;
 use App\Models\Subsedebasura;
 use Illuminate\Http\Request;
 
@@ -12,10 +11,10 @@ class SubsedeController extends Controller
 {
     public function index()
     {
-        $sub=Subsede::all();
+        $subsede=Subsede::all();
         $centro=CentroFormacion::all();
         $subsedetrash=Subsedebasura::all();
-        return view('subsede/index', compact('sub', 'subsedetrash', 'centro'));
+        return view('subsede/index', compact('subsede', 'subsedetrash', 'centro'));
     }
 
 
