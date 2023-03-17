@@ -16,6 +16,6 @@ class Ambienteformacionbasura extends Model
         'recursos',
         'especialidad',
         'codigo_centro',
-        'numero_ficha'
+        'nr_ficha'
     ];
 }

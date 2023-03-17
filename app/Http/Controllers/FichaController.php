@@ -32,7 +32,6 @@ class FichaController extends Controller
         $fichas->nr_aprendices=$request->nr_aprendices;
         $fichas->codigo_for=$request->codigo_for;
         $fichas->codigo_prog=$request->codigo_prog;
-        $fichas->dni=$request->dni;
         $fichas->save();
         return redirect()->route('fichaindex');
     }
@@ -47,7 +46,6 @@ class FichaController extends Controller
         $fichabasura->nr_aprendices=$fichas->nr_aprendices;
         $fichabasura->codigo_for=$fichas->codigo_for;
         $fichabasura->codigo_prog=$fichas->codigo_prog;
-        $fichabasura->dni=$fichas->dni;
         $fichabasura->save();
         $fichas=Ficha::where('nr_ficha', $ficha)->delete();
         return redirect()->route('fichaindex');
@@ -66,7 +64,6 @@ class FichaController extends Controller
         $fichas->nr_aprendices=$fichabasura->nr_aprendices;
         $fichas->codigo_for=$fichabasura->codigo_for;
         $fichas->codigo_prog=$fichabasura->codigo_prog;
-        $fichas->dni=$fichabasura->dni;
         $fichas->save();
         $fichabasura=Fichabasura::where('nr_ficha', $ficha)->delete();
         return redirect()->route('fichaindex');

@@ -1,13 +1,13 @@
 @extends('layouts.structure')
-@section('titulo','Instructor')
+@section('titulo','Ambiente')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head"><center>Instructor</center></h4>
+    <h4 class="head"><center>Ambiente de Formacion</center></h4>
     <div class="">
-    <form action="{{route('instructorindex')}}" method="GET">
+    <form action="{{route('ambienteindex')}}" method="GET">
         <div class="">
             <input type="text" name="busqueda" class="">
             <input type="submit" value="Buscar" class="">
@@ -18,48 +18,42 @@
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
           <tr>
-            <th v-for="column in columns">Documento de Identidad</th>
+            <th v-for="column in columns">Codigo del Ambiente</th>
             <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Apellido</th>
-            <th v-for="column in columns">Telefono</th>
-            <th v-for="column in columns">Correo</th>
-            <th v-for="column in columns">Estado</th>
-            <th v-for="column in columns">Tipo de Contrato</th>
-            <th v-for="column in columns">Codigo de Red</th>
-            <th v-for="column in columns">Codigo de Area</th>
+            <th v-for="column in columns">Recursos</th>
+            <th v-for="column in columns">Especialidad</th>
+            <th v-for="column in columns">Codio del Centro</th>
+            <th v-for="column in columns">Numero de Ficha</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($instruc as $i)
+        @foreach ($ambiente as $ae)
         <tbody>
             <tr v-for="(person,index) in persons">
-              <td>{{$i->dni}}</td>
-              <td>{{$i->nombre}}</td>
-              <td>{{$i->apellido}}</td>
-              <td>{{$i->telefono}}</td>
-              <td>{{$i->correo}}</td>
-              <td>{{$i->estado}}</td>
-              <td>{{$i->tipo_contrato}}</td>
-              <td>{{$i->codigo_red}}</td>
-              <td>{{$i->codigo_area}}</td>
+              <td>{{$ae->codigo_ambiente}}</td>
+              <td>{{$ae->nombre}}</td>
+              <td>{{$ae->recursos}}</td>
+              <td>{{$ae->especialidad}}</td>
+              <td>{{$ae->codigo_centro}}</td>
+              <td>{{$ae->nr_ficha}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
+              <form action="{{route('ambientearchive', $ae->codigo_ambiente)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
             </td>
           </tr>
                   <!-- Pop window -->
-            @include('popupwindows.instructor')  
+            
           @endforeach
           <tr>
-        <form action="{{ route('instructorcreate') }}" method="post">
+        <form action="{{ route('ambientecreate') }}" method="post">
         @csrf
             <td colspan="2">
                 <div class="input-field">
-                    <label for="lname">Documento de Identidad</label>
-                    <input placeholder="dni" ref="lname" v-model="input.lname" name="dni" id="lname" type="text">
+                    <label for="lname">Codigo del Ambiente</label>
+                    <input placeholder="codigo" ref="lname" v-model="input.lname" name="codigo_ambiente" id="lname" type="text">
                 </div>
             </td>
             <td>
@@ -70,50 +64,32 @@
             </td>
             <td>
                 <div class="input-field">
-                    <label for="fname">Apellido</label>
-                    <input placeholder="apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
+                    <label for="fname">Recursos</label>
+                    <input placeholder="Rescursos" v-model="input.fname" name="recursos" id="fname" type="text">                
                 </div>
             </td>
             <td>
                 <div class="input-field">
-                    <label for="fname">Telefono</label>
-                    <input placeholder="telefono" v-model="input.fname" name="telefono" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Correo</label>
-                    <input placeholder="correo" v-model="input.fname" name="correo" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Estado</label>
-                    <input placeholder="estado" v-model="input.fname" name="estado" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Tipo de Contrato</label>
-                    <input placeholder="contrato" v-model="input.fname" name="tipo_contrato" id="fname" type="text">                
+                    <label for="fname">Especialidad</label>
+                    <input placeholder="Especialidad" v-model="input.fname" name="especialidad" id="fname" type="text">                
                 </div>
             </td>
             
             <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
-              <select class="form-select" id="validationCustom04" required="" name="codigo_red">
+              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo del Centro</font></font></label>
+              <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
                   <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($red as $r)     
-                  <option>{{$r->codigo_red}}</option>     
+              @foreach($codigo as $c)     
+                  <option>{{$c->codigo_centro}}</option>     
               @endforeach     
               </select>
           </td>
         <td>
-          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Area</font></font></label>
-          <select class="form-select" id="validationCustom04" required="" name="codigo_area">
+          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Numero de la Ficha</font></font></label>
+          <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach($area as $a)     
-              <option>{{$a->codigo_area}}</option>     
+          @foreach($numero as $f)     
+              <option>{{$f->nr_ficha}}</option>     
           @endforeach     
           </select>
       </td>
@@ -134,32 +110,26 @@
               <th v-for="column in columns">Telefono</th>
               <th v-for="column in columns">Correo</th>
               <th v-for="column in columns">Estado</th>
-              <th v-for="column in columns">Tipo de Contrato</th>
-              <th v-for="column in columns">Codigo de Red</th>
-              <th v-for="column in columns">codigo de Area</th>
               <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($instructrash as $trash)
+        @foreach ($amba as $ambb)
         <tbody>
           <tr v-for="(person,index) in bin">
-              <td>{{$trash->dni}}</td>
-              <td>{{$trash->nombre}}</td>
-              <td>{{$trash->apellido}}</td>
-              <td>{{$trash->telefono}}</td>
-              <td>{{$trash->correo}}</td>
-              <td>{{$trash->estado}}</td>
-              <td>{{$trash->tipo_contrato}}</td>
-              <td>{{$trash->codigo_red}}</td>
-              <td>{{$trash->codigo_area}}</td>
+              <td>{{$ambb->codigo_ambiente}}</td>
+              <td>{{$ambb->nombre}}</td>
+              <td>{{$ambb->recursos}}</td>
+              <td>{{$ambb->especialidad}}</td>
+              <td>{{$ambb->codigo_centro}}</td>
+              <td>{{$ambb->nr_ficha}}</td>
             <td>
-            <form action="{{route('instructorstore', $trash->dni )}}" method="POST">
+            <form action="{{route('ambienterestore', $ambb->codigo_ambiente)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('instructordestroy', $trash->dni )}}" method="POST">
+              <form action="{{route('ambientedestroy', $ambb->codigo_ambiente)}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

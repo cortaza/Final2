@@ -45,16 +45,7 @@
                   <option>{{$tipo->codigo_for}}</option>     
               @endforeach      
             </select>
-          </div>  
-          <div class="row">
-            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Documento de Identidad</font></font></label>
-            <select class="form-select" id="validationCustom04" required="" name="dni">
-              <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($instructor as $instruc)     
-                  <option>{{$instruc->dni}}</option>     
-              @endforeach       
-            </select>
-          </div>  
+          </div>
             <div class="input-field col s6">                
                 <button type="submit">ENVIAR</button>   
                 <input type="hidden" value="{{$f->nr_ficha}}" name="nr_ficha">

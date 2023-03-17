@@ -16,10 +16,10 @@ class AreaTematicaController extends Controller
         $areatrash=Areabasura::all();
         return view('areatematica/index', compact('area', 'areatrash', 'red'));
     }
-
-
+    
     public function create(Request $request)
     {   
+
         $request->validate([
             'codigo_area' => 'required',
             'nombre' => 'required',

@@ -95,26 +95,26 @@
             <th v-for="column in columns">Viernes</th>
           </tr>
         </thead>
-        @foreach ($red as $r)
+        @foreach ($horario as $h)
         <tbody>
           <tr v-for="(person,index) in persons">
-            <th>{{$horario->nr_ficha}}</th><!--1-->
-            <th>{{$programas[$horario->codigo]}}</th><!--2-->
-            <th>{{$horario->codigo_ambiente}}</th><!--3-->
-            <th>{{$jornadas[$horario->codigo]}}</th><!--4-->                                     
-            <th>{{$instructors[$horario->codigo]}}</th><!--5-->
-            <th>{{$semaforos[$horario->codigo]}}</th><!--6-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--7-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--8-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--9-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--10-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--11-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--12-->
-            <th>{{$competencias[$horario->codigo]}}</th><!--13-->
+            <th>{{$h->nr_ficha}}</th><!--1-->
+            <th>{{$programas[$h->codigo]}}</th><!--2-->
+            <th>{{$h->codigo_ambiente}}</th><!--3-->
+            <th>{{$jornadas[$h->codigo]}}</th><!--4-->                                     
+            <th>{{$instructors[$h->codigo]}}</th><!--5-->
+            <th>{{$semaforos[$h->codigo]}}</th><!--6-->
+            <th>{{$competencias[$h->codigo]}}</th><!--7-->
+            <th>{{$competencias[$h->codigo]}}</th><!--8-->
+            <th>{{$competencias[$h->codigo]}}</th><!--9-->
+            <th>{{$competencias[$h->codigo]}}</th><!--10-->
+            <th>{{$competencias[$h->codigo]}}</th><!--11-->
+            <th>{{$competencias[$h->codigo]}}</th><!--12-->
+            <th>{{$competencias[$h->codigo]}}</th><!--13-->
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <!-- <a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a> -->
-              <form action="{{route('horarioarchive', $horario->codigo_h)}}" method="POST">
+              <form action="{{route('horarioarchive', $h->codigo_h)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
@@ -222,18 +222,29 @@
             <th v-for="column in columns">Viernes</th>
           </tr>
         </thead>
-        @foreach ($redtrash as $trash)
+        @foreach ($horariobasura as $ht)
         <tbody>
           <tr v-for="(person,index) in bin">
-          <td>{{$trash->codigo_red}}</td>
-            <td>{{$trash->nombre}}</td>
+            <th>{{$ht->nr_ficha}}</th><!--1-->
+            <th>{{$programas[$ht->codigo]}}</th><!--2-->
+            <th>{{$ht->codigo_ambiente}}</th><!--3-->
+            <th>{{$jornadas[$ht->codigo]}}</th><!--4-->                                     
+            <th>{{$instructors[$ht->codigo]}}</th><!--5-->
+            <th>{{$semaforos[$ht->codigo]}}</th><!--6-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--7-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--8-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--9-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--10-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--11-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--12-->
+            <th>{{$competencias[$ht->codigo]}}</th><!--13-->
             <td>
-            <form action="{{route('redrestore', $trash->codigo_red )}}" method="POST">
+            <form action="{{route('horariostore', $ht->codigo_h )}}" method="POST">
               @csrf
               <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
             </form>  
               <!--DELETE REGISTERS-->
-              <form action="{{route('reddestroy', $trash->codigo_red )}}" method="POST">
+              <form action="{{route('horariodestroy', $ht->codigo_h )}}" method="POST">
                   @csrf
                   @method('delete')
                 <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

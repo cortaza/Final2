@@ -181,26 +181,18 @@
   </section>  
   <section class="grid">
    <article style="height:80%;">
-    <img style="height:100%; width:100%;" src="{{asset('/img/sofia.jfif')}}">
+    <img style="height:100%; width:100%; border-radius:10%;" src="{{asset('/img/sofia.jfif')}}">
     </article>
     <article >
       <img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
     <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
     </article>
-    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
+    <article>
+      <img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
     <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fradad t
     </article>
-    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
-    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragme renciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
     </article>
-    </article>
-    <article><img style="height:90%; width:50%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
-    <h3 style="margin-left:15px; margin-top:15px; width:45%;">Fragmentoo con unidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.</h3>
-    </article>
-    </article>
-    <article><img style="height:90%; width:40%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
-    <h3 style="margin-left:15px; margin-top:15px; width:60%;">Umbiéndo parágrafo, es una unidad comunicativa del lenguaje escrito compuesta por un conjunto de oraciones que tienen cierta unidad temática o que, sin tenerla, se enuncian juntas. Es un componente del texto que en su aspecto externo termina en un punto y aparte. de fragmentos por un punto y aparte y generalmente también por llevar letra mayúscula inicial y un espacio en blanco en el margen izquierdo de alineación del texto principal de la primera línea.
-    </h3>
+    <article><img style="height:90%; width:60%; border-radius:8px; margin-left:20%; margin-top:10px;" src="{{asset('/img/cide.jpg')}}">
   </article>
 </section>
 </section>
@@ -307,7 +299,7 @@ body {
   padding-top: 5px;
   width: var(--page-header-width);
   color: var(--page-header-txtColor);
-  background: var(--page-header-bgColor);
+  background: green;
 }
 
 /*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
@@ -457,7 +449,7 @@ body {
   height: 30px;
   font-size: 1.5rem;
   padding-left: 15px;
-  margin-left:65%;
+  margin-left:63%;
   background: var(--page-content-blockColor);
   color: var(--white);
   border-radius: var(--border-radius);

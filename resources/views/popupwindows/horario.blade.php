@@ -79,7 +79,7 @@
           </div>
             <div class="input-field col s6">                
                 <button type="submit">Enviar</button>   
-                <input type="hidden" value="{{$horario->codigo_h}}" name="codigo">             
+                <input type="hidden" value="{{$h->codigo_h}}" name="codigo">             
             </div>
           </div>
         </form>  

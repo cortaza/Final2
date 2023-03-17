@@ -32,14 +32,16 @@
             <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
             <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              <option>{{$a->codigo_centro}}</option>     
+              @foreach($red as $r)     
+                  <option>{{$r->codigo_red}}</option>     
+              @endforeach      
             </select>
           </div>
           <div class="row">
             <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
             <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
               <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              <option>{{$a->nr_ficha}}</option>     
+              <option>{{$f->nr_ficha}}</option>     
             </select>
           </div> 
               <div class="input-field col s6">                

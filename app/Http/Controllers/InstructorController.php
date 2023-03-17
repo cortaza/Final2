@@ -13,15 +13,15 @@ class InstructorController extends Controller
 
     public function index(Request $request)
     {
-        $busqueda = $request->busqueda;     
+        $busqueda = $request->input('busqueda');    
         $red=RedTematica::all();
         $area=AreaTematica::all();
-        $instruc=Instructor::all();
-        $bsinstru= Instructor::where('nombre','LIKE','%'.$busqueda.'%')
+        $instructor=Instructor::all();
+        $instruc= Instructor::where('nombre','LIKE','%'.$busqueda.'%')
                             ->orWhere('apellido','LIKE','%'.$busqueda.'%')
-                            ->latest('dni');
+                            ->latest('dni')->get();
         $instructrash=Instructorbasura::all();
-        return view('instructor/index', compact('instruc', 'instructrash','area','red','bsinstru'));
+        return view('instructor/index', compact('instruc','instructor', 'instructrash','area','red'));
     }
 
     public function create(Request $request)

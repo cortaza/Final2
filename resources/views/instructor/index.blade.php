@@ -12,6 +12,7 @@
             <input type="text" name="busqueda" class="">
             <input type="submit" value="Buscar" class="">
         </div>
+        <a href="{{route('instructorindex')}}"  class="btn-redirect">Volver</a>
     </form>
 </div>
     <div class="container">
@@ -229,6 +230,18 @@
 .popup.active .content {
   transition:all 300ms ease-in-out;
   transform:translate(-50%,-50%) scale(1);
+}
+
+.btn-redirect {
+  background-color: #00b0f0;
+  color: #FFF;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+  margin: 10px;
 }
 </style>
 @endsection

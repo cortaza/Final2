@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Semaforo;
 use App\Models\Competencia;
 use App\Models\Programa;
+use App\Models\Semaforo;
+use App\Models\Semaforobasura;
 use Illuminate\Http\Request;
-use DB;
+
 class SemaforoController extends Controller
 {
     /**
@@ -14,78 +15,63 @@ class SemaforoController extends Controller
      */
     public function index()
     {
-        $semaforo=Semaforo::all(); 
-        $nombreprogrm = Semaforo::select('semaforos.id_semaforo', 'programas.nombre')
-        ->join('programas', 'semaforos.codigo_prog', '=', 'programas.codigo_prog')
-        ->orderBy('semaforos.id_semaforo', 'ASC')
-        ->get();
-        $nombrecomp = Semaforo::select('semaforos.id_semaforo', 'competencias.codigo_comp',  'competencias.nombre')
-        ->join('competencias', 'semaforos.codigo_comp', '=', 'competencias.codigo_comp')
-        ->orderBy('semaforos.id_semaforo', 'ASC')
-        ->get();
-        return view('semaforo/index', ['semaforo'=>$semaforo, 'nombreprog'=>$nombreprogrm, 'nombrecomp'=>$nombrecomp]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $semaforo=Semaforo::select('id_semaforo')->get(); 
-        $programa=Programa::all();
+        $sema=Semaforo::all();
+        $semabasura=Semaforobasura::all();
         $competencia=Competencia::all();
-        return view('semaforo/create', ['programa'=>$programa, 'semaforo'=>$semaforo, 'competencia'=>$competencia ]);
+        $programa=Programa::all();
+        return view('semaforo/index', compact('sema', 'semabasura', 'competencia', 'programa'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $semaforo=new Semaforo;
         $semaforo->id_semaforo=$request->id_semaforo;
         $semaforo->dia_semana=$request->dia_semana;
         $semaforo->trimestre=$request->trimestre;
-        $semaforo->codigo_comp=$request->codigo_comp; //FOREIGN KEY
-        $semaforo->codigo_prog=$request->codigo_prog; //FOREIGN KEY
+        $semaforo->codigo_comp=$request->codigo_comp;
+        $semaforo->codigo_prog=$request->codigo_prog;
         $semaforo->save();
         return redirect()->route('semaforoindex');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Semaforo $semaforo)
+    public function archive($sema)
     {
-        //
+        $semaforo=Semaforo::where('id_semaforo', $sema)->first();
+        $semaforobasura=new Semaforobasura;
+        $semaforobasura->id_semaforo=$semaforo->id_semaforo;
+        $semaforobasura->dia_semana=$semaforo->dia_semana;
+        $semaforobasura->trimestre=$semaforo->trimestre;
+        $semaforobasura->codigo_comp=$semaforo->codigo_comp;
+        $semaforobasura->codigo_prog=$semaforo->codigo_prog;
+        $semaforobasura->save();
+        $semaforo=Semaforo::where('id_semaforo', $sema)->delete();
+        return redirect()->route('semaforoindex');
+    }
+
+    public function restore($sema)
+    {
+        $semaforobasura=Semaforobasura::where('id_semaforo', $sema)->first();
+        $semaforo=new Semaforo;
+        $semaforo->id_semaforo=$semaforobasura->id_semaforo;
+        $semaforo->dia_semana=$semaforobasura->dia_semana;
+        $semaforo->trimestre=$semaforobasura->trimestre;
+        $semaforo->codigo_comp=$semaforobasura->codigo_comp;
+        $semaforo->codigo_prog=$semaforobasura->codigo_prog;
+        $semaforobasura=Semaforobasura::where('id_semaforo', $sema)->delete();
+        return redirect()->route('semaforoindex');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($semaforo)
+    public function edit(Request $request)
     {
-        $semaf=Semaforo::where('id_semaforo','=',$semaforo)->get();
-        $programa=Programa::all();
-        $competencia=Competencia::all();
-        return view('semaforo/editar',['semaforo'=>$semaf, 'programa'=>$programa, 'competencia'=>$competencia]);
+        Semaforo::where('id_semaforo', $request)->update(['id_semaforo'=>$request->id_semaforo, 'dia_semana'=>$request->dia_semana, 'trimestre'=>$request->trimestre, 'codigo_comp'=>$request->codigo_comp, 'codigo_prog'=>$request->codigo_prog]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
+    public function destroy($sema)
     {
-        Semaforo::where('id_semaforo', $request->codigo)->update(['id_semaforo'=>$request->id_semaforo,'dia_semana'=>$request->dia_semana, 'trimestre'=>$request->trimestre, 'codigo_comp'=>$request->codigo_comp, 'codigo_prog'=>$request->codigo_prog]);
-        return redirect()->route('semaforoindex');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($semaforo)
-    {
-        DB::delete('DELETE FROM semaforos WHERE id_semaforo = ?', [$semaforo]);          
+        Semaforobasura::where('id_semaforo', $sema)->delete();
             return redirect()->route('semaforoindex');  
     }
 }

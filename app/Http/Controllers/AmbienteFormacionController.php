@@ -80,25 +80,15 @@ class AmbienteFormacionController extends Controller
         return redirect()->route('ambienteindex');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AmbienteFormacion $ambienteFormacion)
-    {
-        //
-    }
     public function destroy($ambiente)
     {
         Ambienteformacionbasura::where('codigo_ambiente', $ambiente)->delete();
         return redirect()->route('ambienteindex');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request)
     {
-        AmbienteFormacion::where('codigo_ambiente', $request->codigo)->update(['codigo_ambiente'=>$request->codigo_ambiente,'nombre'=>$request->nombre,'recursos'=>$request->recursos,'especialidad'=>$request->especialidad,'codigo_centro'=>$request->codigo_centro,'nr_ficha'=>$request->nr_ficha]);   
+        AmbienteFormacion::where('codigo_ambiente', $request->codigo)->update(['codigo_ambiente'=>$request->codigo_ambiente,'nombre'=>$request->nombre,'recursos'=>$request->recursos,'especialidad'=>$request->especialidad,'codigo_centro'=>$request->codigo_centro,'nr_ficha'=>$request->nr_ficha]);
         return redirect()->route('ambienteindex');
     }
 

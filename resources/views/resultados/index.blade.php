@@ -87,21 +87,21 @@
           </tr>
           </tr>
         </thead>
-        @foreach ($resultados as $re)
+        @foreach ($resultadobasura as $reb)
         <tbody>
           <tr v-for="(person,index) in bin">
-            <td>{{$re->id_resultado}}</td>
-            <td>{{$re->resultado}}</td>
-            <td>{{$re->estado}}</td>
-            <td>{{$re->codigo_comp}}</td>
+            <td>{{$reb->id_resultado}}</td>
+            <td>{{$reb->resultado}}</td>
+            <td>{{$reb->estado}}</td>
+            <td>{{$reb->codigo_comp}}</td>
             <td>
-            <form action="{{route('resultadostore', $re->id_resultado)}}" method="POST">
+            <form action="{{route('resultadostore', $reb->id_resultado)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
               </form>  
               <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('resultadodestroy', $re->id_resultado)}}" method="POST">
+              <form action="{{route('resultadodestroy', $reb->id_resultado)}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              

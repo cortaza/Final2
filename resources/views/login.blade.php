@@ -35,7 +35,7 @@
   </div>
   
 </form>
-<div class="copy-text">Creado<i class="fa fa-heart"></i> por<a href="http://grafreez.com">Richi y sus tesos</a></div>
+<div class="copy-text">Creado <i class="fa fa-heart"></i> por los 	<a href="http://grafreez.com">Cacique</a></div>
 		</div>
 		<div class="col-md-8 banner-sec">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -46,7 +46,7 @@
                   </ol>
             <div class="carousel-inner" role="listbox">
     <div class="carousel-item active">
-      <img class="d-block img-fluid" src="" alt="First slide">
+      <img class="d-block img-fluid" src="{{asset('/img/cide.jpg')}}" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
         <div class="banner-text">
             <h2>Servicio nacional de aprendizaje SENA</h2>
@@ -58,17 +58,15 @@
       <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="Second slide">
       <div class="carousel-caption d-none d-md-block">
         <div class="banner-text">
-            <h2>This is Second Slide</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+            <h2>Servicio nacional de aprendizaje SENA</h2>
         </div>	
     </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="Third slide">
+      <img class="d-block img-fluid" src="{{asset('/img/cide.jpg')}}" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
         <div class="banner-text">
-            <h2>This is Heaven</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+            <h2>Servicio nacional de aprendizaje SENA</h2>
         </div>	
     </div>
   </div>
@@ -96,6 +94,7 @@
 	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	float: left;
 	width: 100%;
+	height: auto;
 	padding: 40px;
 	margin: auto;
 }
@@ -112,6 +111,8 @@
 	background: #fff;
 	border-radius: 10px;
 	box-shadow: 15px 20px 0px rgba(1, 78, 1, 0.1);
+	margin-top: 10%;
+	margin-bottom:12%;
 }
 
 .carousel-inner {
@@ -170,29 +171,26 @@
 }
 
 .banner-text {
-	width: 70%;
+	width: 100%;
 	position: absolute;
 	bottom: 40px;
 	padding-left: 20px;
 }
 
 .banner-text h2 {
-	color: #000000;;
+	color: #127427;
 	font-weight: 600;
 }
 
-.banner-text h2:after {
-	content: " ";
-	width: 100px;
-	height: 5px;
-	background: #000000;;
-	display: block;
-	margin-top: 20px;
-	border-radius: 3px;
-}
 
 .banner-text p {
 	color: #000000;
 }
+
+.carousel-item img{
+	width: 100%;
+	height: 100%;
+}
+
 
 </style>
