@@ -1,12 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.nav')
+
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
 </head>
 <body>
-    <h1>anita te amo att:corta </h1>
+    @section('tablas')
+    <div class="fondo">
+        <div class="perfil">
+
+        </div>
+    </div>
 </body>
 </html>
+@endsection
+<style>
+    .fondo{
+        position: relative;
+        left: var(--page-header-width);
+        width: calc(100% - var(--page-header-width));
+        min-height: 100vh;
+        padding: 30px;
+        color: var(--page-content-txtColor);
+        background: var(--page-content-gr);
+    }
+
+    .perfil{
+        width: 100%;
+        height: 150px;
+        background: red ;
+    }
+
+</style>

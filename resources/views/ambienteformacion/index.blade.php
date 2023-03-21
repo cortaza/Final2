@@ -1,4 +1,6 @@
 @extends('layouts.structure')
+@extends('layouts.nav')
+@section('tablas')
 @section('titulo','Ambiente')
 
 @section('contenido')

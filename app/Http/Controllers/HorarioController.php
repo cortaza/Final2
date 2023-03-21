@@ -23,9 +23,8 @@ class HorarioController extends Controller
     {
         /*-----------------------------------------NORMAL-----------------------------------------*/
         $horario=Horario::all();
-        //NUMERO DE FICHA ==DONE
         //PROGTRAMA DE FORMACION
-        $nombreprogrm = Horario::select('horarios.codigo_h', 'programas.codigo_prog')
+        $nombreprogrm = Horario::select('horarios.codigo_h', 'programas.nombre')
         ->join('programas', 'horarios.codigo_prog', '=', 'programas.codigo_prog')
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();
@@ -40,7 +39,7 @@ class HorarioController extends Controller
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();
         //INSTRUCTOR
-        $nombreinstructor=Horario::select('horarios.codigo_h', 'instructors.dni')
+        $nombreinstructor=Horario::select('horarios.codigo_h', 'instructors.nombre')
         ->join('instructors', 'horarios.dni', '=', 'instructors.dni')
         ->orderBy('horarios.codigo_h', 'ASC')
         ->get();

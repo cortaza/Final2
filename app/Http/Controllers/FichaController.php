@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Redis;
 class FichaController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $busqueda = $request->input('busqueda'); 
         $programa=Programa::all();
         $tipoformacion=TipoFormacion::all();
         $instructor=Instructor::all();
         $fichas=Ficha::all();
+        $fichas= Ficha::where('nr_ficha','LIKE','%'.$busqueda.'%')
+                        ->orWhere('jornada','LIKE','%'.$busqueda.'%')
+                        ->latest('modalidad')->get();
         $fichabasura=Fichabasura::all();
         return view('ficha/index', compact('fichas', 'fichabasura', 'instructor', 'tipoformacion', 'programa'));
     }

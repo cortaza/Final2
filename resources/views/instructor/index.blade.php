@@ -17,44 +17,7 @@
 </div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
-        <thead>
-          <tr>
-            <th v-for="column in columns">Documento de Identidad</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Apellido</th>
-            <th v-for="column in columns">Telefono</th>
-            <th v-for="column in columns">Correo</th>
-            <th v-for="column in columns">Estado</th>
-            <th v-for="column in columns">Tipo de Contrato</th>
-            <th v-for="column in columns">Codigo de Red</th>
-            <th v-for="column in columns">Codigo de Area</th>
-            <th v-for="column in columns">Acción</th>
-          </tr>
-        </thead>
-        @foreach ($instruc as $i)
-        <tbody>
-            <tr v-for="(person,index) in persons">
-              <td>{{$i->dni}}</td>
-              <td>{{$i->nombre}}</td>
-              <td>{{$i->apellido}}</td>
-              <td>{{$i->telefono}}</td>
-              <td>{{$i->correo}}</td>
-              <td>{{$i->estado}}</td>
-              <td>{{$i->tipo_contrato}}</td>
-              <td>{{$i->codigo_red}}</td>
-              <td>{{$i->codigo_area}}</td>
-            <td style="width: 18%;">
-              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
-                    @csrf
-                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
-              </form>  
-            </td>
-          </tr>
-                  <!-- Pop window -->
-            @include('popupwindows.instructor')  
-          @endforeach
-          <tr>
+      <tr>
         <form action="{{ route('instructorcreate') }}" method="post">
         @csrf
             <td colspan="2">
@@ -122,6 +85,44 @@
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
+        <thead>
+          <tr>
+            <th v-for="column in columns">Documento de Identidad</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Apellido</th>
+            <th v-for="column in columns">Telefono</th>
+            <th v-for="column in columns">Correo</th>
+            <th v-for="column in columns">Estado</th>
+            <th v-for="column in columns">Tipo de Contrato</th>
+            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Codigo de Area</th>
+            <th v-for="column in columns">Acción</th>
+          </tr>
+        </thead>
+        @foreach ($instruc as $i)
+        <tbody>
+            <tr v-for="(person,index) in persons">
+              <td>{{$i->dni}}</td>
+              <td>{{$i->nombre}}</td>
+              <td>{{$i->apellido}}</td>
+              <td>{{$i->telefono}}</td>
+              <td>{{$i->correo}}</td>
+              <td>{{$i->estado}}</td>
+              <td>{{$i->tipo_contrato}}</td>
+              <td>{{$i->codigo_red}}</td>
+              <td>{{$i->codigo_area}}</td>
+            <td style="width: 18%;">
+              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
+              <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
+                    @csrf
+                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
+              </form>  
+            </td>
+          </tr>
+                  <!-- Pop window -->
+            @include('popupwindows.instructor')  
+          @endforeach
+          
           </tbody>
         </table>
       </form>

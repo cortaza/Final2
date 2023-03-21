@@ -36,6 +36,8 @@ Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('
 // /*-----------------HORARIO PRINCIPAL-----------------*/
 
         Route::controller(MainhorarioController::class)->group(function(){
+        //DOWNLAND
+        Route::match(['get', 'post'], '/horario/principal/pdf','pdf')->name('hopdf');        
         //INDEX
         Route::get('/horario/principal','index')->name('mainhindex');        
         //CREATE
@@ -44,8 +46,6 @@ Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('
         Route::match(['get', 'post'], '/horario/principal/editar', 'edit' )->name('mainhedit');
         //DELETE 
         Route::delete('/horario/principal/delete/{horario}','destroy')->name('mainhdestroy');   
-        //DOWNLAND
-        
         });
 // /*-----------------ELEGIR CRUD-----------------*/
     Route::get('/elegir_crud', function () {return view('choosecrud');})->name('choosecrud');

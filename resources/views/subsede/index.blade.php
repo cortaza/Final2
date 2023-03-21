@@ -8,6 +8,38 @@
     <h4 class="head"><center>Sub-Sede</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <tr>
+        <form action="{{ route('subsedecreate') }}" method="post">
+        @csrf
+              <td colspan="2">
+                <div class="input-field">
+                    <label for="lname">Codigo sub</label>
+                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_sub" id="lname" type="text">
+                </div>
+              </td>
+              <td>
+                <div class="input-field">
+                    <label for="fname">Nombre</label>
+                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="name" type="text">                
+                </div>
+              </td>
+              
+              <td>
+
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo centro</font></font></label>
+                
+                <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
+                @foreach($centro as $c)     
+                    <option>{{$c->codigo_centro}}</option>     
+                @endforeach     
+                </select>
+
+              </td>
+          
+              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
         <thead>
           <tr>
             <th v-for="column in columns">
@@ -41,38 +73,7 @@
                   <!-- Pop window -->
             @include('popupwindows.subsede')
           @endforeach
-          <tr>
-        <form action="{{ route('subsedecreate') }}" method="post">
-        @csrf
-              <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo sub</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_sub" id="lname" type="text">
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="name" type="text">                
-                </div>
-              </td>
-              
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo centro</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($centro as $c)     
-                    <option>{{$c->codigo_centro}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-          
-              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
+       
           </tbody>
         </table>
       </form>

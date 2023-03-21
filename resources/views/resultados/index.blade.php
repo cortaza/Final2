@@ -111,6 +111,7 @@
         </tbody>
         @endforeach
       </table>
+      {{$lista->links() }}
     </div>
 
 

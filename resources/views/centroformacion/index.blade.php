@@ -7,44 +7,7 @@
     <h4 class="head"><center>Centro de Formacion</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
-        <thead>
-          <tr>
-            <th v-for="column in columns">
-              Codigo Centro
-            </th>
-            <th v-for="column in columns">
-              Nombre de Centro
-            </th>
-            <th v-for="column in columns">
-              Numero de ambientes
-            </th>
-            <th v-for="column in columns">
-                Usuario
-            </th>
-            <th v-for="column in columns">
-              Acción
-            </th>
-          </tr>
-        </thead>
-        @foreach ($centro as $c)
-        <tbody>
-          <tr v-for="(person,index) in persons">
-            <td>{{$c->codigo_centro}}</td>
-            <td>{{$c->nombre_centro}}</td>
-            <td>{{$c->nr_ambientes}}</td>
-            <td>{{$c->id_usuario}}</td>
-            <td style="width: 18%;">
-              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('centroarchive', $c->codigo_centro )}}" method="POST">
-                    @csrf
-                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
-              </form>  
-            </td>
-          </tr>
-                  <!-- Pop window -->
-            @include('popupwindows.centro')  
-          @endforeach
-          <tr>
+      <tr>
         <form action="{{ route('centrocreate') }}" method="post">
         @csrf
               <td colspan="2">
@@ -82,6 +45,44 @@
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
+        <thead>
+          <tr>
+            <th v-for="column in columns">
+              Codigo Centro
+            </th>
+            <th v-for="column in columns">
+              Nombre de Centro
+            </th>
+            <th v-for="column in columns">
+              Numero de ambientes
+            </th>
+            <th v-for="column in columns">
+                Usuario
+            </th>
+            <th v-for="column in columns">
+              Acción
+            </th>
+          </tr>
+        </thead>
+        @foreach ($centro as $c)
+        <tbody>
+          <tr v-for="(person,index) in persons">
+            <td>{{$c->codigo_centro}}</td>
+            <td>{{$c->nombre_centro}}</td>
+            <td>{{$c->nr_ambientes}}</td>
+            <td>{{$c->id_usuario}}</td>
+            <td style="width: 18%;">
+              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
+              <form action="{{route('centroarchive', $c->codigo_centro )}}" method="POST">
+                    @csrf
+                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
+              </form>  
+            </td>
+          </tr>
+                  <!-- Pop window -->
+            @include('popupwindows.centro')  
+          @endforeach
+         
           </tbody>
         </table>
       </form>

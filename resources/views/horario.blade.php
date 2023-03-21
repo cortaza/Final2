@@ -83,7 +83,7 @@
                                         <th>{{$competencias[$horario->codigo]}}</th><!--11-->
                                         <th>{{$competencias[$horario->codigo]}}</th><!--12-->
                                         <th>{{$competencias[$horario->codigo]}}</th><!--13-->
-                                        <th><img src="{{asset('/img/descargar.png')}}" style="height:50px; width:50px;" alt="This is a picture"></th><!--14-->
+                                        <th><a href="{{route('hopdf')}}" target="__blank"><img src="{{asset('/img/descargar.png')}}" style="height:50px; width:50px;" alt="This is a picture"></a></th><!--14-->
                                     </tr>
                                     @empty
                                         <tr>
@@ -93,8 +93,5 @@
                                     
                                 </tbody>                            
                                 <br>
-
     </table>
-    
-
 @endsection

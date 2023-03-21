@@ -11,10 +11,16 @@ class AreaTematicaController extends Controller
 {
     public function index()
     {
+        //Nombre de red
         $red=RedTematica::all();
+        $nombrered = AreaTematica::select('red_tematicas.nombre')
+        ->join('red_tematicas', 'area_tematicas.codigo_red', '=', 'red_tematicas.codigo_red')
+        ->orderBy('area_tematicas.codigo_area', 'ASC')
+        ->get();
         $area=AreaTematica::all();
+        $nombrered=RedTematica::select('nombre')->get();        
         $areatrash=Areabasura::all();
-        return view('areatematica/index', compact('area', 'areatrash', 'red'));
+        return view('areatematica/index', compact('area', 'areatrash', 'nombrered', 'red', 'nombrered'));
     }
     
     public function create(Request $request)

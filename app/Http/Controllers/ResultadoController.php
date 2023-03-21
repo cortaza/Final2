@@ -7,6 +7,8 @@ use App\Models\Competencia;
 use App\Models\Resultadobasura;
 use Illuminate\Http\Request;
 
+
+
 class ResultadoController extends Controller
 {
     public function index()

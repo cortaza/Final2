@@ -1,0 +1,12 @@
+{
+    "roboto": {
+        "200": "C:\\xampp\\htdocs\\proyecto_horario\\storage\\fonts\/roboto_200_5870a6647e8808754e9e9731437359ed",
+        "300": "C:\\xampp\\htdocs\\proyecto_horario\\storage\\fonts\/roboto_300_d91fb0f1d83c9b77785d9df15993932b",
+        "normal": "C:\\xampp\\htdocs\\proyecto_horario\\storage\\fonts\/roboto_normal_20f0f3e43eb739718ee9f35949aef4ae",
+        "500": "C:\\xampp\\htdocs\\proyecto_horario\\storage\\fonts\/roboto_500_fee35888d562dd794cf68f7d022b6247",
+        "bold": "roboto_bold_2cef113d97903bd95f468c692d7ba56f"
+    },
+    "material icons": {
+        "normal": "material_icons_normal_c8ff36056e8dee147c1ed2d6ed4318a4"
+    }
+}

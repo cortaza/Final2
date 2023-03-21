@@ -8,6 +8,31 @@
   <h4 class="head"><center>Red Tematica</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <tr>
+        <form action="{{ route('redcreate') }}" method="post">
+        @csrf
+              <td colspan="2">
+                <div class="input-field">
+                <label for="lname">Codigo de Red</label>
+                  <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_red" id="lname" type="text" value="{{old('codigo_red')}}">
+                  @error('codigo_red')                  
+                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
+                  @enderror
+                </div>
+              </td>
+              <td>
+                <div class="input-field">
+                <label for="fname">Nombre</label>
+                  <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">                
+                  @error('nombre')                  
+                    <small style="color:red; position:static;">El campo nombre no puede estar vacio</small>
+                  @enderror
+                </div>
+              </td>
+              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+
         <thead>
           <tr>
             <th v-for="column in columns">Codigo de Red</th>
@@ -32,34 +57,9 @@
                   <!-- Pop window -->
         @include('popupwindows.red')  
           @endforeach
-          <tr>
-        <form action="{{ route('redcreate') }}" method="post">
-        @csrf
-              <td colspan="2">
-                <div class="input-field">
-                <label for="lname">Codigo de Red</label>
-                  <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_red" id="lname" type="text" value="{{old('codigo_red')}}">
-                  @error('codigo_red')                  
-                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
-                  @enderror
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                <label for="fname">Nombre</label>
-                  <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">                
-                  @error('nombre')                  
-                    <small style="color:red; position:static;">El campo nombre no puede estar vacio</small>
-                  @enderror
-                </div>
-              </td>
-              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
           </tbody>
         </table>
       </form>
-
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
           <tr>

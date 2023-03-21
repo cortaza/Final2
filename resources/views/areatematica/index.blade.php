@@ -2,38 +2,26 @@
 @section('titulo','Area Tematica')
 
 @section('contenido')
+
+
+
+@php
+    // Create associative arrays for competencias and programas
+
+    $redes = array();
+
+        foreach($nombrered as $red) {
+            $redes[$red->codigo_red] = $red->nombre;
+        }
+@endphp
+
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Area Tematica</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
-        <thead>
-          <tr>
-            <th v-for="column in columns">Codigo de Area</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Codigo de Red</th>
-            <th v-for="column in columns">Acción</th>
-          </tr>
-        </thead>
-        @foreach ($area as $a)
-        <tbody>
-          <tr v-for="(person,index) in persons">
-            <td>{{$a->codigo_area}}</td>
-            <td>{{$a->nombre}}</td>
-            <td>{{$a->codigo_red}}</td>
-            <td style="width: 18%;">
-              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <form action="{{route('areaarchive', $a->codigo_area )}}" method="POST">
-                    @csrf
-                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
-              </form>  
-            </td>
-          </tr>
-                  <!-- Pop window -->
-            @include('popupwindows.area')  
-          @endforeach
-          <tr>
+      <tr>
         <form action="{{ route('areacreate') }}" method="post">
         @csrf
               <td colspan="2">
@@ -57,23 +45,47 @@
               
               <td>
 
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la Red</font></font></label>
                 
                 <select class="form-select" id="validationCustom04" required="" name="codigo_red">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($red as $r)     
-                    <option>{{$r->codigo_red}}</option>     
-                @endforeach                     
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($nombrered as $a)
+                      <option value="{{ $a->codigo_red }}">{{$redes[$a->code]}}</option>                    
+                    @endforeach
                 </select>
-                @error('codigo_red')                  
-                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
-                @enderror
+                
 
               </td>
           
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
+        <thead>
+          <tr>
+            <th v-for="column in columns">Codigo de Area</th>
+            <th v-for="column in columns">Nombre</th>
+            <th v-for="column in columns">Nombre de la Red</th>
+            <th v-for="column in columns">Acción</th>
+          </tr>
+        </thead>
+        @foreach ($area as $a)
+        <tbody>
+          <tr v-for="(person,index) in persons">
+            <td>{{$a->codigo_area}}</td>
+            <td>{{$a->nombre}}</td>
+            <td>{{$a->codigo_red}}</td>
+            <td style="width: 18%;">
+              <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
+              <form action="{{route('areaarchive', $a->codigo_area )}}" method="POST">
+                    @csrf
+                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
+              </form>  
+            </td>
+          </tr>
+                  <!-- Pop window -->
+            @include('popupwindows.area')  
+          @endforeach
+          
           </tbody>
         </table>
       </form>

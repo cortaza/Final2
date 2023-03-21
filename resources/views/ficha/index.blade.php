@@ -6,6 +6,15 @@
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Ficha</center></h4>
+    <div class="">
+    <form action="{{route('fichaindex')}}" method="GET">
+        <div class="">
+            <input type="text" name="busqueda" class="">
+            <input type="submit" value="Buscar" class="">
+        </div>
+        <a href="{{route('fichaindex')}}"  class="btn-redirect">Volver</a>
+    </form>
+</div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
         <thead>
@@ -196,6 +205,17 @@
 .popup.active .content {
   transition:all 300ms ease-in-out;
   transform:translate(-50%,-50%) scale(1);
+}
+.btn-redirect {
+  background-color: #00b0f0;
+  color: #FFF;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+  margin: 10px;
 }
 </style>
 @endsection

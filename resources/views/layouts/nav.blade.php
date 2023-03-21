@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title>Principal</title>
-  <link rel="stylesheet" href="./style.css">
+
+
   <link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
 </head>
 <body>
@@ -162,51 +162,14 @@
     </ul>
   </nav>
 </header>
-<section class="page-content">
-  <section class="search-and-user">
-    <form>
-      <input type="search" placeholder="Buscar...">
-      <button type="submit" aria-label="submit form">
-        <svg aria-hidden="true">
-          <use xlink:href="#search"></use>
-        </svg>
-      </button>
-    </form>
-    <a href="{{route('perfilindex')}}">
-    <div class="admin-profile">
-        <img style="height:50px; width:50px; margin-left:10px;"; src="{{asset('img/Logo-de-SENA-png-verde.png')}}">
-      </div>
-    </a>
-    </div>
-  </section>  
-  <section class="grid">
-   <article style="height:80%;">
-    <img style="height:100%; width:100%; " src="{{asset('/img/sofia.jfif')}}">
-    </article>
-    <article >
-      <img style="height:90%; width:40%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
-    <p style="margin-left:15px;  width:60%;">Fragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y
-    Fragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y 
-    vFragmentunidad temática, que queda diferenciado del resto de fragmentos por un punto y aparte y .</p>
-    </article>
-    <article>
-      <img style="height:90%; width:40%; border-radius:8px; margin-top:15px; margin-left:15px;" src="{{asset('/img/cide.jpg')}}">
-    <p style="margin-left:15px;">Fradad t</p>
-    </article>
-    <article><img style="height:90%; width:60%; border-radius:8px; margin-left:20%; margin-top:10px;" src="{{asset('/img/cide.jpg')}}">
-  </article>
-</section>
-</section>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
+@yield('tablas')  
+<footer>
+</footer>
 </body>
 </html>
 
 <style>
-    /* RESET RULES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
+    @import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
 
 :root {
   --page-header-bgColor: #242e42;
@@ -301,7 +264,7 @@ body {
   padding-top: 5px;
   width: var(--page-header-width);
   color: var(--page-header-txtColor);
-  background: var(--page-content-bgColor);
+  background: var(--page-content-gr);
 }
 
 /*In case you prefer an absolutely positioned header that covers the full page height, add these styles*/
@@ -347,7 +310,7 @@ body {
   display: none;
   margin-left: 5px;
   padding: 4px;
-  background: var(--page-content-blockColor);
+  background: var(--page-content-gr);
   border-radius: var(--border-radius);
 }
 
@@ -513,30 +476,7 @@ body {
   border-radius: 50%;
   font-size: 10px;
   color: var(--white);
-  background: var(--red);
-}
-
-.page-content .grid {
-  display: grid;
-  grid-gap: 30px ;
-}
-
-.page-content .grid > article {
-  display: flex;
-  height: 300px;
-  background: var(--page-content-blockColor);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-}
-
-.page-content .grid > article:first-child,
-.page-content .grid > article:last-child {
-  grid-column: 1 / -1;
-}
-
-article p{
-  overflow-x: hidden;
-  overflow-y: scroll; 
+  background: var(--page-content-gr);
 }
 
 /* MQ RULES
@@ -627,11 +567,6 @@ article p{
   }
 }
 
-@media screen and (max-width: 400px) {
-  .page-content .grid > article {
-    grid-column: 1 / -1;
-  }
-}
 
 
 /* BODY CLASSES
@@ -866,3 +801,4 @@ switchInput.addEventListener("input", function () {
   }
 });
 </script>
+</style>

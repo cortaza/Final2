@@ -50,16 +50,7 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'Informática, Diseño y Desarrollo de Software.'
             ]
         ]);
-        
-        //RED BASURA
-        Redbasura::insert([
-            [
-            'codigo_red'=>'2',
-            'nombre'=>'Informática, Diseño'
-            ]
-        ]);
-
-        
+                
         //AREA TEMATICA           
         AreaTematica::insert([
             [
@@ -68,16 +59,6 @@ class DatabaseSeeder extends Seeder
             'codigo_red'=>'1'
             ]
         ]);
-
-        //AREA BASURA           
-        Areabasura::insert([
-            [
-            'codigo_area'=>'2',
-            'nombre'=>'SoftwareSSSS',
-            'codigo_red'=>'1'
-            ]
-        ]);
-
 
         //INSTRUCTOR      
         Instructor::insert([
@@ -116,22 +97,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //INSTRUCTOR BASURA
-        Instructorbasura::insert([
-            [
-            'dni'=>'1',
-            'nombre'=>'f f',
-            'apellido'=>'e e',
-            'telefono'=>'1',
-            'correo'=>'u@u.u.u',
-            'estado'=>'1',
-            'tipo_contrato'=>'g',
-            'codigo_red'=>'1',
-            'codigo_area'=>'1'
-            ]
-        ]);
-
-
         //ADMINISTRACION     
         Administracion::insert([
             [
@@ -150,18 +115,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
         
-        //ADMINISTRACION BASURA
-        AdministracionBasura::insert([
-            [
-            'id_usuario'=>'1',
-            'rol'=>'A',
-            'nombre'=>'A',
-            'apellido'=>'A',
-            'contraseña'=>'A'
-            ]
-        ]);
-        
-
         //CENTRO FORMACION         
         CentroFormacion::insert([
             [
@@ -177,18 +130,7 @@ class DatabaseSeeder extends Seeder
             'id_usuario'=>'1',
             ]
         ]);
-
-        //CENTRO FORMACION BASURA
-        centroformacionbasura::insert([
-            [
-            'codigo_centro'=>'1',
-            'nombre_centro'=>'af',
-            'nr_ambientes'=>'1',
-            'id_usuario'=>'1'
-            ]
-        ]);
-
-        
+ 
         //SUBSEDES           
         Subsede::insert([
             [
@@ -203,16 +145,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //SUBSEDES BASURA
-        Subsedebasura::insert([
-            [
-            'codigo_sub'=>'1',
-            'nombre'=>'A',
-            'codigo_centro'=>'23471927'
-            ]
-        ]);
-
-        
         //PROGRAMAS           
         Programa::insert([
             [
@@ -247,21 +179,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //PROGRAMAS BASURA
-        Programabasura::insert([
-            [
-            'codigo_prog'=>'1',
-            'nombre'=>'A',
-            'estado'=>'1',
-            'nivel_formacion'=>'A',
-             'duracion'=>'1 M',
-             'version'=>'1',
-             'codigo_centro'=>'23471927',
-             'codigo_area'=>'1'       
-            ]
-        ]);
-
-
         //DESCARGAS           
         Descarga::insert([
             [
@@ -270,16 +187,6 @@ class DatabaseSeeder extends Seeder
             'codigo_prog'=>'228106'
             ]
         ]);
-
-        //DESCARGAS BASURA
-        Descargabasura::insert([
-            [
-            'codigo_desc'=>'1',
-            'nombre'=>'1',
-            'codigo_prog'=>'228106'
-            ]
-        ]);
-
 
         //TIPO DE FORMACIÓN 
         TipoFormacion::insert([
@@ -293,15 +200,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //TIPO DE FORMACIÓN BASURA 
-        TipoFormacionBasura::insert([
-            [
-            'codigo_for'=>'3',
-            'nombre'=>'Cadena'
-            ]
-        ]);
-
-
         //FICHAS
         Ficha::insert([
             [
@@ -314,19 +212,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //FICHAS BASURA
-        Fichabasura::insert([
-            [
-            'nr_ficha'=>'1',
-            'jornada'=>'A', 
-            'modalidad'=>'A',
-            'nr_aprendices'=>'1',
-            'codigo_prog'=>'228106',
-            'codigo_for'=>'1'
-            ]
-        ]);
-
-
         //AMBIENTE FORMACION
         AmbienteFormacion::insert([
             [
@@ -338,19 +223,6 @@ class DatabaseSeeder extends Seeder
             'nr_ficha'=>'2515397'
             ]
         ]);
-
-        //AMBIENTE FORMACION BASURA
-        Ambienteformacionbasura::insert([
-            [
-            'codigo_ambiente'=>'1',
-            'nombre'=>'A',
-            'recursos'=>'A',
-            'especialidad'=>'A',
-            'codigo_centro'=>'1',
-            'nr_ficha'=>'2515397'
-            ]
-        ]);
-
 
         //COMPETENCIA
         Competencia::insert([
@@ -431,17 +303,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //COMPETENCIA BASURA
-        Competenciabasura::insert([
-            [
-            'codigo_comp'=>'1',
-            'nombre'=>'A',
-            'descripcion'=>'A',
-            'codigo_prog'=>'228106'
-            ]
-        ]);
-
-        
         //RESULTADO        
         Resultado::insert([
             //////////////////////////////
@@ -732,17 +593,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //RESULTADO BASURA
-        Resultadobasura::insert([
-            [
-            'id_resultado'=>'1',
-            'resultado'=>'A',
-            'estado'=>'1',
-            'codigo_comp'=>'220501009'
-            ]
-        ]);
-        
-
         //SEMAFORO
         Semaforo::insert([
             //////////////////////////////
@@ -869,18 +719,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //SEMAFORO BASURA
-        Semaforobasura::insert([
-            [
-            'id_semaforo'=>'1',
-            'dia_semana'=>'1',
-            'trimestre'=>'1',
-            'codigo_comp'=>'220501009',
-            'codigo_prog'=>'228106'
-            ]
-        ]);
-
-        
         //HORARIO
         Horario::insert([
             [
@@ -895,18 +733,5 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        //HORARIO BASURA
-        Horariobasura::insert([
-            [
-            'codigo_h'=>'1',
-            'codigo_prog'=>'228106',
-            'nr_ficha'=>'2515397',
-            'codigo_ambiente'=>'102',
-            'dni'=>'11111',
-            'id_semaforo'=>'1',
-            'codigo_comp'=>'220501006',
-            'codigo_desc'=>'1'
-            ]
-        ]);
     }
 }
