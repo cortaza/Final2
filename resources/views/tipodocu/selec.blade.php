@@ -6,20 +6,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 <link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
 
+<center>
 <body>
 <!-- partial:index.partial.html -->
 <div id="divmain">
     <div id="center">
-	    <a href="{{ route('subsedeindex') }}" target="_blank" class="boton">Subsedes <span class="top"></span></a>
-	    <a href="{{ route('programaindex') }}" target="_blank" class="boton">Programas <span class="top"></span></a> 
-	    <a href="{{ route('formacionindex') }}" target="_blank" class="boton">Tipo de formacion <span class="top"></span></a>
-        <a href="{{ route('fichaindex') }}" target="_blank" class="boton">Fichas <span class="top"></span></a>
-	    <a href="{{ route('ambienteindex') }}" target="_blank" class="boton">Ambiente de formacion<span class="top"></span></a>
+	    <a href="{{ route('hopdf') }}" target="_blank" class="boton">PDF <span class="top"></span></a>
+	    <a href="{{ route('hopdf') }}" target="_blank" class="boton">EXCEL<span class="top"></span></a>
     </div>
 </div>
 <!-- partial -->
   
 </body>
+</center>
 </html>
 
 <style>
@@ -32,9 +31,21 @@
 }
 
 
+#left{
+    float: left;
+	width: 35%;
+	height: auto;
+}
 #center{
     float: left;
 	width: 30%;
+	height: auto;
+	margin-left: 35%;
+	margin-top: 15%;
+}
+#right{
+    float: left;
+	width: 35%;
 	height: auto;
 }
 

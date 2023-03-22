@@ -3,18 +3,6 @@
 
 @section('contenido')
 
-
-
-@php
-    // Create associative arrays for competencias and programas
-
-    $redes = array();
-
-        foreach($nombrered as $red) {
-            $redes[$red->codigo_red] = $red->nombre;
-        }
-@endphp
-
     <div>@include('partials.selectform')</div>
 <!-- partial:index.partial.html -->
 <div id="app">
@@ -49,8 +37,8 @@
                 
                 <select class="form-select" id="validationCustom04" required="" name="codigo_red">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
-                    @foreach ($nombrered as $a)
-                      <option value="{{ $a->codigo_red }}">{{$redes[$a->code]}}</option>                    
+                    @foreach ($red as $a)
+                      <option value="{{ $a->codigo_red }}">{{ $a->nombre }}</option>                    
                     @endforeach
                 </select>
                 
@@ -73,7 +61,13 @@
           <tr v-for="(person,index) in persons">
             <td>{{$a->codigo_area}}</td>
             <td>{{$a->nombre}}</td>
-            <td>{{$a->codigo_red}}</td>
+            <td value="{{$a->codigo_red}}">
+              @foreach($red as $r)
+                @if($a->codigo_red==$r->codigo_red)
+                  {{$r->nombre}}
+                @endif
+              @endforeach
+            </td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('areaarchive', $a->codigo_area )}}" method="POST">
@@ -104,7 +98,13 @@
           <tr v-for="(person,index) in bin">
             <td>{{$trash->codigo_area}}</td>
             <td>{{$trash->nombre}}</td>
-            <td>{{$trash->codigo_red}}</td>
+            <td >
+              @foreach($red as $r)
+                @if($trash->codigo_red==$r->codigo_red)
+                  {{$r->nombre}}
+                @endif
+              @endforeach
+            </td>
             <td>
             <form action="{{route('arearestore', $trash->codigo_area )}}" method="POST">
                     @csrf

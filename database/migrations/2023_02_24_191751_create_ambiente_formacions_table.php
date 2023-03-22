@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('recursos');
             $table->string('especialidad');
-            $table->string('codigo_centro');
+            $table->unsignedBigInteger('codigo_centro');
             $table->foreign('codigo_centro')->references('codigo_centro')->on('centro_formacions')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nr_ficha');
             $table->foreign('nr_ficha')->references('nr_ficha')->on('fichas')->onDelete('cascade')->onUpdate('cascade');

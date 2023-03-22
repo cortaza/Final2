@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subsedes', function (Blueprint $table) {
             $table->id('codigo_sub');
             $table->string('nombre');
-            $table->string('codigo_centro');
+            $table->unsignedBigInteger('codigo_centro');
             $table->foreign('codigo_centro')->references('codigo_centro')->on('centro_formacions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

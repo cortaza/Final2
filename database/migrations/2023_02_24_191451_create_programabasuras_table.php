@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nivel_formacion');
             $table->string('duracion');
             $table->integer('version');
-            $table->string('codigo_centro');
+            $table->unsignedBigInteger('codigo_centro');
             $table->foreign('codigo_centro')->references('codigo_centro')->on('centro_formacions')->onDelete('cascade')->onUpdate('cascade');
             $table->string('codigo_area');
             $table->foreign('codigo_area')->references('codigo_area')->on('area_tematicas')->onDelete('cascade')->onUpdate('cascade');

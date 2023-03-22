@@ -82,13 +82,13 @@
   <h4><center>Editar Horario</center></h4>
     <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
         <thead>
-          <tr>
-              <th colspan="2" v-for="column in columns">N Ficha</th>
+        <tr>
+          <th colspan="2" v-for="column in columns">N Ficha</th>
               <th colspan="2" v-for="column in columns">Programa</th>
               <th colspan="2" v-for="column in columns">Aula</th>
               <th colspan="2" v-for="column in columns">Jornada</th>
               <th colspan="2" v-for="column in columns">Instructor</th>
-              <th v-for="column in columns">Trimestre &nbsp;</th>
+              <th colspan="2" v-for="column in columns">Trimestre &nbsp;</th>
               <th v-for="column in columns">Lunes</th>
               <th v-for="column in columns">Martes</th>
               <th v-for="column in columns">Miercoles</th>
@@ -109,17 +109,6 @@
                     <option selected="" disabled="" placeholder="" value="{{old('nr_ficha')}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                
                     <option>{{$programas[$h->nombre]}}</option>                                        
                 </select>
-                <!-- @error('nr_ficha')                  
-                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
-                @enderror -->
-                
-                <!-- <div class="input-field">
-                
-                  <input placeholder="Ficha" ref="lname" v-model="input.lname" name="nr_ficha" id="fname" type="text" value="{{old('nr_ficha')}}">
-                  @error('nr_ficha')                  
-                    <small style="color:red; position:static;">El campo codigo de horario no puede estar vacio</small>
-                  @enderror
-                </div> -->
               </td>
 
           <td colspan="2">
@@ -159,9 +148,9 @@
               <td colspan="2">
                 <div class="input-field">
                 
-                  <input placeholder="Ambiente" v-model="input.fname" name="id_semaforo" id="fname" type="text" value="{{old('id_semaforo')}}">                
+                  <input placeholder="Trimestre" v-model="input.fname" name="id_semaforo" id="fname" type="text" value="{{old('id_semaforo')}}">                
                   @error('id_semaforo')                  
-                    <small style="color:red; position:static;">El campo Codigo de ambiente no puede estar vacio</small>
+                    <small style="color:red; position:static;">El campo trimestre no puede estar vacio</small>
                   @enderror
                 </div>
               </td>        

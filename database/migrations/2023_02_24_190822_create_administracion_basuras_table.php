@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('administracion_basuras', function (Blueprint $table) {
-            $table->string('id_usuario')->primary();
+            $table->id('id_usuario');
             $table->string('rol');
             $table->string('nombre');
             $table->string('apellido');

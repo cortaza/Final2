@@ -5,45 +5,6 @@
     <center>
         <h1>HORARIO SENA-CIDE</h1>
     </center>
-
-@php
-// Create associative arrays for competencias and programas
-        // <!-- PROGRAMA -->
-        $programas = array();
-
-        foreach($nombreprogrm as $prog) {
-            $programas[$prog->codigo_prog] = $prog->nombre;
-        }
-        // <!-- JORNADA -->
-
-        $jornadas = array();
-        foreach($jornada as $jor) {
-            $jornadas[$jor->nr_ficha] = $jor->jornada;
-        }
-
-        // <!-- AMBIENTE -->
-        $ambientes = array();
-        foreach($nombreambiente as $amb) {
-            $ambientes[$amb->codigo_ambiente] = $amb->nombre;
-        }
-        // <!-- INSTRUCTOR -->
-        $instructors = array();
-        foreach($nombreinstructor as $ins) {
-            $instructors[$ins->dni] = $ins->nombre;
-        }
-        // <!-- SEMAFORO -->
-        $semaforos = array();
-        foreach($trimestre as $sema) {
-            $semaforos[$sema->id_semaforo] = $sema->trimestre;
-        }
-        // <!-- COMPETENCIA -->
-        $competencias = array();
-        foreach($competencia as $comp) {
-            $competencias[$comp->codigo_comp] = $comp->nombre;
-        }
-
-@endphp
-
     <div>
         <a href="{{route('horarioindex')}}" class="btn btn-info" style="background-color:green; border-color:green;">Editar horario</a> 
     </div>
@@ -71,7 +32,13 @@
                                     @forelse($horario as $horario)                                        
                                     <tr>
                                         <th>{{$horario->nr_ficha}}</th><!--1-->
-                                        <th>{{$programas[$horario->codigo]}}</th><!--2-->
+                                        <th>
+                                            @foreach($red as $r)
+                                                @if($a->codigo_red==$r->codigo_red)
+                                                    {{$r->nombre}}
+                                                @endif
+                                            @endforeach
+                                        </th><!--2-->                                        
                                         <th>{{$horario->codigo_ambiente}}</th><!--3-->
                                         <th>{{$jornadas[$horario->codigo]}}</th><!--4-->                                     
                                         <th>{{$instructors[$horario->codigo]}}</th><!--5-->
@@ -83,7 +50,7 @@
                                         <th>{{$competencias[$horario->codigo]}}</th><!--11-->
                                         <th>{{$competencias[$horario->codigo]}}</th><!--12-->
                                         <th>{{$competencias[$horario->codigo]}}</th><!--13-->
-                                        <th><a href="{{route('hopdf')}}" target="__blank"><img src="{{asset('/img/descargar.png')}}" style="height:50px; width:50px;" alt="This is a picture"></a></th><!--14-->
+                                        <th><a href="{{route('descarga')}}" target="__blank"><img src="{{asset('/img/descargar.png')}}" style="height:50px; width:50px;" alt="This is a picture"></a></th><!--14-->
                                     </tr>
                                     @empty
                                         <tr>

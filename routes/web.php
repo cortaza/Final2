@@ -37,7 +37,7 @@ Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('
 
         Route::controller(MainhorarioController::class)->group(function(){
         //DOWNLAND
-        Route::match(['get', 'post'], '/horario/principal/pdf','pdf')->name('hopdf');        
+        Route::match(['get', 'post'], '/horario/principal/selec/pdf','pdf')->name('hopdf');
         //INDEX
         Route::get('/horario/principal','index')->name('mainhindex');        
         //CREATE
@@ -49,6 +49,8 @@ Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('
         });
 // /*-----------------ELEGIR CRUD-----------------*/
     Route::get('/elegir_crud', function () {return view('choosecrud');})->name('choosecrud');
+// /*-----------------ELEGIR DESCARGA-----------------*/
+    Route::get('/elegir_descarga', function () {return view('tipodocu.selec');})->name('descarga');
 // /*-----------------CRUDS-----------------*/
 
 // /*RED*/

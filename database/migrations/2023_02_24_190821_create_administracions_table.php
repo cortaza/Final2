@@ -13,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('administracions', function (Blueprint $table) {
-            $table->string('id_usuario')->primary();
+            $table->id('id_usuario');
             $table->string('rol');
             $table->string('nombre');
             $table->string('apellido');
