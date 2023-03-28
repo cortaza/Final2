@@ -17,7 +17,7 @@
                 <label for="last_name">Nombre</label>                
             </div>
             <div class="input-field col s6">                
-                <button type="submit">ENVIAR</button>   
+                <button type="submit" id="botonsend">ENVIAR</button>   
                 <input type="hidden" value="{{$r->codigo_red}}" name="codigo">             
             </div>
           </div>

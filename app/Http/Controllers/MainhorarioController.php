@@ -18,6 +18,7 @@ class MainhorarioController extends Controller
 {
     public function index()
     {
+
         $horario=Horario::all();
         //NUMERO DE FICHA ==DONE
         $numeroficha=Ficha::all();

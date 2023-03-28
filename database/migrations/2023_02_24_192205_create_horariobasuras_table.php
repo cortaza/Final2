@@ -23,10 +23,6 @@ return new class extends Migration
             $table->foreign('dni')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_semaforo');
             $table->foreign('id_semaforo')->references('id_semaforo')->on('semaforos')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('codigo_comp');
-            $table->foreign('codigo_comp')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('codigo_desc');
-            $table->foreign('codigo_desc')->references('codigo_desc')->on('descargas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

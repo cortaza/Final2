@@ -1,76 +1,76 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Centro de formacion')
+@section('titulo','ScheduleMate||Formulario Centro de formación')
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
-<div id="app">
-    <h4 class="head"><center>Centro de Formacion</center></h4>
+<div id="app">  
+    <h4 class="head" style="font-family: 'Poppins', sans-serif; padding:10px;" ><center>Centro de Formacion</center></h4>
     <div class="container">
-      <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <table class="table-responsive bordered highlight centered z-depth-2" v-show="persons.length">
       <tr>
         <form action="{{ route('centrocreate') }}" method="post">
         @csrf
+        <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="8" style="background-color:#2C3E50; color:white;">
+                Crear centro de formación
+              </th>
+            </tr>
+          </thead>
+          <tbody>
               <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo Centro</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_centro" id="lname" type="text">
+                <div class="input-field">                    
+                    <input placeholder="Codigo de centro" ref="lname" v-model="input.lname" name="codigo_centro" id="lname" type="text" value="{{old('codigo_centro')}}">
+                    @error('codigo_centro')                  
+                    <small style="color:red; position:static;">Este campo no puede quedar vacio</small>
+                  @enderror
                 </div>
               </td>
               <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Nombre de Centro</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="nombre_centro" id="lname" type="text">
+                <div class="input-field">                    
+                    <input placeholder="Nombre de centro" ref="lname" v-model="input.lname" name="nombre_centro" id="lname" type="text" value="{{old('nombre_centro')}}">
+                    @error('nombre_centro')                  
+                    <small style="color:red; position:static;">Este campo no puede quedar vacio</small>
+                  @enderror
                 </div>
               </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Numero de ambientes</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nr_ambientes" id="fname" type="text">                
+              <td colspan="2">
+                <div class="input-field">                    
+                    <input placeholder="Numero de ambientes" v-model="input.fname" name="nr_ambientes" id="fname" type="text" value="{{old('nr_ambientes')}}">                
+                    @error('nr_ambientes')                  
+                    <small style="color:red; position:static;">Este campo no puede quedar vacio</small>
+                  @enderror
                 </div>
-              </td>
-              
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Usuario</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="id_usuario">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($administracion as $ad)     
-                    <option>{{$ad->id_usuario}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-          
+              </td>                        
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
-        <thead>
+          </tbody>
+
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
-            <th v-for="column in columns">
-              Codigo Centro
+            <th v-for="column in columns" colspan="2">
+              Codigo de centro
             </th>
-            <th v-for="column in columns">
-              Nombre de Centro
+            <th v-for="column in columns" colspan="2">
+              Nombre de centro
             </th>
-            <th v-for="column in columns">
+            <th v-for="column in columns" colspan="2">
               Numero de ambientes
-            </th>
-            <th v-for="column in columns">
-                Usuario
-            </th>
-            <th v-for="column in columns">
+            </th>            
+            <th v-for="column in columns" colspan="2">
               Acción
             </th>
           </tr>
         </thead>
-        @foreach ($centro as $c)
+        
         <tbody>
+        @foreach ($centro as $c)
           <tr v-for="(person,index) in persons">
-            <td>{{$c->codigo_centro}}</td>
-            <td>{{$c->nombre_centro}}</td>
-            <td>{{$c->nr_ambientes}}</td>
-            <td>{{$c->id_usuario}}</td>
+            <td colspan="2">{{$c->codigo_centro}}</td>
+            <td colspan="2">{{$c->nombre_centro}}</td>
+            <td colspan="2">{{$c->nr_ambientes}}</td>            
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('centroarchive', $c->codigo_centro )}}" method="POST">
@@ -87,20 +87,17 @@
         </table>
       </form>
 
-      <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+      <table class="table-responsive centered bordered striped highlight z-depth-1" v-show="bin.length">
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">
-              codigo centro
+              Codigo de centro
             </th>
             <th v-for="column in columns">
-              nombre de centro
+              Nombre de centro
             </th>
             <th v-for="column in columns">
               Numero de ambientes
-            </th>
-            <th v-for="column in columns">
-              id de usuario
             </th>
             <th v-for="column in columns">
               Acción
@@ -112,8 +109,7 @@
           <tr v-for="(person,index) in bin">
             <td>{{$trash->codigo_centro}}</td>
             <td>{{$trash->nombre_centro}}</td>
-            <td>{{$trash->nr_ambientes}}</td>
-            <td>{{$trash->id_usuario}}</td>
+            <td>{{$trash->nr_ambientes}}</td>            
             <td>
             <form action="{{route('centrorestore', $trash->codigo_centro )}}" method="POST">
                     @csrf
@@ -135,6 +131,18 @@
 
 
 <style>
+  #botonsend{
+      border-style: solid;
+      border-color: #229954;
+      border-radius:20px;
+      padding:10px;
+      color:#229954;
+      margin-left:20px;
+  }
+  #botonsend:hover{            
+      background-color:#229954;
+      color:white;
+  }
   /* POPUP ACTIVE */
 /*backgroun*/
 .popup .overlay {
@@ -156,7 +164,7 @@
   transform:translate(-50%,-50%) scale(0);
   background:#fff;
   width:500px;
-  height:250px;
+  height:500px;
   z-index:2;
   text-align:center;
   padding:20px;

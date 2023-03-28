@@ -34,6 +34,7 @@ use App\Models\Semaforo;
 use App\Models\Semaforobasura;
 use App\Models\Horario;
 use App\Models\Horariobasura;
+use App\Models\Semana;
 use Illuminate\Database\Seeder;
 
 
@@ -719,6 +720,16 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        //SEMANA
+        Semana::insert([
+            'cod_se'=>'1',
+            'lunes'=>'220501006',
+            'martes'=>'220501009',
+            'miercoles'=>'220501034',
+            'jueves'=>'220501006',
+            'viernes'=>'220501006'
+        ]);
+
         //HORARIO
         Horario::insert([
             [
@@ -728,8 +739,7 @@ class DatabaseSeeder extends Seeder
             'codigo_ambiente'=>'102',
             'dni'=>'11111',
             'id_semaforo'=>'1',
-            'codigo_comp'=>'220501006',
-            'codigo_desc'=>'1'
+            'cod_se'=>'1'
             ]
         ]);
 

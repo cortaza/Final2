@@ -57,6 +57,7 @@ class SemaforoController extends Controller
         $semaforo->trimestre=$semaforobasura->trimestre;
         $semaforo->codigo_comp=$semaforobasura->codigo_comp;
         $semaforo->codigo_prog=$semaforobasura->codigo_prog;
+        $semaforo->save();
         $semaforobasura=Semaforobasura::where('id_semaforo', $sema)->delete();
         return redirect()->route('semaforoindex');
     }

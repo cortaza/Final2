@@ -1,31 +1,82 @@
 @extends('layouts.structure')
-@section('titulo','Ficha')
+@section('titulo','ScheduleMate||Formulario Fichas')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
+<div class="container">
+  <input id="input"type="text" placeholder="Buscar...">
+  <div class="search"></div>
+</div>
 <div id="app">
     <h4 class="head"><center>Ficha</center></h4>
-    <div class="">
-    <form action="{{route('fichaindex')}}" method="GET">
-        <div class="">
-            <input type="text" name="busqueda" class="">
-            <input type="submit" value="Buscar" class="">
-        </div>
+    
         <a href="{{route('fichaindex')}}"  class="btn-redirect">Volver</a>
     </form>
 </div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
-        <thead>
+      <form action="{{ route('fichacreate') }}" method="post">
+        @csrf
+        <thead style="background-color:#2C3E50; color:white;">
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="12" style="background-color:#2C3E50; color:white;">
+                Crear Ficha
+              </th>
+            </tr>
+          </thead>
+              <td colspan="2">
+                <div class="input-field">                    
+                    <input placeholder="Numero de Ficha" ref="lname" v-model="input.lname" name="nr_ficha" id="lname" type="text">
+                </div>
+              </td>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Jornada" v-model="input.fname" name="jornada" id="fname" type="text">                
+                </div>
+              </td>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Modalidad" v-model="input.fname" name="modalidad" id="fname" type="text">                
+                </div>
+              </td>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Numero de Aprendices" v-model="input.fname" name="nr_aprendices" id="fname" type="text">
+                </div>
+              </td>
+              <td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Programa</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($programa as $f)
+                      <option value="{{ $f->codigo_prog }}">{{ $f->nombre }}</option>                    
+                    @endforeach
+                  </select>
+              </td>  
+              <td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo de Formacion</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_for">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($tipoformacion as $f)
+                      <option value="{{ $f->codigo_for }}">{{ $f->nombre }}</option>                    
+                    @endforeach
+                  </select>
+              </td>  
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+          </tbody>        
+      </form>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Numero de Ficha</th>
             <th v-for="column in columns">Jornada</th>
             <th v-for="column in columns">Modalidad</th>
             <th v-for="column in columns">Numero de Aprendices</th>
-            <th v-for="column in columns">Codigo del Programa</th>
+            <th v-for="column in columns">Programa</th>
             <th v-for="column in columns">Tipo de Formacion</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
         @foreach ($fichas as $f)
@@ -35,9 +86,21 @@
             <td>{{$f->jornada}}</td>
             <td>{{$f->modalidad}}</td>
             <td>{{$f->nr_aprendices}}</td>
-            <td>{{$f->codigo_for}}</td>
-            <td>{{$f->codigo_prog}}</td>
-            <td style="width: 18%;">
+            <td value="{{$f->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($f->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+            </td>
+            <td value="{{$f->codigo_for}}">
+                @foreach($tipoformacion as $tipo)
+                  @if($f->codigo_for==$tipo->codigo_for)
+                    {{$tipo->nombre}}
+                  @endif
+                @endforeach
+            </td>
+            <td style="width: 18%;" colspan="2">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('fichaarchive', $f->nr_ficha )}}" method="POST">
                     @csrf
@@ -49,71 +112,15 @@
             @include('popupwindows.ficha')  
           @endforeach
           <tr>
-        <form action="{{ route('fichacreate') }}" method="post">
-        @csrf
-              <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Numero de Ficha</label>
-                    <input placeholder="numero" ref="lname" v-model="input.lname" name="nr_ficha" id="lname" type="text">
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Jornada</label>
-                    <input placeholder="Jornada" v-model="input.fname" name="jornada" id="fname" type="text">                
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Modalidad</label>
-                    <input placeholder="Modalidad" v-model="input.fname" name="modalidad" id="fname" type="text">                
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Numero de Aprendices</label>
-                    <input placeholder="Cantidad de Aprendices" v-model="input.fname" name="nr_aprendices" id="fname" type="text">
-                </div>
-              </td>
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Programa</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($programa as $prog)
-                    <option>{{$prog->codigo_prog}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tipo de Formacion</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="codigo_for">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($tipoformacion as $tipo)     
-                    <option>{{$tipo->codigo_for}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
           <tr>
             <th v-for="column in columns">Numero de Ficha</th>
             <th v-for="column in columns">Jornada</th>
             <th v-for="column in columns">Modalidad</th>
             <th v-for="column in columns">Numero de Aprendices</th>
-            <th v-for="column in columns">Codigo del Programa</th>
+            <th v-for="column in columns">Programa</th>
             <th v-for="column in columns">Tipo de Formacion</th>
             <th v-for="column in columns">Acción</th>
           </tr>
@@ -126,8 +133,20 @@
             <td>{{$fe->jornada}}</td>
             <td>{{$fe->modalidad}}</td>
             <td>{{$fe->nr_aprendices}}</td>
-            <td>{{$fe->codigo_for}}</td>
-            <td>{{$fe->codigo_prog}}</td>
+            <td value="{{$fe->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($fe->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+            </td>
+            <td value="{{$fe->codigo_for}}">
+                @foreach($tipoformacion as $tipo)
+                  @if($fe->codigo_for==$tipo->codigo_for)
+                    {{$tipo->nombre}}
+                  @endif
+                @endforeach
+            </td>
             <td>
             <form action="{{route('fichastore', $fe->nr_ficha )}}" method="POST">
                     @csrf
@@ -191,7 +210,6 @@
   font-size:25px;
   font-weight:600;
   line-height:30px;
-  text-align:center;
   border-radius:50%;
 }
 
@@ -217,5 +235,113 @@
   border-radius: 4px;
   margin: 10px;
 }
+
+
+
+  .container .search {
+    position: absolute;
+    top: 120px;
+    right: 350px;
+    width: 50px;
+    height: 50px;
+    background: green;
+    border-radius: 50%;
+    transition: all 1s;
+    z-index: 4;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .container .search:hover {
+    cursor: pointer;
+  }
+
+  .container .search::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: 22px;
+    right: 0;
+    bottom: 0;
+    left: 22px;
+    width: 12px;
+    height: 2px;
+    background: white;
+    transform: rotate(45deg);
+    transition: all 0.5s;
+  }
+
+  .container .search::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: -5px;
+    right: 0;
+    bottom: 0;
+    left: -5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: all 0.5s;
+  }
+
+  .container #input {
+    font-family: "Inconsolata", monospace;
+    position: absolute;
+    top: 120px;
+    right: 350px;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border: none;
+    background: white;
+    color: green;
+    border-style:solid;
+    border-color:green;
+    text-shadow: 0 0 10px green;
+    padding: 0 80px 0 20px;
+    border-radius: 30px;
+    opacity: 0;
+    z-index: 5;
+    font-weight: bolder;
+    letter-spacing: 0.1em;
+  }
+
+  .container #input:hover {
+    cursor: pointer;
+  }
+
+  .container #input:focus {
+    width: 300px;
+    opacity: 1;
+    cursor: text;
+  }
+
+  .container #input:focus + .search {
+    right: 2px;
+    background: #151515;
+    z-index: 6;
+  }
+
+  .container #input:focus + .search::before {
+    top: 0;
+    left: 0;
+    width: 25px;
+  }
+
+  .container #input:focus + .search::after {
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    border: none;
+    background: white;
+    border-radius: 0%;
+    transform: rotate(-10deg);
+  }
+
+  .container #input::placeholder {
+    color: green;
+  }
 </style>
 @endsection

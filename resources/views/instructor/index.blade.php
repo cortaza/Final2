@@ -1,91 +1,96 @@
 @extends('layouts.structure')
-@section('titulo','Instructor')
+@section('titulo','ScheduleMate||Formulario Instructor')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Instructor</center></h4>
     <div class="">
-    <form action="{{route('instructorindex')}}" method="GET">
-        <div class="">
-            <input type="text" name="busqueda" class="">
-            <input type="submit" value="Buscar" class="">
-        </div>
-        <a href="{{route('instructorindex')}}"  class="btn-redirect">Volver</a>
+</div>        
     </form>
 </div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
       <tr>
-        <form action="{{ route('instructorcreate') }}" method="post">
+        <form action="{{ route('instructorcreate') }}" method="post">          
         @csrf
-            <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Documento de Identidad</label>
-                    <input placeholder="dni" ref="lname" v-model="input.lname" name="dni" id="lname" type="text">
+        <thead>
+          <div>
+            <div style="float:left;">@include('partials.selectform')</div>   
+            <div style="float:right; width:70%;">
+              <form id="mi-formulario" action="{{route('instructorindex')}}" method="GET">                
+                  <img style="float:left;  padding:10px;" src="/img/search.jpg" alt="Search"></img><input type="text" style=" padding:10px;float:left; width:50%; height:20px;" name="busqueda" class="">
+                  <a href="{{route('instructorindex')}}"   style="float:right; background-color:green;" class="btn-redirect">Volver</a>                 
+                  <input type="submit"  style="float:right; background-color:green;" value="Buscar" class="btn-redirect">                  
+              </form>
+            </div>
+          </div>
+            <tr>
+              <th v-for="column in columns" colspan="12" style="background-color:#2C3E50; color:white;">
+                Crear Instructor
+              </th>
+            </tr>
+          </thead>
+ 
+            <td>
+                <div class="input-field">                    
+                    <input placeholder="Documento de Identidad" ref="lname" v-model="input.lname" name="dni" id="lname" type="text">
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Apellido</label>
-                    <input placeholder="apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Telefono</label>
-                    <input placeholder="telefono" v-model="input.fname" name="telefono" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Telefono" v-model="input.fname" name="telefono" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Correo</label>
-                    <input placeholder="correo" v-model="input.fname" name="correo" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Correo" v-model="input.fname" name="correo" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Estado</label>
-                    <input placeholder="estado" v-model="input.fname" name="estado" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Estado" v-model="input.fname" name="estado" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Tipo de Contrato</label>
-                    <input placeholder="contrato" v-model="input.fname" name="tipo_contrato" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Tipo de Contrato" v-model="input.fname" name="tipo_contrato" id="fname" type="text">                
                 </div>
             </td>
             
             <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Red</font></font></label>
-              <select class="form-select" id="validationCustom04" required="" name="codigo_red">
-                  <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($red as $r)     
-                  <option>{{$r->codigo_red}}</option>     
-              @endforeach     
-              </select>
+            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la Red</font></font></label>
+                <select class="form-select" id="validationCustom04" required="" name="codigo_red">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($red as $i)
+                      <option value="{{ $i->codigo_red }}">{{ $i->nombre }}</option>                    
+                    @endforeach
+                </select>
           </td>
         <td>
-          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de Area</font></font></label>
-          <select class="form-select" id="validationCustom04" required="" name="codigo_area">
-              <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach($area as $a)     
-              <option>{{$a->codigo_area}}</option>     
-          @endforeach     
-          </select>
-      </td>
-          
+        <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre del Area</font></font></label>
+                <select class="form-select" id="validationCustom04" required="" name="codigo_area">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($area as $i)
+                      <option value="{{ $i->codigo_area }}">{{ $i->nombre }}</option>                    
+                    @endforeach
+                </select>
+      </td>          
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Documento de Identidad</th>
             <th v-for="column in columns">Nombre</th>
@@ -109,8 +114,20 @@
               <td>{{$i->correo}}</td>
               <td>{{$i->estado}}</td>
               <td>{{$i->tipo_contrato}}</td>
-              <td>{{$i->codigo_red}}</td>
-              <td>{{$i->codigo_area}}</td>
+              <td value="{{$i->codigo_red}}">
+              @foreach($red as $r)
+                @if($r->codigo_red==$r->codigo_red)
+                  {{$r->nombre}}
+                @endif
+              @endforeach
+              </td>
+              <td value="{{$i->codigo_area}}">
+              @foreach($area as $a)
+                @if($a->codigo_area==$a->codigo_area)
+                  {{$a->nombre}}
+                @endif
+              @endforeach
+              </td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('instructorarchive', $i->dni )}}" method="POST">
@@ -128,7 +145,7 @@
       </form>
 
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
               <th v-for="column in columns">Documento de Identidad</th>
               <th v-for="column in columns">Nombre</th>
@@ -152,8 +169,20 @@
               <td>{{$trash->correo}}</td>
               <td>{{$trash->estado}}</td>
               <td>{{$trash->tipo_contrato}}</td>
-              <td>{{$trash->codigo_red}}</td>
-              <td>{{$trash->codigo_area}}</td>
+              <td value="{{$i->codigo_red}}">
+              @foreach($red as $r)
+                @if($r->codigo_red==$r->codigo_red)
+                  {{$r->nombre}}
+                @endif
+              @endforeach
+              </td>
+              <td value="{{$i->codigo_area}}">
+              @foreach($area as $a)
+                @if($a->codigo_area==$a->codigo_area)
+                  {{$a->nombre}}
+                @endif
+              @endforeach
+              </td>
             <td>
             <form action="{{route('instructorstore', $trash->dni )}}" method="POST">
                     @csrf
@@ -175,6 +204,19 @@
 
 
 <style>
+
+#botonsend{
+      border-style: solid;
+      border-color: #229954;
+      border-radius:20px;
+      padding:10px;
+      color:#229954;
+      margin-left:20px;
+  }
+  #botonsend:hover{            
+      background-color:#229954;
+      color:white;
+  }
   /* POPUP ACTIVE */
 /*backgroun*/
 .popup .overlay {
@@ -190,13 +232,14 @@
 
 /*content style*/
 .popup .content {
+  margin-top:150px;
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
   background:#fff;
   width:500px;
-  height:250px;
+  height:1000px;
   z-index:2;
   text-align:center;
   padding:20px;
@@ -233,7 +276,7 @@
   transform:translate(-50%,-50%) scale(1);
 }
 
-.btn-redirect {
+.btn-redirect{
   background-color: #00b0f0;
   color: #FFF;
   padding: 5px 10px;
@@ -244,5 +287,29 @@
   border-radius: 4px;
   margin: 10px;
 }
+
+  /* Estilos para el formulario con ID "mi-formulario" */
+  #mi-formulario {
+    display: flex;
+    justify-content: flex-start; /* Alineamos a la izquierda */
+    align-items: center;
+    margin-top: 50px;
+    padding: 20px;
+    border: none; /* Quitamos el borde predeterminado */
+    border-bottom: 1px solid #ccc; /* Agregamos una línea en la parte inferior */
+  }
+  
+  /* Estilos para los campos de entrada */
+  #mi-formulario input[type="text"], #mi-formulario input[type="submit"] {
+    padding: 10px;    
+    border-radius: 5px;
+  }
+  
+  /* Estilos para el botón de enviar */
+  #mi-formulario input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+  }
 </style>
 @endsection

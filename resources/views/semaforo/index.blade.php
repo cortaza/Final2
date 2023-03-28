@@ -1,8 +1,8 @@
 @extends('layouts.structure')
-@section('titulo','Semaforo')
+@section('titulo','ScheduleMate||Formulario Semaforo ')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Semaforo</center></h4>
@@ -18,56 +18,61 @@
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
       <form action="{{ route('semaforocreate') }}" method="post">
         @csrf
+        <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="8" style="background-color:#2C3E50; color:white;">
+                Crear Semaforo
+              </th>
+            </tr>
+          </thead>
             <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Semaforo</label>
+                <div class="input-field">                    
                     <input placeholder="Id semaforo" ref="lname" v-model="input.lname" name="id_semaforo" id="lname" type="text">
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Dias</label>
-                    <input placeholder="dias" v-model="input.fname" name="dia_semana" id="fname" type="text">                
+                <div class="input-field">                    
+                    <input placeholder="Dias" v-model="input.fname" name="dia_semana" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <div class="input-field">
-                    <label for="fname">Trimestre</label>
+                <div class="input-field">                    
                     <input placeholder="Trimestre" v-model="input.fname" name="trimestre" id="fname" type="text">                
                 </div>
             </td>
             <td>
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de la Competencia</font></font></label>
-                <select class="form-select" id="validationCustom04" required="" name="codigo_comp">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                    @foreach($competencia as $c)     
-                    <option>{{$c->codigo_comp}}</option>     
-                    @endforeach     
-                </select>
-            </td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Competencia</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_comp">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($competencia as $se)
+                      <option value="{{ $se->codigo_comp }}">{{ $se->nombre }}</option>                    
+                    @endforeach
+                  </select>
+            </td>  
             <td>
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo del Programa</font></font></label>
-                <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                    @foreach($programa as $p)     
-                    <option>{{$p->codigo_prog}}</option>     
-                    @endforeach     
-                </select>
-            </td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Programa</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($programa as $se)
+                      <option value="{{ $se->codigo_prog }}">{{ $se->nombre }}</option>                    
+                    @endforeach
+                  </select>
+            </td>  
           
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
           </tbody>
       </form>
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Semaforo</th>
             <th v-for="column in columns">Dia de la Semana</th>
             <th v-for="column in columns">Trimestre</th>
-            <th v-for="column in columns">Nombre de la Competencia</th>
-            <th v-for="column in columns">Nombre del Programa</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns">Competencia</th>
+            <th v-for="column in columns">Programa</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
         @foreach ($sema as $se)
@@ -76,9 +81,21 @@
               <td>{{$se->id_semaforo}}</td>
               <td>{{$se->dia_semana}}</td>
               <td>{{$se->trimestre}}</td>
-              <td>{{$se->codigo_comp}}</td>
-              <td>{{$se->codigo_prog}}</td>
-            <td style="width: 18%;">
+              <td value="{{$se->codigo_prog}}">
+                @foreach($competencia as $c)
+                  @if($se->codigo_comp==$c->codigo_comp)
+                    {{$c->nombre}}
+                  @endif
+                @endforeach
+            </td>
+            <td value="{{$se->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($se->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+            </td>            
+            <td style="width: 18%;" colspan="2">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('semaforoarchive', $se->id_semaforo)}}" method="POST">
                     @csrf
@@ -93,15 +110,14 @@
         
       </table>
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
-              <th v-for="column in columns">Numero de Usuario</th>
-              <th v-for="column in columns">Semaforo</th>
-              <th v-for="column in columns">Dia de la Semana</th>
-              <th v-for="column in columns">Trimestre</th>
-              <th v-for="column in columns">Codigo de la Competencia</th>
-              <th v-for="column in columns">Codigo del Programa</th>
-              <th v-for="column in columns">Acción</th>
+          <th v-for="column in columns">Semaforo</th>
+            <th v-for="column in columns">Dia de la Semana</th>
+            <th v-for="column in columns">Trimestre</th>
+            <th v-for="column in columns">Competencia</th>
+            <th v-for="column in columns">Programa</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
         @foreach ($semabasura as $sef)
@@ -110,8 +126,20 @@
               <td>{{$sef->id_semaforo}}</td>
               <td>{{$sef->dia_semana}}</td>
               <td>{{$sef->trimestre}}</td>
-              <td>{{$sef->codigo_comp}}</td>
-              <td>{{$sef->codigo_prog}}</td>
+              <td value="{{$sef->codigo_prog}}">
+                @foreach($competencia as $c)
+                  @if($sef->codigo_comp==$c->codigo_comp)
+                    {{$c->nombre}}
+                  @endif
+                @endforeach
+            </td>
+            <td value="{{$sef->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($sef->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+            </td>            
             <td>
             <form action="{{route('semaforostore', $sef->id_semaforo)}}" method="POST">
                     @csrf

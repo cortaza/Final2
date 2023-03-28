@@ -1,6 +1,4 @@
-
 <div class="popup" id="popup-1">
-  <div class="overlay"></div>
     <div class="content">
       <div class="close-btn" onclick="togglePopup()">&times;</div>
         <form action="{{route('centroedit')}}" method="POST" class="col s12">
@@ -31,12 +29,11 @@
             </select>
           </div>  
             <div class="input-field col s6">                
-                <button type="submit">ENVIAR</button>   
+                <button type="submit" id="botonsend" >ENVIAR</button>   
                 <input type="hidden" value="{{$c->codigo_centro}}" name="codigo">             
             </div>
           </div>
         </form>  
       </div>
     </div>
-  </div>
 </div>

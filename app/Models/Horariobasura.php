@@ -16,8 +16,6 @@ class Horariobasura extends Model
         'nr_ficha',
         'codigo_ambiente',
         'dni',
-        'id_semaforo',
-        'codigo_comp',
-        'codigo_descarga'
+        'id_semaforo'
     ];
 }

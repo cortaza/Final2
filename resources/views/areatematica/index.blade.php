@@ -1,9 +1,9 @@
 @extends('layouts.structure')
-@section('titulo','Area Tematica')
+@section('titulo','ScheduleMate||Formulario area tematica')
 
 @section('contenido')
 
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Area Tematica</center></h4>
@@ -12,26 +12,32 @@
       <tr>
         <form action="{{ route('areacreate') }}" method="post">
         @csrf
-              <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo de Area</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text" value="{{old('codigo_area')}}">
+        <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Area tematica
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Codigo de Area" ref="lname" v-model="input.lname" name="codigo_area" id="lname" type="text" value="{{old('codigo_area')}}">
                   @error('codigo_area')                  
                     <small style="color:red; position:static;">El campo codigo area no puede estar vacio</small>
                   @enderror
                 </div>
               </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">  
+              <td colspan="2">
+                <div class="input-field">                    
+                    <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">  
                   @error('nombre')                  
                     <small style="color:red; position:static;">El campo nombre no puede estar vacio</small>
                   @enderror              
                 </div>
-              </td>
-              
-              <td>
+              </td>              
+              <td colspan="2">
 
                 <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de la Red</font></font></label>
                 
@@ -40,19 +46,18 @@
                     @foreach ($red as $a)
                       <option value="{{ $a->codigo_red }}">{{ $a->nombre }}</option>                    
                     @endforeach
-                </select>
-                
-
+                </select>                
               </td>
           
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
-        <thead>
+          </tbody>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
-            <th v-for="column in columns">Codigo de Area</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Nombre de la Red</th>
+            <th v-for="column in columns" >Codigo de Area</th>
+            <th v-for="column in columns" colspan="2">Nombre</th>
+            <th v-for="column in columns" colspan="2" >Nombre Red</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
@@ -60,8 +65,9 @@
         <tbody>
           <tr v-for="(person,index) in persons">
             <td>{{$a->codigo_area}}</td>
-            <td>{{$a->nombre}}</td>
-            <td value="{{$a->codigo_red}}">
+            <td colspan="2"
+            >{{$a->nombre}}</td>
+            <td colspan="2" value="{{$a->codigo_red}}">
               @foreach($red as $r)
                 @if($a->codigo_red==$r->codigo_red)
                   {{$r->nombre}}
@@ -85,11 +91,11 @@
       </form>
 
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Codigo de Area</th>
             <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Codigo de Red</th>
+            <th v-for="column in columns">Nombre de la Red</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
@@ -126,6 +132,19 @@
 
 
 <style>
+
+#botonsend{
+      border-style: solid;
+      border-color: #229954;
+      border-radius:20px;
+      padding:10px;
+      color:#229954;
+      margin-left:20px;
+  }
+  #botonsend:hover{            
+      background-color:#229954;
+      color:white;
+  }
   /* POPUP ACTIVE */
 /*backgroun*/
 .popup .overlay {
@@ -147,7 +166,7 @@
   transform:translate(-50%,-50%) scale(0);
   background:#fff;
   width:500px;
-  height:250px;
+  height:400px;
   z-index:2;
   text-align:center;
   padding:20px;
@@ -185,3 +204,4 @@
 }
 </style>
 @endsection
+

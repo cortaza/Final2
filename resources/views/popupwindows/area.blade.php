@@ -13,7 +13,7 @@
           </div>
           <div class="row">
             <div class="input-field col s6">                
-                <input name="nombre" id="last_name" type="text" v-model="editInput.lname">
+                <input name="nombre" id="last_name" type="text" v-model="editInput.lname" value="nombre">
                 <label for="last_name">Nombre</label>                
             </div>
           </div>
@@ -27,7 +27,7 @@
             </select>
           </div>  
             <div class="input-field col s6">                
-                <button type="submit">ENVIAR</button>   
+                <button type="submit" id="botonsend">ENVIAR</button>   
                 <input type="hidden" value="{{$a->codigo_area}}" name="codigo">             
             </div>
           </div>

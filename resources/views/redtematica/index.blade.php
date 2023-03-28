@@ -1,88 +1,98 @@
 @extends('layouts.structure')
-@section('titulo','Red Tematica')
-@section('contenido')
-    <div>@include('partials.selectform')</div>
+@section('titulo','ScheduleMate||Formulario red tematica')
 
+@section('contenido')
+
+    
 <!-- partial:index.partial.html -->
 <div id="app">
-  <h4 class="head"><center>Red Tematica</center></h4>
+    <h4 class="head" style="font-family: 'Poppins', sans-serif; padding:10px;" ><center>Red Tematica</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
       <tr>
         <form action="{{ route('redcreate') }}" method="post">
         @csrf
+        <thead>
+            <tr>
+              <div>@include('partials.selectform')</div>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Red tematica
+              </th>
+            </tr>
+          </thead>
+          <tbody>
               <td colspan="2">
-                <div class="input-field">
-                <label for="lname">Codigo de Red</label>
-                  <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_red" id="lname" type="text" value="{{old('codigo_red')}}">
+                <div class="input-field">                    
+                    <input placeholder="Codigo de red" ref="lname" v-model="input.lname" name="codigo_red" id="lname" type="text" value="{{old('codigo_red')}}">
                   @error('codigo_red')                  
-                    <small style="color:red; position:static;">El campo codigo red no puede estar vacio</small>
+                    <small style="color:red; position:static;">El campo codigo de red no puede estar vacio</small>
                   @enderror
                 </div>
               </td>
-              <td>
-                <div class="input-field">
-                <label for="fname">Nombre</label>
-                  <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">                
+              <td colspan="2">
+                <div class="input-field">                    
+                    <input placeholder="Nombre de red" v-model="input.fname" name="nombre" id="fname" type="text" value="{{old('nombre')}}">  
                   @error('nombre')                  
                     <small style="color:red; position:static;">El campo nombre no puede estar vacio</small>
-                  @enderror
+                  @enderror              
                 </div>
-              </td>
+              </td>          
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+              <td colspan="2"><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
-
-        <thead>
+          </tbody>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
-            <th v-for="column in columns">Codigo de Red</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns" colspan="2">Codigo de Red</th>
+            <th v-for="column in columns" colspan="2">Nombre</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
-        @foreach ($red as $r )
+        @foreach ($red as $r)
         <tbody>
           <tr v-for="(person,index) in persons">
-            <td>{{$r->codigo_red}}</td>
-            <td>{{$r->nombre}}</td>
-            <td style="width: 18%;">
+            <td colspan="2">{{$r->codigo_red}}</td>
+            <td colspan="2">{{$r->nombre}}</td>
+            <td colspan="2" style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
-              <!-- <a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a> -->
-              <form action="{{route('redarchive', $r->codigo_red )}}" method="POST">
+              <form action="{{route('redarchive', $r->codigo_red)}}" method="POST">
                     @csrf
                     <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a></button>                                                              
               </form>  
             </td>
           </tr>
                   <!-- Pop window -->
-        @include('popupwindows.red')  
+            @include('popupwindows.red')  
           @endforeach
+          
           </tbody>
         </table>
       </form>
+
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
-            <th v-for="column in columns">Codigo de Red</th>
-            <th v-for="column in columns">Nombre</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns" colspan="2">Codigo de Red</th>
+            <th v-for="column in columns" colspan="2">Nombre</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
-        @foreach ($redtrash as $trash)
+        @foreach ($redtrash as $redb)
         <tbody>
           <tr v-for="(person,index) in bin">
-          <td>{{$trash->codigo_red}}</td>
-            <td>{{$trash->nombre}}</td>
-            <td>
-            <form action="{{route('redrestore', $trash->codigo_red )}}" method="POST">
-              @csrf
-              <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
-            </form>  
+            <td colspan="2">{{$redb->codigo_red}}</td>
+            <td colspan="2">{{$redb->nombre}}</td>
+            <td colspan="2">
+            <form action="{{route('redrestore', $redb->codigo_red )}}" method="POST">
+                    @csrf
+                    <button type="submit" style=" background-color:white; border-style:none;"><a href="#!" @click="restore(index)" class="btn waves-effect waves-light blue darken-2"><i class="material-icons">restore</i></a></button>                                                              
+              </form>  
+              <!-- <a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a> -->
               <!--DELETE REGISTERS-->
-              <form action="{{route('reddestroy', $trash->codigo_red )}}" method="POST">
-                  @csrf
-                  @method('delete')
-                <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>
+              <form action="{{route('reddestroy', $redb->codigo_red )}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" style="background-color:white; border-style:none;" onclick="return ConfirmDelete()"><a href="#!" @click="deplete(index)" class="btn waves-effect waves-light red darken-2"><i class="material-icons">delete</i></a></button>                                                              
               </form>  
             </td>
           </tr>
@@ -90,8 +100,19 @@
         @endforeach
       </table>
     </div>
-
 <style>
+  #botonsend{
+      border-style: solid;
+      border-color: #229954;
+      border-radius:20px;
+      padding:10px;
+      color:#229954;
+      margin-left:20px;
+  }
+  #botonsend:hover{            
+      background-color:#229954;
+      color:white;
+  }
   /* POPUP ACTIVE */
 /*backgroun*/
 .popup .overlay {
@@ -113,7 +134,7 @@
   transform:translate(-50%,-50%) scale(0);
   background:#fff;
   width:500px;
-  height:250px;
+  height:200px;
   z-index:2;
   text-align:center;
   padding:20px;
@@ -150,5 +171,5 @@
   transform:translate(-50%,-50%) scale(1);
 }
 </style>
-
 @endsection
+

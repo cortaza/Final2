@@ -13,7 +13,7 @@ class AdministracionController extends Controller
         $admin=Administracion::all();
         $adminbasura=AdministracionBasura::all();
         return view('administracion/index', compact('admin', 'adminbasura'));
-    }
+        }
 
     public function create(Request $request)
     {

@@ -15,6 +15,7 @@ use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\RedTematicaController;
 use App\Http\Controllers\ResultadoController;
 use App\Http\Controllers\SemaforoController;
+use App\Http\Controllers\SemanaController;
 use App\Http\Controllers\SubsedeController;
 use App\Http\Controllers\TipoFormacionController;
 
@@ -305,6 +306,23 @@ Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('
     Route::post('/horario/crearhorario/{horario}','restore')->name('horariostore');
     //EDIT      
     Route::match(['get', 'post'], '/horario/edit/', 'edit' )->name('horarioedit');
+    });
+
+    //DIAS HORARIO
+
+Route::controller(SemanaController::class)->group(function(){
+    //Principal
+    Route::get('/dias/formulario','index')->name('diasindex');
+    // CREAR
+    Route::post('/dias/crear','create')->name('diascreate');
+    // ELIMINAR
+    Route::delete('/dias/delete/{dias}','destroy')->name('diasdestroy');
+    //Archive
+    Route::post('dias/archive/{dias}','archive')->name('diasarchive');
+    //Restore
+    Route::post('/dias/creardias/{dias}','restore')->name('diasstore');
+    //EDIT      
+    Route::match(['get', 'post'], '/dias/edit/', 'edit' )->name('diasedit');
     });
 
     

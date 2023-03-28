@@ -1,5 +1,5 @@
 @extends('layouts.structure')
-@section('titulo','Tipo Formacion')
+@section('titulo','ScheduleMate||Formulario Tipo de formación')
 
 @section('contenido')
     <div>@include('partials.selectform')</div>
@@ -7,7 +7,33 @@
     <h4 class="head"><center>Tipo Formacion</center></h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <form action="{{ route('formacioncreate') }}" method="post">
+        @csrf
         <thead>
+            <tr>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Tipo de formación 
+              </th>
+            </tr>
+          </thead>
+              <td>
+                <div class="input-field">                
+                  <input placeholder="Codigo formacion" ref="lname" v-model="input.lname" name="codigo_for" id="lname" type="text">
+                </div>
+              </td>
+              <td colspan="2">
+                <div class="input-field">                
+                  <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
+                </div>
+              </td>
+              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+          </tbody>
+
+      </form>
+
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">
               Codigo de la Formacion
@@ -15,7 +41,7 @@
             <th v-for="column in columns">
               Nombre
             </th>
-            <th v-for="column in columns">
+            <th colspan="2" v-for="column in columns">
               Acción
             </th>
           </tr>
@@ -25,7 +51,7 @@
           <tr v-for="(person,index) in persons">
             <td>{{$t->codigo_for}}</td>
             <td>{{$t->nombre}}</td>
-            <td style="width: 18%;">
+            <td colspan="2" style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <!-- <a href="#!" class="btn waves-effect waves-light red darken-2" @click="archive(index)"><i class="material-icons">archive</i></a> -->
               <form action="{{route('formacionarchive', $t->codigo_for )}}" method="POST">
@@ -38,32 +64,11 @@
         @include('popupwindows.tipoformacion')  
           @endforeach
           <tr>
-        <form action="{{ route('formacioncreate') }}" method="post">
-        @csrf
-              <td colspan="2">
-                <div class="input-field">
-                <label for="lname">Codigo formacion</label>
-                  <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_for" id="lname" type="text">
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                <label for="fname">Nombre</label>
-                  <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="fname" type="text">                
-                </div>
-              </td>
-              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">
-              codigo formacion
+              Codigo formacion
             </th>
             <th v-for="column in columns">
               Nombre

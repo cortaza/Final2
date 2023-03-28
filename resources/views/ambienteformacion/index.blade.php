@@ -1,10 +1,8 @@
 @extends('layouts.structure')
-@extends('layouts.nav')
-@section('tablas')
-@section('titulo','Ambiente')
+@section('titulo','ScheduleMate||Formulario Ambiente de formación')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Ambiente de Formacion</center></h4>
@@ -18,25 +16,87 @@
 </div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <form action="{{ route('ambientecreate') }}" method="post">
+        @csrf
         <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="10" style="background-color:#2C3E50; color:white;">
+                Crear Ambiente de formación
+              </th>
+            </tr>
+          </thead>
+            <td >
+                <div class="input-field">                    
+                    <input placeholder="Codigo del Ambiente" ref="lname" v-model="input.lname" name="codigo_ambiente" id="lname" type="text">
+                </div>
+            </td>
+            <td>
+                <div class="input-field">                    
+                    <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
+                </div>
+            </td>
+            <td>
+                <div class="input-field">                    
+                    <input placeholder="Rescursos" v-model="input.fname" name="recursos" id="fname" type="text">                
+                </div>
+            </td>
+            <td>
+                <div class="input-field">                    
+                    <input placeholder="Especialidad" v-model="input.fname" name="especialidad" id="fname" type="text">                
+                </div>
+            </td>
+            
+            <td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SEDE</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_cen">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($codigo as $ae)
+                      <option value="{{ $ae->codigo_cen }}">{{ $ae->nombre_centro }}</option>                    
+                    @endforeach
+                  </select>
+              </td> 
+              <td>        
+              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ficha</font></font></label>
+                <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach($numero as $ae)     
+                      <option>{{$ae->nr_ficha}}</option>     
+                    @endforeach 
+                </select>
+              </td> 
+          
+              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+          </tbody>        
+      </form>
+
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Codigo del Ambiente</th>
             <th v-for="column in columns">Nombre</th>
             <th v-for="column in columns">Recursos</th>
             <th v-for="column in columns">Especialidad</th>
-            <th v-for="column in columns">Codio del Centro</th>
-            <th v-for="column in columns">Numero de Ficha</th>
+            <th v-for="column in columns">Centro</th>
+            <th v-for="column in columns">Ficha</th>
             <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
-        @foreach ($ambiente as $ae)
+        @foreach ($ambienteformacion as $ae)
         <tbody>
             <tr v-for="(person,index) in persons">
               <td>{{$ae->codigo_ambiente}}</td>
               <td>{{$ae->nombre}}</td>
               <td>{{$ae->recursos}}</td>
               <td>{{$ae->especialidad}}</td>
-              <td>{{$ae->codigo_centro}}</td>
+              <td value="{{$ae->codigo_centro}}">
+                @foreach($codigo as $c)
+                  @if($ae->codigo_centro==$c->codigo_centro)
+                    {{$c->nombre_centro}}
+                  @endif
+                @endforeach
+            </td>
               <td>{{$ae->nr_ficha}}</td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
@@ -49,62 +109,9 @@
                   <!-- Pop window -->
             
           @endforeach
-          <tr>
-        <form action="{{ route('ambientecreate') }}" method="post">
-        @csrf
-            <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo del Ambiente</label>
-                    <input placeholder="codigo" ref="lname" v-model="input.lname" name="codigo_ambiente" id="lname" type="text">
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Recursos</label>
-                    <input placeholder="Rescursos" v-model="input.fname" name="recursos" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Especialidad</label>
-                    <input placeholder="Especialidad" v-model="input.fname" name="especialidad" id="fname" type="text">                
-                </div>
-            </td>
-            
-            <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo del Centro</font></font></label>
-              <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
-                  <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($codigo as $c)     
-                  <option>{{$c->codigo_centro}}</option>     
-              @endforeach     
-              </select>
-          </td>
-        <td>
-          <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Numero de la Ficha</font></font></label>
-          <select class="form-select" id="validationCustom04" required="" name="nr_ficha">
-              <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-          @foreach($numero as $f)     
-              <option>{{$f->nr_ficha}}</option>     
-          @endforeach     
-          </select>
-      </td>
-          
-              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-
+          <tr>        
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
               <th v-for="column in columns">Documento de Identidad</th>
               <th v-for="column in columns">Nombre</th>

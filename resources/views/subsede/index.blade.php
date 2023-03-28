@@ -1,8 +1,8 @@
 @extends('layouts.structure')
-@section('titulo','Sub sede')
+@section('titulo','ScheduleMate||Formulario Subsedes')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Sub-Sede</center></h4>
@@ -11,45 +11,48 @@
       <tr>
         <form action="{{ route('subsedecreate') }}" method="post">
         @csrf
-              <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo sub</label>
-                    <input placeholder="Placeholder" ref="lname" v-model="input.lname" name="codigo_sub" id="lname" type="text">
+        <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Subsede
+              </th>
+            </tr>
+          </thead>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Codigo Subsede" ref="lname" v-model="input.lname" name="codigo_sub" id="lname" type="text">
                 </div>
               </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="Placeholder" v-model="input.fname" name="nombre" id="name" type="text">                
+              <td colspan="2">
+                <div class="input-field">                    
+                    <input placeholder="Nombre" v-model="input.fname" name="nombre" id="name" type="text">                
                 </div>
               </td>
               
               <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo centro</font></font></label>
-                
+            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre del Centro</font></font></label>
                 <select class="form-select" id="validationCustom04" required="" name="codigo_centro">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($centro as $c)     
-                    <option>{{$c->codigo_centro}}</option>     
-                @endforeach     
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($centro as $s)
+                      <option value="{{ $s->codigo_centro }}">{{ $s->nombre_centro }}</option>                    
+                    @endforeach
                 </select>
-
-              </td>
+        </td>  
           
               <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
               <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
             </tr>
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">
               codigo Sub
             </th>
-            <th v-for="column in columns">
+            <th v-for="column in columns" colspan="2">
               Nombre
             </th>
             <th v-for="column in columns">
-                codigo centro
+                Nombre del Centro
             </th>
             <th v-for="column in columns">
               Acción
@@ -60,8 +63,14 @@
         <tbody>
           <tr v-for="(person,index) in persons">
             <td>{{$s->codigo_sub}}</td>
-            <td>{{$s->nombre}}</td>
-            <td>{{$s->codigo_centro}}</td>
+            <td colspan="2">{{$s->nombre}}</td>
+            <td value="{{$s->codigo_centro}}">
+                @foreach($centro as $c)
+                  @if($s->codigo_centro==$c->codigo_centro)
+                    {{$c->nombre_centro}}
+                  @endif
+                @endforeach
+            </td>
             <td style="width: 18%;">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('subsedearchive', $s->codigo_sub)}}" method="POST">
@@ -79,7 +88,7 @@
       </form>
 
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">
               codigo sub
@@ -88,7 +97,7 @@
               Nombre
             </th>
             <th v-for="column in columns">
-              Codigo centro
+              Nombre del Centro
             </th>
             <th v-for="column in columns">
               Acción
@@ -100,7 +109,13 @@
           <tr v-for="(person,index) in bin">
             <td>{{$subb->codigo_sub}}</td>
             <td>{{$subb->nombre}}</td>
-            <td>{{$subb->codigo_centro}}</td>
+            <td value="{{$subb->codigo_centro}}">
+                @foreach($centro as $c)
+                  @if($subb->codigo_centro==$c->codigo_centro)
+                    {{$c->nombre_centro}}
+                  @endif
+                @endforeach
+            </td>
             <td>
             <form action="{{route('subsederestore', $subb->codigo_sub )}}" method="POST">
                     @csrf

@@ -21,11 +21,15 @@ class CentroFormacionController extends Controller
 
     public function create(Request $request)
     {   
+        $request->validate([
+            'codigo_centro' => 'required',
+            'nombre_centro' => 'required',
+            'nr_ambientes' => 'required'
+        ]);
         $centroformacion = new CentroFormacion;
         $centroformacion->codigo_centro=$request->codigo_centro;
         $centroformacion->nombre_centro=$request->nombre_centro;
-        $centroformacion->nr_ambientes=$request->nr_ambientes;
-        $centroformacion->id_usuario=$request->id_usuario;
+        $centroformacion->nr_ambientes=$request->nr_ambientes;        
         $centroformacion->save();
         return redirect()->route('centroindex');
 

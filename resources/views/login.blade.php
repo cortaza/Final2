@@ -2,10 +2,10 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>ScheduleMate||Bienvenidos</title>
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
-
+<link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->

@@ -1,8 +1,8 @@
 @extends('layouts.structure')
-@section('titulo','Competencia')
+@section('titulo','ScheduleMate||Formulario Competencias')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
     <h4 class="head"><center>Competencia</center></h4>
@@ -16,13 +16,54 @@
 </div>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <form action="{{ route('competenciacreate') }}" method="post">
+        @csrf
         <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Competencia
+              </th>
+            </tr>
+          </thead>
+            <td >
+                <div class="input-field">                    
+                    <input placeholder="Codigo" ref="lname" v-model="input.lname" name="codigo_comp" id="lname" type="text">
+                </div>
+            </td>
+            <td>
+                <div class="input-field">                    
+                    <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="input-field">                  
+                  <input placeholder="Descripcion" v-model="input.fname" name="descripcion" id="fname" type="text">                
+                </div>
+            </td>            
+            <td>
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Programa</font></font></label>
+                  <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($programa as $co)
+                      <option value="{{ $co->codigo_prog }}">{{ $co->nombre }}</option>                    
+                    @endforeach
+                  </select>
+            </td>  
+          
+              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+          </tbody>
+      </form>
+
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Codigo de la Competencia</th>
             <th v-for="column in columns">Nombre</th>
             <th v-for="column in columns">Descripcion</th>
-            <th v-for="column in columns">Codigo del Programa</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns">Programa</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
         @foreach ($competencia as $co)
@@ -31,8 +72,14 @@
               <td>{{$co->codigo_comp}}</td>
               <td>{{$co->nombre}}</td>
               <td>{{$co->descripcion}}</td>
-              <td>{{$co->codigo_prog}}</td>
-            <td style="width: 18%;">
+              <td value="{{$co->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($co->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+              </td>
+            <td style="width: 18%;" colspan="2">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('competenciaarchive', $co->codigo_comp)}}" method="POST">
                     @csrf
@@ -43,51 +90,14 @@
                   <!-- Pop window -->
             <!--  -->
           @endforeach
-          <tr>
-        <form action="{{ route('competenciacreate') }}" method="post">
-        @csrf
-            <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo de la Competencia</label>
-                    <input placeholder="codigo" ref="lname" v-model="input.lname" name="codigo_comp" id="lname" type="text">
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Nombre</label>
-                    <input placeholder="nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
-                </div>
-            </td>
-            <td>
-                <div class="input-field">
-                    <label for="fname">Descripcion</label>
-                    <input placeholder="descripcion" v-model="input.fname" name="descripcion" id="fname" type="text">                
-                </div>
-            </td>            
-            <td>
-              <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo del Programa</font></font></label>
-              <select class="form-select" id="validationCustom04" required="" name="codigo_prog">
-                  <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-              @foreach($programa as $p)     
-                  <option>{{$p->codigo_prog}}</option>     
-              @endforeach     
-              </select>
-          </td>
-          
-              <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-
+          <tr>        
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
               <th v-for="column in columns">Codigo de la Competencia</th>
               <th v-for="column in columns">Nombre</th>
               <th v-for="column in columns">Descripcion</th>
-              <th v-for="column in columns">Codigo del Programa</th>
+              <th v-for="column in columns">Programa</th>
               <th v-for="column in columns">Acción</th>
           </tr>
         </thead>
@@ -97,7 +107,13 @@
               <td>{{$cb->codigo_comp}}</td>
               <td>{{$cb->nombre}}</td>
               <td>{{$cb->descripcion}}</td>
-              <td>{{$cb->codigo_prog}}</td>
+              <td value="{{$cb->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($cb->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+              </td>
             <td>
             <form action="{{route('competenciastore', $cb->codigo_comp )}}" method="POST">
                     @csrf

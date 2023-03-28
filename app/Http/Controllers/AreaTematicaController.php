@@ -66,9 +66,7 @@ class AreaTematicaController extends Controller
     }
 
     public function edit(Request $request)
-    {   
-        // $redtematica=AreaTematica::where('codigo_red', $red)->get();
-        // return $redtematica;   
+    {
         AreaTematica::where('codigo_area', $request->codigo)->update(['codigo_area'=>$request->codigo_area,'nombre'=>$request->nombre,'codigo_red'=>$request->codigo_red,]);   
         return redirect()->route('areaindex');
     }

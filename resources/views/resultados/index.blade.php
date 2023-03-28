@@ -1,20 +1,62 @@
 @extends('layouts.structure')
-@section('titulo','Formulario principal Resultado')
+@section('titulo','ScheduleMate||Formulario Resultado')
 
 @section('contenido')
-    <div>@include('partials.selectform')</div>
+    
 <!-- partial:index.partial.html -->
 <div id="app">
-    <h4 class="head">Formulario de Resultado</h4>
+    <h4 class="head" style="text-align:center;">Formulario de Resultado</h4>
     <div class="container">
       <table class="table-responsive bordered highlight centered hoverable z-depth-2" v-show="persons.length">
+      <form action="{{ route('resultadocreate')}}" method="post">
+        @csrf
         <thead>
+          <div>@include('partials.selectform')</div>
+            <tr>
+              <th v-for="column in columns" colspan="6" style="background-color:#2C3E50; color:white;">
+                Crear Resultados
+              </th>
+            </tr>
+          </thead>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Codigo" ref="lname" v-model="input.lname" name="id_resultado" id="lname" type="text">
+                </div>
+              </td>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Resultado" v-model="input.fname" name="resultado" id="fname" type="text">
+                </div>
+              </td>
+              <td>
+                <div class="input-field">                    
+                    <input placeholder="Estado" v-model="input.fname" name="estado" id="fname" type="text">
+                </div>
+              </td>
+              <td colspan="2">
+
+                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Competencia</font></font></label>
+                
+                <select class="form-select" id="validationCustom04" required="" name="codigo_comp">
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($competencia as $comp)
+                      <option value="{{ $comp->codigo_comp }}">{{ $comp->nombre }}</option>                    
+                    @endforeach
+                </select>                
+              </td>
+          
+              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
+            </tr>
+          </tbody>
+      </form>
+
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Codigo del Resultado</th>
             <th v-for="column in columns">Resultado</th>
             <th v-for="column in columns">Estado</th>
-            <th v-for="column in columns">Codigo de la Competencia</th>
-            <th v-for="column in columns">Acción</th>
+            <th v-for="column in columns">Competencia</th>
+            <th v-for="column in columns" colspan="2">Acción</th>
           </tr>
         </thead>
         @foreach ($resultados as $r)
@@ -23,8 +65,14 @@
             <td>{{$r->id_resultado}}</td>
             <td>{{$r->resultado}}</td>
             <td>{{$r->estado}}</td>
-            <td>{{$r->codigo_comp}}</td>
-            <td style="width: 18%;">
+            <td colspan="2" value="{{$r->codigo_comop}}">
+              @foreach($competencia as $comp)
+                @if($r->codigo_comp==$comp->codigo_comp)
+                  {{$comp->nombre}}
+                @endif
+              @endforeach
+            </td>
+            <td style="width: 18%;" colspan="2">
               <a  onclick="togglePopup()" class="btn waves-effect waves-light yellow darken-2" ><i class="material-icons">edit</i></a>
               <form action="{{route('resultadoarchive', $r->id_resultado )}}" method="POST">
                     @csrf
@@ -35,54 +83,15 @@
                   <!-- Pop window -->
             @include('popupwindows.resultado')  
           @endforeach
-          <tr>
-        <form action="{{ route('resultadocreate')}}" method="post">
-        @csrf
-              <td colspan="2">
-                <div class="input-field">
-                    <label for="lname">Codigo del Resultado</label>
-                    <input placeholder="Codigo" ref="lname" v-model="input.lname" name="id_resultado" id="lname" type="text">
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Resultado</label>
-                    <input placeholder="Resultado" v-model="input.fname" name="resultado" id="fname" type="text">
-                </div>
-              </td>
-              <td>
-                <div class="input-field">
-                    <label for="fname">Estado</label>
-                    <input placeholder="Estado" v-model="input.fname" name="estado" id="fname" type="text">
-                </div>
-              </td>
-              <td>
-
-                <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo de la Competencia</font></font></label>
-                
-                <select class="form-select" id="validationCustom04" required="" name="codigo_comp">
-                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach($competencia as $comp)
-                    <option>{{$comp->codigo_comp}}</option>     
-                @endforeach     
-                </select>
-
-              </td>
-          
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-
+          <tr>        
       <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-        <thead>
+        <thead style="background-color:#2C3E50; color:white;">
           <tr>
           <tr>
             <th v-for="column in columns">Codigo del Resultado</th>
             <th v-for="column in columns">Resultado</th>
             <th v-for="column in columns">Estado</th>
-            <th v-for="column in columns">Codigo de la Competencia</th>
+            <th v-for="column in columns">Competencia</th>
             <th v-for="column in columns">Acción</th>
           </tr>
           </tr>
@@ -93,7 +102,13 @@
             <td>{{$reb->id_resultado}}</td>
             <td>{{$reb->resultado}}</td>
             <td>{{$reb->estado}}</td>
-            <td>{{$reb->codigo_comp}}</td>
+            <td value="{{$reb->codigo_comop}}">
+              @foreach($competencia as $comp)
+                @if($reb->codigo_comp==$comp->codigo_comp)
+                  {{$comp->nombre}}
+                @endif
+              @endforeach
+            </td>
             <td>
             <form action="{{route('resultadostore', $reb->id_resultado)}}" method="POST">
                     @csrf
@@ -111,7 +126,6 @@
         </tbody>
         @endforeach
       </table>
-      {{$lista->links() }}
     </div>
 
 

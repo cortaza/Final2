@@ -31,6 +31,10 @@
     document.getElementById("popup-1").classList.toggle("active");
   }
 
+  function togglePopup2(){
+    document.getElementById("popup-2").classList.toggle("active");
+  }
+
   </script>
   @yield('contenido')  
 
@@ -39,6 +43,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js'></script><script  src="./script.js"></script>
     <footer>
+    @include('partials.footer')
     </footer>
 </body>
 </html>

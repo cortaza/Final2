@@ -18,9 +18,9 @@ class AmbienteFormacionController extends Controller
     {   
         $codigo=CentroFormacion::all();
         $numero=Ficha::all();
-        $ambiente=AmbienteFormacion::all();
+        $ambienteformacion=AmbienteFormacion::all();
         $amba=Ambienteformacionbasura::all();
-        return view('ambienteformacion/index', compact('ambiente', 'amba', 'codigo','numero'));
+        return view('ambienteformacion/index', compact('ambienteformacion', 'amba', 'codigo','numero'));
     }
 
     /**
@@ -36,14 +36,14 @@ class AmbienteFormacionController extends Controller
             'codigo_centro' => 'required',
             'nr_ficha' => 'required'
         ]);
-        $ambiente = new AmbienteFormacion;
-        $ambiente->codigo_ambiente=$request->codigo_ambiente;
-        $ambiente->nombre=$request->nombre;
-        $ambiente->recursos=$request->recursos;
-        $ambiente->especialidad=$request->especialidad;
-        $ambiente->codigo_centro=$request->codigo_centro;
-        $ambiente->nr_ficha=$request->nr_ficha;
-        $ambiente->save();
+        $ambienteformacion = new AmbienteFormacion;
+        $ambienteformacion->codigo_ambiente=$request->codigo_ambiente;
+        $ambienteformacion->nombre=$request->nombre;
+        $ambienteformacion->recursos=$request->recursos;
+        $ambienteformacion->especialidad=$request->especialidad;
+        $ambienteformacion->codigo_centro=$request->codigo_centro;
+        $ambienteformacion->nr_ficha=$request->nr_ficha;
+        $ambienteformacion->save();
         return redirect()->route('ambienteindex');
         }
 

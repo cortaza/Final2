@@ -47,25 +47,25 @@
             </div>
           </div>
           <div class="row">
-            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Red</font></font></label>
+            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de Red</font></font></label>
             <select class="form-select" id="validationCustom04" required="" name="codigo_red">
-              <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>
-                @foreach ($red as $r )
-                  <option>{{$r->codigo_red}}</option>       
-                @endforeach
-            </select>
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($red as $i)
+                      <option value="{{ $i->codigo_red }}">{{ $i->nombre }}</option>                    
+                    @endforeach
+                </select>
           </div>  
           <div class="row">
-            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Codigo Area</font></font></label>
+            <label for="validationCustom04" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nombre de  Area</font></font></label>
             <select class="form-select" id="validationCustom04" required="" name="codigo_area">
-              <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>  
-                @foreach ($area as $a )
-                  <option>{{$a->codigo_area}}</option>
-                @endforeach
-            </select>
+                    <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Elegir...</font></font></option>                  
+                    @foreach ($area as $i)
+                      <option value="{{ $i->codigo_area }}">{{ $i->nombre }}</option>                    
+                    @endforeach
+                </select>
           </div>  
             <div class="input-field col s6">                
-                <button type="submit">ENVIAR</button>   
+                <button type="submit" id="botonsend">ENVIAR</button>   
                 <input type="hidden" value="{{$i->dni}}" name="d">             
             </div>
           </div>

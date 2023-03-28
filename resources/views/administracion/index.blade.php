@@ -1,15 +1,11 @@
 @extends('layouts.structure')
-@extends('layouts.nav')
+@section('titulo','ScheduleMate||Formulario de Administración')
 
-@section('titulo','Administracion')
-
-
-        
 @section('contenido')
 
 <body>
 
-<div>@include('partials.selectform')</div>
+
 <!-- partial:index.partial.html -->
 <div id="app">
 <h4 class="head"><center>Administracion</center></h4>
@@ -26,41 +22,52 @@
   <tr>
     <form action="{{ route('administracioncreate') }}" method="post">
     @csrf
-        <td colspan="2">
-            <div class="input-field">
-                <label for="lname">Usuario</label>
-                <input placeholder="usuario" ref="lname" v-model="input.lname" name="id_usuario" id="lname" type="text">
+    <thead>
+      <div>@include('partials.selectform')</div>
+      <div style="float:left; width:40%;">
+        <form id="mi-formulario" action="{{route('instructorindex')}}" method="GET">
+          <div class="">
+            <input type="text" name="busqueda" class="" placeholder="a">
+            <input type="submit" value="Buscar" class="">
+            <a href="{{route('instructorindex')}}"  class="btn-redirect">Volver</a> 
+          </div>
+        </form>
+            <tr>
+              <th v-for="column in columns" colspan="8" style="background-color:#2C3E50; color:white;">
+                Crear Administración
+              </th>
+            </tr>
+          </thead>          
+        <td>
+            <div class="input-field">                
+                <input placeholder="Numero de usuario" ref="lname" v-model="input.lname" name="id_usuario" id="lname" type="text">
             </div>
         </td>
         <td>
-            <div class="input-field">
-                <label for="fname">Rol</label>
-                <input placeholder="rol" v-model="input.fname" name="rol" id="fname" type="text">                
+            <div class="input-field">                
+                <input placeholder="Rol" v-model="input.fname" name="rol" id="fname" type="text">                
             </div>
         </td>
         <td>
-            <div class="input-field">
-                <label for="fname">Nombre</label>
-                <input placeholder="nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
+            <div class="input-field">                
+                <input placeholder="Nombre" v-model="input.fname" name="nombre" id="fname" type="text">                
             </div>
         </td>
         <td>
-            <div class="input-field">
-                <label for="fname">Apellido</label>
-                <input placeholder="apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
+            <div class="input-field">                
+                <input placeholder="Apellido" v-model="input.fname" name="apellido" id="fname" type="text">                
             </div>
         </td>
         <td>
-            <div class="input-field">
-                <label for="fname">Contraseña</label>
-                <input placeholder="contraseña" v-model="input.fname" name="contraseña" id="fname" type="text">                
+            <div class="input-field">                
+                <input placeholder="Contraseña" v-model="input.fname" name="contraseña" id="fname" type="text">                
             </div>
         </td>
       
           <!-- <td><a href="!#" @click="add" class="btn btn-waves green darken-2"><i class="material-icons">add</i></a></td> -->
           <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
         </tr>
-    <thead>
+    <thead style="background-color:#2C3E50; color:white;">
       <tr>
         <th v-for="column in columns">Numero de Usuario</th>
         <th v-for="column in columns">Rol</th>
@@ -95,7 +102,7 @@
   </form>
 
   <table class="table-responsive centered bordered striped highlight z-depth-1 hoverable" v-show="bin.length">
-    <thead>
+    <thead style="background-color:#2C3E50; color:white;">
       <tr>
       <th v-for="column in columns">Numero de Usuario</th>
           <th v-for="column in columns">Rol</th>
@@ -155,7 +162,7 @@ left:50%;
 transform:translate(-50%,-50%) scale(0);
 background:#fff;
 width:500px;
-height:250px;
+height:400px;
 z-index:2;
 text-align:center;
 padding:20px;
@@ -203,12 +210,4 @@ margin-left: 15%
 
 
 
-
-
-
-</body>
-@section('tablas')
-
-
-@endsection
 

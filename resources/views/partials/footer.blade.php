@@ -1,33 +1,20 @@
-<footer>
+<!-- <footer>
         <img src="img\sese.png" alt="" class="logo">
         <div class="contenedor-iconos">
-            <a href="https://www.facebook.com/SENA/" class="iconos"><img src="img\facebook.png" alt=""></a>
-            <a  href="https://www.instagram.com/senacomunica/" class="iconos"><img src="img\igig.png"></a>
-            <a href="https://twitter.com/SENAComunica" class="iconos"><img src="img\ttt.png"></a>
-            <a href="https://www.youtube.com/user/SENATV" class="iconos"><img src="img\yuyu.png"></a>
+            <a href="" class="iconos"><img src="img\facebook.png" alt=""></a>
+            <a  href="" class="iconos"><img src="img\igig.png"></a>
+            <a href="" class="iconos"><img src="img\ttt.png"></a>
+            <a href="" class="iconos"><img src="img\yuyu.png"></a>
         </div>
-        <ul class="contendor-menu">
-            <li class="menu-icono">SERVICIO NACIONAL DE APRENDIZAJE SENA</li>
-            <li class="menu-icono">DIRECCION Cl. 13 #1093, Soacha, Cundinamarca</li>
-        </ul>
-        <span class="copyrigth">&copy;2023, SENA. Derechos reservados.</span>
-
 
     </footer>
 
 
     
 <style>
-*{
-    margin: 0%;
-    padding: 0%;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-    transition: 0.5%;
-}
 
 body{
-    height: 150vh;
+    height: 110vh;
     width: 100%;
     position: relative;
 }
@@ -119,4 +106,4 @@ footer{
         opacity: 0.3;
         text-align: center;
 }
-</style>
+</style>  -->

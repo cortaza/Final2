@@ -11,13 +11,8 @@ class RedTematicaController extends Controller
     public function index()
     {
         $red=RedTematica::all();
-        $redtrash=Redbasura::all();
-        $bin=[];
-        $input=[
-            'codigo_red' => '',
-            'nombre' => ''
-        ];
-        return view('redtematica/index', compact('red', 'bin', 'input', 'redtrash'));
+        $redtrash=Redbasura::all();     
+        return view('redtematica/index', compact('red', 'redtrash'));        
     }
 
 
