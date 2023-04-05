@@ -20,7 +20,6 @@
         </div>
         <div class="CD">
             <h1>PERFIL</h1>
-            
             <div class="CCD">
                     <div>
                         <p>Nombres</p>

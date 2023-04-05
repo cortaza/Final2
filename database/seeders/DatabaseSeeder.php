@@ -724,10 +724,15 @@ class DatabaseSeeder extends Seeder
         Semana::insert([
             'cod_se'=>'1',
             'lunes'=>'220501006',
+            'lunesi'=>'11111',
             'martes'=>'220501009',
+            'martesi'=>'11111',
             'miercoles'=>'220501034',
+            'miercolesi'=>'11111',
             'jueves'=>'220501006',
-            'viernes'=>'220501006'
+            'juevesi'=>'11111',
+            'viernes'=>'220501006',
+            'viernesi'=>'11111'
         ]);
 
         //HORARIO
@@ -739,7 +744,16 @@ class DatabaseSeeder extends Seeder
             'codigo_ambiente'=>'102',
             'dni'=>'11111',
             'id_semaforo'=>'1',
-            'cod_se'=>'1'
+            'lunes'=>'220501006',
+            'lunesi'=>'11111',
+            'martes'=>'220501009',
+            'martesi'=>'11111',
+            'miercoles'=>'220501034',
+            'miercolesi'=>'11111',
+            'jueves'=>'220501006',
+            'juevesi'=>'11111',
+            'viernes'=>'220501006',
+            'viernesi'=>'11111'
             ]
         ]);
 

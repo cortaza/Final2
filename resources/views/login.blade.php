@@ -6,29 +6,30 @@
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'><link rel="stylesheet" href="./style.css">
 <link rel="shortcut icon" href="/img/Logo-de-SENA-png-verde.png"> 
-</head>
+</head>	
 <body>
 <!-- partial:index.partial.html -->
 <section class="login-block">
     <div class="container">
 	<div class="row">
 		<div class="col-md-4 login-sec">
-		    <h2 class="text-center">Bienvenido  </h2>
-		    <form action="{{ route('mainindex')}}" class="login-form">
-  <div class="form-group">
-    <label for="exampleInputEmail1" class="text-uppercase">Usuario</label>
-    <input type="text" class="form-control" placeholder="">
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
-    <input type="password" class="form-control" placeholder="">
-  </div>
+		    <h2 class="text-center">Bienvenido </h2>
+<form action="{{ route('mainindex')}}" class="login-form">
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="text-uppercase">Usuario</label>
+      <input id="usuario" name=""  type="text" class="form-control" placeholder="">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1" class="text-uppercase">Contraseña</label>
+      <input id="password" type="password" class="form-control" placeholder="">
+    </div>
+
+
   
   
     <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
+      <label class="form-check-label">
+    <input type="checkbox" class="form-check-input">
       <small>Mantener abierto</small>
     </label>
     <button type="submit" class="btn btn-login float-right">Enviar</button>

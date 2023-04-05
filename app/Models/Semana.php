@@ -13,9 +13,14 @@ class Semana extends Model
     protected $fillable=[
         'cod_se',
         'lunes',
+        'lunesi',
         'martes',
+        'martesi',
         'miercoles',
+        'miercolesi',
         'jueves',
-        'viernes'
+        'juevesi',
+        'viernes',
+        'viernesi'
     ];
 }

@@ -3,7 +3,7 @@
     <div class="overlay"></div>
       <div class="content">
         <div class="close-btn" onclick="togglePopup()">&times;</div>
-          <form action="{{route('diasedit')}}" method="POST" class="col s12">
+          <form action="{{route('horarioedit')}}" method="POST" class="col s12">
             @csrf
             <div class="row">
               <div class="input-field col s6">                

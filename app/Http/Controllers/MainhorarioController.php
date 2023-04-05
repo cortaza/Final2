@@ -19,7 +19,7 @@ class MainhorarioController extends Controller
     public function index()
     {
 
-        $horario=Horario::all();
+        $horario=Horario::all();        
         //NUMERO DE FICHA ==DONE
         $numeroficha=Ficha::all();
         //PROGTRAMA DE FORMACION
@@ -29,12 +29,14 @@ class MainhorarioController extends Controller
         //JORNADA
         $jornada=Ficha::all();
         //INSTRUCTOR
-        $instructor=Instructor::all();
+        $instructor=Instructor::all();        
         //TRIMESTRE
         $trimestre=Semaforo::all();
         //DIAS SEMANA
-        $diasemana=Semaforo::all();        
-        return view('horario', ['horario'=>$horario, 'numeroficha'=>$numeroficha, 'programaform'=>$programaform, 'ambiente'=>$ambiente, 'jornada'=>$jornada, 'instructor'=>$instructor, 'trimestre'=>$trimestre, 'diasemana'=>$diasemana]);
+        $diasemana=Semaforo::all();     
+        //DIAS SEMANA
+        $competencia=Competencia::all(); 
+        return view('horario', ['horario'=>$horario, 'numeroficha'=>$numeroficha, 'programaform'=>$programaform, 'ambiente'=>$ambiente, 'jornada'=>$jornada, 'instructor'=>$instructor, 'trimestre'=>$trimestre, 'diasemana'=>$diasemana, 'competencia'=>$competencia ]);
     }
 
     public function pdf()

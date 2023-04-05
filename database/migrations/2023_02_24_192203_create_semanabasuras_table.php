@@ -12,7 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('semanabasuras', function (Blueprint $table) {
-            $table->id();
+            $table->id('cod_se');
+            $table->string('lunes');
+            $table->foreign('lunes')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('lunesi');
+            $table->foreign('lunesi')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('martes');
+            $table->foreign('martes')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('martesi');
+            $table->foreign('martesi')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('miercoles');
+            $table->foreign('miercoles')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('miercolesi');
+            $table->foreign('miercolesi')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('jueves');
+            $table->foreign('jueves')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('juevesi');
+            $table->foreign('juevesi')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('viernes');
+            $table->foreign('viernes')->references('codigo_comp')->on('competencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('viernesi');
+            $table->foreign('viernesi')->references('dni')->on('instructors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

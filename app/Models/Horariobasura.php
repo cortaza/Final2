@@ -16,6 +16,16 @@ class Horariobasura extends Model
         'nr_ficha',
         'codigo_ambiente',
         'dni',
-        'id_semaforo'
+        'id_semaforo',
+        'lunes',
+        'lunesi',
+        'martes',
+        'martesi',
+        'miercoles',
+        'miercolesi',
+        'jueves',
+        'juevesi',
+        'viernes',
+        'viernesi'
     ];
 }

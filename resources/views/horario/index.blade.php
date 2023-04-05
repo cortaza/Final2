@@ -43,14 +43,15 @@
                     @endforeach 
                 </select>
         </td>
-        <td>            
+        <td>
+        
                 <select class="form-select" id="validationCustom04" required="" name="dni">
                     <option selected="" disabled="" placeholder=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Instructor...</font></font></option>                  
-                    @foreach ($instructor as $h)
-                      <option value="{{ $h->dni }}">{{ $h->nombre }}</option>                    
-                    @endforeach
+                    @foreach($instructor as $ins)     
+                      <option value="{{$ins->dni}}">{{$ins->nombre}}</option>     
+                    @endforeach 
                 </select>
-        </td>  
+        </td> 
         
         <td>                   
 
@@ -62,7 +63,7 @@
     <option selected disabled placeholder="">Trimestre...</option>
     @foreach($semaforo as $se)
         @if(!in_array($se->trimestre, $impreso) && $se->trimestre <= 3)
-            <option value="{{ $se->id_semaforo }}" {{ $se->trimestre == $cont ? 'selected' : '' }}>
+            <option {{ $se->trimestre == $cont ? 'selected' : '' }}>
                 {{ $se->trimestre }}
             </option>
             @php
@@ -71,15 +72,17 @@
         @endif
     @endforeach
 </select> 
-        </td>
+        </td>              
         <td>          
           <div class="input-field">                    
+          @foreach ($hora as $h)
             <a onclick="togglePopup2()" class="btn btn-waves green darken-2"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKxJREFUSEvVldENwjAMRF8mYITSTRgFJoNRGAU2YIMiS0SNElwXRwlKfmPf+eyTHWj8QmN8LILlU4AWZ/33JzgBV+DobN0DuAD3mJ9Ll4DJCR7TBGPWCGJPKznW1ucKuhFY7tIUFq7SFPyNwPJ9tYIxCSxnpfNytag5QWrJMWfQVYG1o1xDtkA3FeYr4QUcfkH8EvtM70lOIAfnVnETBPy8dXAqiy/TvVtzdyFvOFgwGeNlzPYAAAAASUVORK5CYII="/></a>
+            @include('popupwindows.diassemana')              
+          @endforeach
           </div>
           
-        </td>              
-              <td><button class="btn btn-waves green darken-2" type="submit"><i class="material-icons">+</i></button></td>
-            </tr>
+        </td>                            
+            
         <thead style="background-color:#2C3E50; color:white;">
           <tr>
             <th v-for="column in columns">Programa</th>
@@ -119,8 +122,7 @@
             </td>
           </tr>
           <!-- Pop window -->
-          @include('popupwindows.horario')
-          @include('popupwindows.diassemana')  
+          @include('popupwindows.horario')          
                             
           @endforeach
           
@@ -137,16 +139,29 @@
             <th v-for="column in columns">Instructor Lider</th>
             <th v-for="column in columns">Trimestre</th>
             <th v-for="column in columns">Acción</th>
+            
           </tr>
         </thead>
         @foreach ($horab as $hb)
         <tbody>
           <tr v-for="(person,index) in bin">
-              <td>{{$hb->codigo_prog}}</td>
+          <td value="{{$hb->codigo_prog}}">
+                @foreach($programa as $p)
+                  @if($hb->codigo_prog==$p->codigo_prog)
+                    {{$p->nombre}}
+                  @endif
+                @endforeach
+              </td>
               <td>{{$hb->nr_ficha}}</td>
               <td>{{$hb->codigo_ambiente}}</td>
-              <td>{{$hb->dni}}</td>
-              <td>{{$hb->id_semaforo}}</td>
+              <td value="{{$hb->dni}}">
+                @foreach($instructor as $i)
+                  @if($hb->dni==$i->dni)
+                    {{$i->nombre}}
+                  @endif
+                @endforeach
+              </td>
+              <td>{{$hb->id_semaforo}}</td>     
             <td>
             <form action="{{route('horariostore', $hb->codigo_h)}}" method="POST">
                     @csrf

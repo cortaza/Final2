@@ -10,6 +10,7 @@ use App\Http\Controllers\DescargaController;
 use App\Http\Controllers\FichaController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainhorarioController;
 use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\RedTematicaController;
@@ -20,8 +21,7 @@ use App\Http\Controllers\SubsedeController;
 use App\Http\Controllers\TipoFormacionController;
 
 // /*-----------------LOGIN-----------------*/
- Route::get('/', function () {return view('login');});
-
+    Route::get('/', function () {return view('login');})->name('mainindex');
 // /*-----------------PAGINA PRINCIPAL-----------------*/
 Route::get('/paginaprincipal', function () {return view('mainindex');})->name('mainindex');
 
@@ -33,6 +33,8 @@ Route::get('/paginaopciones', function () {return view('opciones.opciones');})->
 
 // /*-----------------PAGINA OPCIONES-----------------*/
 Route::get('/paginaperfil', function () {return view('perfil.perfil');})->name('perfilindex');
+
+
 
 // /*-----------------HORARIO PRINCIPAL-----------------*/
 
